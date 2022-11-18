@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_assistant/shared/res/res.dart';
 
 class InputField extends StatelessWidget {
   const InputField({super.key});
@@ -9,9 +10,8 @@ class InputField extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: const EdgeInsets.all(10),
-          decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: Colors.grey))),
           child: const TextField(
+            style: TextStyle(fontSize: 24),
             decoration: InputDecoration(
                 hintText: "Enter your email",
                 hintStyle: TextStyle(color: Colors.grey),
@@ -20,14 +20,21 @@ class InputField extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.all(10),
-          decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: Colors.grey))),
           child: const TextField(
+            style: TextStyle(fontSize: 24),
             decoration: InputDecoration(
                 hintText: "Enter your password",
                 hintStyle: TextStyle(color: Colors.grey),
                 border: InputBorder.none),
           ),
+        ),
+        Container(
+          height: 20,
+        ),
+        Container(
+          width: 200,
+          height: 1,
+          color: SmartAssistantColors.grey,
         ),
       ],
     );

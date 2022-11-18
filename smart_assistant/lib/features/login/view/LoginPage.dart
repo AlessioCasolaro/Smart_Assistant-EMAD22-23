@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_assistant/shared/res/colors.dart';
 
 import '../widget/Header.dart';
 import '../widget/InputWrapper.dart';
@@ -12,15 +13,11 @@ class LoginPage extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.cyan.shade400,
-                Colors.cyan.shade300,
-                Colors.cyan.shade200
-              ]),
+              begin: Alignment.topLeft,
+              end: Alignment.topRight,
+              colors: [Color(0xFF1F75FE), Color(0xFF1F75FE)]),
         ),
         child: Column(
           children: <Widget>[

@@ -13,10 +13,16 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Center(
-              child: SizedBox(
-            width: 350,
-            height: 350,
-            child: Image.asset("assets/images/smartAssistantLogo.png"),
+              child: CircleAvatar(
+            backgroundColor: SmartAssistantColors.white,
+            radius: 200,
+            child: Container(
+              child: Image.asset(
+                'assets/images/smartAssistantLogo.png',
+                width: 380,
+                height: 380,
+              ),
+            ),
           )),
           Center(
             child: Text(

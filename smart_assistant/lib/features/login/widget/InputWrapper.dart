@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_assistant/shared/res/colors.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 
 import '../widget/InputField.dart';
@@ -18,11 +19,12 @@ class InputWrapper extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                  color: SmartAssistantColors.white,
+                  borderRadius: BorderRadius.circular(10)),
               child: const InputField(),
             ),
             const SizedBox(
-              height: 40,
+              height: 30,
             ),
             ButtonPrimary(label: "Login", onPressed: () => null),
           ],
