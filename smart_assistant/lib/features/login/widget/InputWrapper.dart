@@ -22,13 +22,6 @@ class InputWrapper extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            Text(
-              "Forgot Password?",
-              style: TextStyle(color: Colors.grey),
-            ),
-            SizedBox(
-              height: 40,
-            ),
             ButtonPrimary(label: "Login", onPressed: () => null),
           ],
         ),
