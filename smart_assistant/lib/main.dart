@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ButtonPrimary(
                       label: 'Get Started',
                       onPressed: () =>
-                          AppNavigator.pushNamedReplacement(//route),
+                          AppNavigator.pushNamedReplacement(loginRoute),
                     ),
                     SizedBox(height: 42.h),
                   ],
