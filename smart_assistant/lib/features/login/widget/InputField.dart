@@ -10,9 +10,15 @@ class InputField extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: const EdgeInsets.all(10),
-          child: const TextField(
-            style: TextStyle(fontSize: 24),
-            decoration: InputDecoration(
+          child: TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your email';
+              }
+              return null;
+            },
+            style: const TextStyle(fontSize: 24),
+            decoration: const InputDecoration(
                 hintText: "Enter your email",
                 hintStyle: TextStyle(color: Colors.grey),
                 border: InputBorder.none),
@@ -20,9 +26,16 @@ class InputField extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.all(10),
-          child: const TextField(
-            style: TextStyle(fontSize: 24),
-            decoration: InputDecoration(
+          child: TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your password';
+              }
+              return null;
+            },
+            obscureText: true,
+            style: const TextStyle(fontSize: 24),
+            decoration: const InputDecoration(
                 hintText: "Enter your password",
                 hintStyle: TextStyle(color: Colors.grey),
                 border: InputBorder.none),

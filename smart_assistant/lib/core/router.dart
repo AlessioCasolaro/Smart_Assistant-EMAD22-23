@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_assistant/core/navigator.dart';
 import 'package:smart_assistant/features/dashboard/views/home.dart';
 import 'package:smart_assistant/features/login/view/LoginPage.dart';
+import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
 
 // Contains effective routes to navigate between screens
 abstract class AppRouter {
@@ -19,6 +20,11 @@ abstract class AppRouter {
         return getPageRoute(
           settings: settings,
           view: const Dashboard(),
+        );
+      case taskListRoute:
+        return getPageRoute(
+          settings: settings,
+          view: TaskListPage(),
         );
       default:
         return getPageRoute(
