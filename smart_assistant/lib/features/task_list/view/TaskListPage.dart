@@ -14,13 +14,14 @@ import '../widget/TaskList.dart';
 //import '../widgets/widgets.dart';
 
 class TaskListPage extends StatelessWidget {
-  static List<String> docList = ['Doc1', 'Doc2', 'Doc3', 'Doc4']; //PROVA
-  static List<String> urlList = [
-    'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
-    'https://www.africau.edu/images/default/sample.pdf',
-    'Url3',
-    'Url4'
-  ]; //PROVA
+  static List<Map<String, dynamic>> jsonResponse =
+      List<Map<String, dynamic>>.generate(
+    10,
+    (index) => {
+      'title': 'Task $index',
+      'description': 'Description $index',
+    },
+  );
   const TaskListPage({Key? key}) : super(key: key);
 
   @override
@@ -68,6 +69,37 @@ class TaskListPage extends StatelessWidget {
             ),
             const SizedBox(
               height: 20,
+            ),
+            TaskList(taskJson: jsonResponse),
+            //align button to the bottom
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  width: 100.w,
+                  height: 30.h,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: SmartAssistantColors.secondary,
+                      backgroundColor: SmartAssistantColors.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () => null,
+                    child: const Text(
+                      'Start task',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20.h,
             ),
           ],
         ),

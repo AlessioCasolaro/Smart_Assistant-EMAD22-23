@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Task.dart';
@@ -5,72 +7,71 @@ import 'Task.dart';
 import '../../../../shared/res/res.dart';
 
 class TaskList extends StatefulWidget {
-  List<String> taskJson = List<String>.generate(10, (i) => "Task $i");
-
-  @override
-  _TaskListState createState() => new _TaskListState();
+  List<Map<String, dynamic>> taskJson = List<Map<String, dynamic>>.generate(
+    10,
+    (index) => {
+      'title': 'Task $index',
+      'description': 'Description $index',
+    },
+  );
 
   TaskList({
-    Key? key,
+    super.key,
     required this.taskJson,
-  }) : super(key: key);
+  }) {
+    for (var i = 0; i < taskJson.length; i++) {
+      taskList = List<Task>.generate(
+          taskJson.length, (i) => Task.fromJson(taskJson[i]));
+    }
+  }
 
+  List<Task> taskList = <Task>[];
+
+  @override
+  State<TaskList> createState() => _TaskListState();
 }
 
 class _TaskListState extends State<TaskList> {
-
-  bool loading = true;
-
-  _TaskListState(){
-    widget.taskJson.then((List value) {
-
-      // loop through the json object
-      for (var i = 0; i < value.length; i++) {
-
-        // add the ListTile to an array
-        listArray.add(new ListTile(title: new Text(value[i].name));
-
-        }
-
-            //use setState to refresh UI
-            setState((){
-          loading = false;
-        });
-
-    });
-  }
+  final List<bool> _selected = List.generate(20, (i) => false);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       //dimensione
-      height: 300.h,
+      height: 650.h,
       child: Scaffold(
+        backgroundColor: SmartAssistantColors.secondary,
         body: ListView.separated(
-          itemCount: document.length,
+          physics: const BouncingScrollPhysics(),
+          itemCount: widget.taskJson.length,
           itemBuilder: (context, index) {
             return ListTile(
               shape: RoundedRectangleBorder(
                 side:
                     BorderSide(color: SmartAssistantColors.secondary, width: 2),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(10),
               ),
-              tileColor: SmartAssistantColors.secondary,
+              tileColor: _selected[index]
+                  ? SmartAssistantColors.primary
+                  : SmartAssistantColors.grey30,
               visualDensity: VisualDensity(horizontal: 0, vertical: 4),
-              leading: const Icon(Icons.picture_as_pdf, color: Colors.black),
+              leading: const Icon(Icons.work_outline, color: Colors.black),
               title: Text(
-                document[index].title,
+                widget.taskList[index].title,
                 style: TextStyles.body.copyWith(
                     fontSize: 18.sp, color: SmartAssistantColors.black),
               ),
-              //onTap: () {
-              //Navigator.push(
-              //context,
-              //MaterialPageRoute(
-              //builder: (context) => PdfView(document: document[index]),
-              //),
-              //);
-              //},
+              onTap: () {
+                setState(() {
+                  for (var i = 0; i < widget.taskJson.length; i++) {
+                    if (i == index) {
+                      _selected[i] = true;
+                    } else {
+                      _selected[i] = false;
+                    }
+                  }
+                });
+              },
             );
           },
           separatorBuilder: (BuildContext context, int index) =>
