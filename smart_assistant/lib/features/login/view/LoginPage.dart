@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_assistant/shared/res/colors.dart';
-
 import '../widget/Header.dart';
 import '../widget/InputWrapper.dart';
 

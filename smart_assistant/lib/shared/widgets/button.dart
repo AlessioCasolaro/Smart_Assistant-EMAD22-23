@@ -47,7 +47,6 @@ class ButtonIconNoBG extends StatelessWidget {
     Key? key,
     this.onPressed,
     required this.label,
-    this.btnColor,
     required this.height,
     required this.width,
     required this.icon,
@@ -55,39 +54,83 @@ class ButtonIconNoBG extends StatelessWidget {
 
   final VoidCallback? onPressed;
   final String label;
-  final Color? btnColor;
-  final width, height;
+  final double width, height;
 
   @override
   Widget build(BuildContext context) {
-    final effectiveBackgroundColor = btnColor ?? SmartAssistantColors.primary;
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          minimumSize: Size(width, height), //Grandezza bottone
-          backgroundColor: SmartAssistantColors.white, //Colore sfondo bottone
-          shape: RoundedRectangleBorder(
-            //Forma bottone
-            borderRadius: BorderRadius.circular(5),
-          ),
-          side: BorderSide(
-              color: SmartAssistantColors.primary,
-              width: 3), //colore del bordo del bottone
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(width, height), //Grandezza bottone
+        backgroundColor: SmartAssistantColors.white, //Colore sfondo bottone
+        shape: RoundedRectangleBorder(
+          //Forma bottone
+          borderRadius: BorderRadius.circular(5),
         ),
-        onPressed: onPressed,
-        child: Row(children: [
-          Icon(
-            icon,
-            size: 10,
+        side: BorderSide(
             color: SmartAssistantColors.primary,
-          ),
-          Text(
-            label,
-            style: TextStyles.body.copyWith(color: SmartAssistantColors.white),
-          ),
-        ]),
+            width: 3), //colore del bordo del bottone
       ),
+      onPressed: onPressed,
+      child: Row(children: [
+        Icon(
+          icon,
+          size: 36,
+          color: SmartAssistantColors.primary,
+        ),
+        const SizedBox(width: 16),
+        Text(
+          label,
+          style: TextStyles.body
+              .copyWith(color: SmartAssistantColors.primary, fontSize: 24),
+        ),
+      ]),
+    );
+  }
+}
+
+class ButtonIconPrimary extends StatelessWidget {
+  final IconData icon;
+  const ButtonIconPrimary({
+    Key? key,
+    this.onPressed,
+    required this.label,
+    required this.height,
+    required this.width,
+    required this.icon,
+  }) : super(key: key);
+
+  final VoidCallback? onPressed;
+  final String label;
+  final double width, height;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(width, height), //Grandezza bottone
+        backgroundColor: SmartAssistantColors.primary, //Colore sfondo bottone
+        shape: RoundedRectangleBorder(
+          //Forma bottone
+          borderRadius: BorderRadius.circular(5),
+        ),
+        side: BorderSide(
+            color: SmartAssistantColors.primary,
+            width: 3), //colore del bordo del bottone
+      ),
+      onPressed: onPressed,
+      child: Row(children: [
+        Icon(
+          icon,
+          size: 36,
+          color: SmartAssistantColors.white,
+        ),
+        const SizedBox(width: 16),
+        Text(
+          label,
+          style: TextStyles.body
+              .copyWith(color: SmartAssistantColors.white, fontSize: 24),
+        ),
+      ]),
     );
   }
 }

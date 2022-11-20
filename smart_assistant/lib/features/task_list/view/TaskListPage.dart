@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_assistant/features/task_list/widget/Task.dart';
-import 'package:smart_assistant/features/task_list/widget/TasksList.dart';
+import 'package:smart_assistant/features/task_list/widget/TaskList.dart';
 //import 'package:smarty/features/home/presentation/widgets/machine_info.dart';
 //import '../../../../core/navigation/navigator.dart';
 
 import '../../../../shared/res/res.dart';
 //import '../../../devices/domain/models/devices.dart';
-import '../widget/TasksList.dart';
+import '../../../core/navigator.dart';
+import '../widget/TaskList.dart';
 //import '../widgets/widgets.dart';
 
 class TaskListPage extends StatelessWidget {

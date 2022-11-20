@@ -2,6 +2,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_assistant/core/navigator.dart';
+import 'package:smart_assistant/features/dashboard/views/home.dart';
 import 'package:smart_assistant/features/login/view/LoginPage.dart';
 import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
 
@@ -13,7 +14,12 @@ abstract class AppRouter {
       case loginRoute:
         return getPageRoute(
           settings: settings,
-          view: LoginPage(),
+          view: const LoginPage(),
+        );
+      case dashboardRoute:
+        return getPageRoute(
+          settings: settings,
+          view: const Dashboard(),
         );
       case taskListRoute:
         return getPageRoute(
@@ -25,7 +31,7 @@ abstract class AppRouter {
           settings: settings,
           view: Scaffold(
             body: Center(
-              child: Text('No route defined for ${settings.name}'),
+              child: Text("Can find route ${settings.name}"),
             ),
           ),
         );

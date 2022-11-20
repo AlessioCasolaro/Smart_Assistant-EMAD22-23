@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
-import 'package:smart_assistant/features/task_list/widget/Task.dart';
+import 'package:smart_assistant/core/navigator.dart';
+import 'package:smart_assistant/features/dashboard/views/home.dart';
 import 'package:smart_assistant/shared/res/colors.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 
