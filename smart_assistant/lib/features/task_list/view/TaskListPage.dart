@@ -7,6 +7,7 @@ import 'package:smart_assistant/features/task_list/widget/TasksList.dart';
 
 import '../../../../shared/res/res.dart';
 //import '../../../devices/domain/models/devices.dart';
+import '../../../core/navigator.dart';
 import '../widget/TasksList.dart';
 //import '../widgets/widgets.dart';
 
@@ -32,7 +33,7 @@ class TaskListPage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () => AppNavigator.pushNamed(
-                  profileRoute,
+                  '/null',
                   arguments: Icon(
                     Icons.notifications_outlined,
                     color: SmartAssistantColors.grey,
@@ -98,14 +99,14 @@ class TaskListPage extends StatelessWidget {
                     Icon(
                       Icons.done,
                       size: 36,
-                      color: SmartAssistantColors.tertiary,
+                      color: SmartAssistantColors.white,
                     ),
                     SizedBox(width: 8.w),
                     Text(
                       'Complete Task',
                       style: TextStyles.body.copyWith(
                         fontSize: 18.sp,
-                        color: SmartAssistantColors.tertiary,
+                        color: SmartAssistantColors.white,
                       ),
                     ),
                   ],

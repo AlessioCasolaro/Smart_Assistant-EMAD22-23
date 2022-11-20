@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smart_assistant/core/navigator.dart';
+import 'package:smart_assistant/features/dashboard/views/home.dart';
 import 'package:smart_assistant/shared/res/colors.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 
@@ -26,7 +28,10 @@ class InputWrapper extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            ButtonPrimary(label: "Login", onPressed: () => null),
+            ButtonPrimary(
+                label: "Login",
+                onPressed: () =>
+                    AppNavigator.pushNamedReplacement(dashboardRoute)),
           ],
         ),
       ),
