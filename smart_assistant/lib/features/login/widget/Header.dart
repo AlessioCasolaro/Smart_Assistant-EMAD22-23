@@ -19,8 +19,8 @@ class Header extends StatelessWidget {
             child: Container(
               child: Image.asset(
                 'assets/images/smartAssistantLogo.png',
-                width: 380,
-                height: 380,
+                width: 350,
+                height: 350,
               ),
             ),
           )),
