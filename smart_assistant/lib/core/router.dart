@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_assistant/core/navigator.dart';
 import 'package:smart_assistant/features/login/view/LoginPage.dart';
+import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
 
 // Contains effective routes to navigate between screens
 abstract class AppRouter {
@@ -13,6 +14,11 @@ abstract class AppRouter {
         return getPageRoute(
           settings: settings,
           view: LoginPage(),
+        );
+      case taskListRoute:
+        return getPageRoute(
+          settings: settings,
+          view: TaskListPage(),
         );
       default:
         return getPageRoute(
