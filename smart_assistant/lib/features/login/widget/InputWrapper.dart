@@ -48,17 +48,10 @@ class InputState extends State<InputWrapper> {
                 ButtonPrimary(
                   label: "Login",
                   onPressed: () {
-                    // Validate returns true if the form is valid, or false otherwise.
                     if (_formKey.currentState!.validate()) {
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
+                      // If the form is valid, display a snackbar and navigate to the task list page.
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Logging in...')),
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const TaskListPage()),
                       );
                       Navigator.push(
                         context,

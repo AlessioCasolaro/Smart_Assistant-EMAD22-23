@@ -4,12 +4,41 @@ import 'Task.dart';
 //import 'pdfView.dart';
 import '../../../../shared/res/res.dart';
 
-class TasksList extends StatelessWidget {
-  final List<Task> document;
-  const TasksList({
+class TaskList extends StatefulWidget {
+  List<String> taskJson = List<String>.generate(10, (i) => "Task $i");
+
+  @override
+  _TaskListState createState() => new _TaskListState();
+
+  TaskList({
     Key? key,
-    required this.document,
+    required this.taskJson,
   }) : super(key: key);
+
+}
+
+class _TaskListState extends State<TaskList> {
+
+  bool loading = true;
+
+  _TaskListState(){
+    widget.taskJson.then((List value) {
+
+      // loop through the json object
+      for (var i = 0; i < value.length; i++) {
+
+        // add the ListTile to an array
+        listArray.add(new ListTile(title: new Text(value[i].name));
+
+        }
+
+            //use setState to refresh UI
+            setState((){
+          loading = false;
+        });
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

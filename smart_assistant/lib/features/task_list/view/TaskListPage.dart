@@ -1,5 +1,7 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_assistant/features/task_list/widget/Task.dart';
 import 'package:smart_assistant/features/task_list/widget/TasksList.dart';
 //import 'package:smarty/features/home/presentation/widgets/machine_info.dart';
@@ -21,7 +23,59 @@ class TaskListPage extends StatelessWidget {
   const TaskListPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext) {
+    return Scaffold(
+      backgroundColor: SmartAssistantColors.secondary,
+      body: Container(
+        padding: EdgeInsets.only(top: 40.h, left: 10.w, right: 10.w),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () => null,
+                  child: const CircleAvatar(
+                    radius: 36,
+                    backgroundImage: AssetImage('assets/images/profile.png'),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => null,
+                  child: const CircleAvatar(
+                    radius: 36,
+                    backgroundImage: AssetImage('assets/images/profile.png'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 60,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Tasks',
+                  style: GoogleFonts.roboto(
+                    fontSize: 36.sp,
+                    fontWeight: FontWeight.w700,
+                    color: SmartAssistantColors.black,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /*@override
+   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -31,17 +85,22 @@ class TaskListPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: () => AppNavigator.pushNamed(
+                onTap: () => null,
+                child: const CircleAvatar(
+                  radius: 36,
+                  backgroundImage: AssetImage('assets/images/profile.png'),
+                ),
+                /*Navigator.pushNamed(
                   profileRoute,
                   arguments: Icon(
                     Icons.notifications_outlined,
                     color: SmartAssistantColors.grey,
                   ),
-                ),
+                ), 
                 child: const CircleAvatar(
                   radius: 36,
                   backgroundImage: AssetImage('assets/images/profile.png'),
-                ),
+                ), */
               ),
               Icon(
                 Icons.notifications,
@@ -98,14 +157,14 @@ class TaskListPage extends StatelessWidget {
                     Icon(
                       Icons.done,
                       size: 36,
-                      color: SmartAssistantColors.tertiary,
+                      color: SmartAssistantColors.secondary,
                     ),
                     SizedBox(width: 8.w),
                     Text(
                       'Complete Task',
                       style: TextStyles.body.copyWith(
                         fontSize: 18.sp,
-                        color: SmartAssistantColors.tertiary,
+                        color: SmartAssistantColors.secondary,
                       ),
                     ),
                   ],
@@ -180,5 +239,5 @@ class TaskListPage extends StatelessWidget {
         ]),
       ),
     );
-  }
+  } */
 }
