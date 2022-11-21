@@ -42,6 +42,8 @@ dependencies:
   sleek_circular_slider: ^2.0.1
   syncfusion_flutter_pdfviewer: ^20.3.56
   qr_code_scanner: ^1.0.1
+  flutter_chat_ui: ^1.6.6
+  bubble: ^1.2.1
 
 dev_dependencies:
   flutter_test:
