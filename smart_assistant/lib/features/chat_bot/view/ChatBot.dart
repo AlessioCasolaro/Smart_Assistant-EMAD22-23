@@ -83,6 +83,13 @@ class _ChatBotState extends State<ChatBot> {
             automaticallyImplyLeading: false,
             centerTitle: true,
             title: const Text("Chat-BOT"),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              iconSize: 20.0,
+              onPressed: () {
+                _goBack(context);
+              },
+            ),
             backgroundColor: SmartAssistantColors.primary),
         body: Chat(
           messages: messages,
@@ -91,7 +98,18 @@ class _ChatBotState extends State<ChatBot> {
           user: _user,
           theme: const DefaultChatTheme(
             primaryColor: Color(0xFF1F75FE),
+            receivedMessageBodyTextStyle: const TextStyle(
+              fontSize: 24,
+            ),
+            sentMessageBodyTextStyle: const TextStyle(
+              fontSize: 24,
+              color: Colors.white,
+            ),
           ),
         ));
+  }
+
+  _goBack(BuildContext context) {
+    Navigator.pop(context);
   }
 }
