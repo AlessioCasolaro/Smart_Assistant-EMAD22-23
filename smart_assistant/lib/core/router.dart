@@ -2,7 +2,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_assistant/core/navigator.dart';
-import 'package:smart_assistant/features/chat_bot/view/ChatBotPage.dart';
+import 'package:smart_assistant/features/chat_bot/view/ChatBot.dart';
 import 'package:smart_assistant/features/dashboard/views/home.dart';
 import 'package:smart_assistant/features/login/view/LoginPage.dart';
 import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
@@ -25,12 +25,12 @@ abstract class AppRouter {
       case taskListRoute:
         return getPageRoute(
           settings: settings,
-          view: TaskListPage(),
+          view: const TaskListPage(),
         );
       case chatBotRoute:
         return getPageRoute(
           settings: settings,
-          view: ChatBotPage(),
+          view: const ChatBot(),
         );
       default:
         return getPageRoute(

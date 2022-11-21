@@ -8,14 +8,14 @@ import 'package:uuid/uuid.dart';
 
 //import './bot_service.dart';
 
-class BotScreen extends StatefulWidget {
-  const BotScreen({Key? key}) : super(key: key);
+class ChatBot extends StatefulWidget {
+  const ChatBot({Key? key}) : super(key: key);
 
   @override
-  _BotScreenState createState() => _BotScreenState();
+  _ChatBotState createState() => _ChatBotState();
 }
 
-class _BotScreenState extends State<BotScreen> {
+class _ChatBotState extends State<ChatBot> {
   List<types.Message> messages = [];
   final _user = const types.User(id: '1234556');
   final _bot = const types.User(id: "123");
@@ -62,7 +62,7 @@ class _BotScreenState extends State<BotScreen> {
 
   void _loadMessages() async {
     List<types.Message> messagesList = [];
-    Future.delayed(Duration(milliseconds: 300), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       messagesList.add(types.TextMessage(
         author: _bot,
         createdAt: DateTime.now().millisecondsSinceEpoch,
@@ -82,13 +82,16 @@ class _BotScreenState extends State<BotScreen> {
         appBar: AppBar(
             automaticallyImplyLeading: false,
             centerTitle: true,
-            title: Text("Chat-BOT"),
+            title: const Text("Chat-BOT"),
             backgroundColor: SmartAssistantColors.primary),
         body: Chat(
           messages: messages,
           showUserNames: true,
           onSendPressed: _handleSendPressed,
           user: _user,
+          theme: const DefaultChatTheme(
+            primaryColor: Color(0xFF1F75FE),
+          ),
         ));
   }
 }
