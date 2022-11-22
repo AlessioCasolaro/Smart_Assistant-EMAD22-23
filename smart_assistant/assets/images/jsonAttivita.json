@@ -1,0 +1,1399 @@
+{
+	"data": {
+		"attivitas": [
+			{
+				"codiceAttivita": "5",
+				"descrizione": "Smontaggio valvola per ispezionare e lappare le sedi, senza scaricare la molla di taratura e di apertura della valvola",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Smontaggio valvola",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "6",
+				"descrizione": "L’operazione di lappatura",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Lappatura",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [
+					{
+						"codiceTipoRicambio": "5",
+						"nome": "Tessuto pulizia",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "4",
+						"nome": "Olio lubrificante",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "1",
+						"nome": "Anello lappatore",
+						"descrizione": null
+					},
+					{
+						"codiceTipoRicambio": "2",
+						"nome": "Abrasivo a grana media",
+						"descrizione": "grana 600-800"
+					},
+					{
+						"codiceTipoRicambio": "3",
+						"nome": "Abrasivo a grana fine",
+						"descrizione": "grana 1000-1200"
+					}
+				],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					}
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			},
+			{
+				"codiceAttivita": "7",
+				"descrizione": "Durante il montaggio occorre rieseguire al contrario le varie operazioni effettuate nella fase di smontaggio",
+				"durataPrevista": 1,
+				"priorita": "NORMALE",
+				"nome": "Rimontaggio valvola",
+				"processoProcessos": [
+					{
+						"nome": "Pulizia camera valvola TAI 200"
+					}
+				],
+				"oggettoOggettos": [
+					{
+						"codiceOggetto": "2",
+						"nome": "Valvola TAI 200",
+						"descrizione": null
+					}
+				],
+				"attivitaRicambiTipoRicambios": [],
+				"attivitaTipoAttrezzaturaTipoAttrezzaturas": [
+					{
+						"codiceTipoAttrezzatura": "3",
+						"nome": "Cinghia di sollevamento",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "6",
+						"nome": "Cacciavite",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "5",
+						"nome": "Pinza",
+						"descrizione": null
+					},
+					{
+						"codiceTipoAttrezzatura": "4",
+						"nome": "Chiave a dado 20 - 50",
+						"descrizione": "Chiave a dado da misura 20 a 50"
+					},
+					{
+						"codiceTipoAttrezzatura": "2",
+						"nome": "Muletto trasportatore con alzata di almeno 3 m e sollevamento da 1t in su",
+						"descrizione": null
+					}
+					
+				],
+				"attivitaUtenteProfiloAssegnato": {
+					"nome": "Meccanico Specializzato"
+				}
+			}
+		]
+	}
+}

@@ -1,41 +1,38 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'Task.dart';
+import 'package:smart_assistant/features/task_list/classes/Response.dart';
 //import 'pdfView.dart';
 import '../../../../shared/res/res.dart';
 
 class TaskList extends StatefulWidget {
-  List<Map<String, dynamic>> taskJson = List<Map<String, dynamic>>.generate(
-    10,
-    (index) => {
-      'title': 'Task $index',
-      'description': 'Description $index',
-    },
-  );
+  List<Attivita> attivitas = [];
+  //List<Map<String, dynamic>> taskJson;
+  //List<Task> taskList = <Task>[];
 
   TaskList({
     super.key,
-    required this.taskJson,
+    required this.attivitas,
   }) {
-    for (var i = 0; i < taskJson.length; i++) {
+    /*for (var i = 0; i < taskJson.length; i++) {
       taskList = List<Task>.generate(
           taskJson.length, (i) => Task.fromJson(taskJson[i]));
-    }
-  }
-
-  List<Task> taskList = <Task>[];
+    } */
+  } 
 
   @override
   State<TaskList> createState() => _TaskListState();
 }
 
 class _TaskListState extends State<TaskList> {
-  final List<bool> _selected = List.generate(20, (i) => false);
+  List<bool> _selected = [];
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      if(_selected.length != widget.attivitas.length) {
+        _selected = List<bool>.generate(widget.attivitas.length, (i) => false);
+      }
+    });
     return Container(
       //dimensione
       height: 650.h,
@@ -43,7 +40,7 @@ class _TaskListState extends State<TaskList> {
         backgroundColor: SmartAssistantColors.secondary,
         body: ListView.separated(
           physics: const BouncingScrollPhysics(),
-          itemCount: widget.taskJson.length,
+          itemCount: widget.attivitas.length,
           itemBuilder: (context, index) {
             return ListTile(
               shape: RoundedRectangleBorder(
@@ -57,13 +54,13 @@ class _TaskListState extends State<TaskList> {
               visualDensity: VisualDensity(horizontal: 0, vertical: 4),
               leading: const Icon(Icons.work_outline, color: Colors.black),
               title: Text(
-                widget.taskList[index].title,
+                widget.attivitas[index].nome,
                 style: TextStyles.body.copyWith(
                     fontSize: 18.sp, color: SmartAssistantColors.black),
               ),
               onTap: () {
                 setState(() {
-                  for (var i = 0; i < widget.taskJson.length; i++) {
+                  for (var i = 0; i < widget.attivitas.length; i++) {
                     if (i == index) {
                       _selected[i] = true;
                     } else {
