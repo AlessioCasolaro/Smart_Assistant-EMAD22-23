@@ -69,8 +69,7 @@ class _QRScannerState extends State<QRScanner> {
                         height: 55.h,
                         fontSize: 20.sp,
                         onPressed: () async {
-                          //AppNavigator.pushNamedReplacement(dashboardRoute);
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
