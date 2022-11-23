@@ -19,15 +19,17 @@ class _BackAlertState extends State<BackAlert> {
           context: context,
           builder: (context) => AlertDialog(
             title: const Text('Are you sure?'),
-            content: const Text('Do you want to back to task list?'),
+            content: const Text('Do you want to go back to task list?'),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
                 child: const Text('No'),
               ),
               TextButton(
-                onPressed: () =>
-                    Navigator.popAndPushNamed(context, taskListRoute),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.popAndPushNamed(context, taskListRoute);
+                },
                 child: const Text('Yes'),
               ),
             ],
