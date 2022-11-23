@@ -34,26 +34,40 @@ class _TaskListState extends State<TaskList> {
       //dimensione
       height: 650.h,
       child: Scaffold(
-        backgroundColor: SmartAssistantColors.secondary,
+        backgroundColor: SmartAssistantColors.white,
         body: ListView.separated(
           physics: const BouncingScrollPhysics(),
           itemCount: widget.attivitas.length,
           itemBuilder: (context, index) {
             return ListTile(
               shape: RoundedRectangleBorder(
-                side:
-                    BorderSide(color: SmartAssistantColors.secondary, width: 2),
+                side: BorderSide(
+                    color: _selected[index]
+                        ? SmartAssistantColors.primary
+                        : SmartAssistantColors.secondary,
+                    width: 2),
                 borderRadius: BorderRadius.circular(10),
               ),
               tileColor: _selected[index]
                   ? SmartAssistantColors.primary
-                  : SmartAssistantColors.grey30,
-              visualDensity: VisualDensity(horizontal: 0, vertical: 4),
-              leading: const Icon(Icons.work_outline, color: Colors.black),
+                  : SmartAssistantColors.secondary,
+              //visualDensity: VisualDensity(horizontal: 0, vertical: 4),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+              leading: widget.attivitas[index].priorita == "BASSA"
+                  ? const Icon(Icons.circle, color: Colors.green)
+                  : widget.attivitas[index].priorita == "NORMALE"
+                      ? const Icon(Icons.circle, color: Colors.orange)
+                      : widget.attivitas[index].priorita == "ALTA"
+                          ? const Icon(Icons.circle, color: Colors.red)
+                          : const Icon(Icons.circle, color: Colors.black),
               title: Text(
                 widget.attivitas[index].nome,
                 style: TextStyles.body.copyWith(
-                    fontSize: 18.sp, color: SmartAssistantColors.black),
+                    fontSize: 18.sp,
+                    color: _selected[index]
+                        ? SmartAssistantColors.white
+                        : SmartAssistantColors.black),
               ),
               onTap: () {
                 setState(() {

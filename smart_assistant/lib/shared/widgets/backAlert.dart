@@ -1,6 +1,5 @@
-//create class
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_assistant/core/navigator.dart';
 
 class BackAlert extends StatefulWidget {
   Widget child;
@@ -19,18 +18,17 @@ class _BackAlertState extends State<BackAlert> {
     return (await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: new Text('Are you sure?'),
-            content: new Text('Do you want to exit an App'),
+            title: const Text('Are you sure?'),
+            content: const Text('Do you want to back to task list?'),
             actions: <Widget>[
               TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pop(false), //<-- SEE HERE
-                child: new Text('No'),
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('No'),
               ),
               TextButton(
                 onPressed: () =>
-                    Navigator.of(context).pop(true), // <-- SEE HERE
-                child: new Text('Yes'),
+                    Navigator.popAndPushNamed(context, taskListRoute),
+                child: const Text('Yes'),
               ),
             ],
           ),

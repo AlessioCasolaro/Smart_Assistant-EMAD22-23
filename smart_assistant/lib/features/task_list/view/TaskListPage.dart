@@ -1,10 +1,8 @@
-import 'dart:convert';
-
 import 'package:smart_assistant/features/qr/views/qrScanner.dart';
 import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:smart_assistant/features/task_list/widget/TaskList.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_assistant/shared/widgets/backAlert.dart';
+import 'package:smart_assistant/shared/widgets/button.dart';
 import '../../../../shared/res/res.dart';
 import 'package:flutter/material.dart';
 
@@ -41,73 +39,97 @@ class _TaskListPageState extends State<TaskListPage> {
     });
   }
 
+  //ordinamento attivitas per priorità
+  void sortAttivitas() {
+    attivitas.sort((a, b) {
+      if (a.priorita == "ALTA" && b.priorita == "ALTA") {
+        return 0;
+      } else if (a.priorita == "ALTA" && b.priorita == "NORMALE") {
+        return -1;
+      } else if (a.priorita == "ALTA" && b.priorita == "BASSA") {
+        return -1;
+      } else if (a.priorita == "NORMALE" && b.priorita == "ALTA") {
+        return 1;
+      } else if (a.priorita == "NORMALE" && b.priorita == "NORMALE") {
+        return 0;
+      } else if (a.priorita == "NORMALE" && b.priorita == "BASSA") {
+        return -1;
+      } else if (a.priorita == "BASSA" && b.priorita == "ALTA") {
+        return 1;
+      } else if (a.priorita == "BASSA" && b.priorita == "NORMALE") {
+        return 1;
+      } else if (a.priorita == "BASSA" && b.priorita == "BASSA") {
+        return 0;
+      } else {
+        return 0;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     getAttivitas();
-    return BackAlert(
-      child: Scaffold(
-        backgroundColor: SmartAssistantColors.secondary,
-        body: Container(
-          padding: EdgeInsets.only(top: 40.h, left: 10.w, right: 10.w),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () => null,
-                    child: Icon(
-                      Icons.account_circle,
-                      size: 70,
-                      color: SmartAssistantColors.black,
-                    ),
+    sortAttivitas();
+    return Scaffold(
+      backgroundColor: SmartAssistantColors.white,
+      body: Container(
+        padding: EdgeInsets.only(top: 40.h, left: 10.w, right: 10.w),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () => null,
+                  child: Icon(
+                    Icons.account_circle,
+                    size: 70,
+                    color: SmartAssistantColors.black,
                   ),
-                  GestureDetector(
-                    onTap: () => null,
-                    child: Icon(
-                      Icons.notifications_outlined,
-                      size: 70,
-                      color: SmartAssistantColors.black,
-                    ),
+                ),
+                GestureDetector(
+                  onTap: () => null,
+                  child: Icon(
+                    Icons.notifications_outlined,
+                    size: 70,
+                    color: SmartAssistantColors.black,
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Tasks',
-                    style: TextStyle(
-                      fontSize: 36.sp,
-                      fontWeight: FontWeight.w700,
-                      color: SmartAssistantColors.black,
-                    ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Tasks',
+                  style: TextStyle(
+                    fontSize: 36.sp,
+                    fontWeight: FontWeight.w700,
+                    color: SmartAssistantColors.black,
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TaskList(
-                  callback: (index) => setState(() => selectedIndex = index),
-                  attivitas: attivitas),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    width: 100.w,
-                    height: 30.h,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: SmartAssistantColors.secondary,
-                        backgroundColor: SmartAssistantColors.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TaskList(
+                callback: (index) => setState(() => selectedIndex = index),
+                attivitas: attivitas),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  width: 100.w,
+                  height: 55.h,
+                  child: ButtonPrimary(
+                      label: 'Next',
+                      width: 100.w,
+                      height: 55.h,
+                      fontSize: 24,
                       onPressed: () {
                         Attivita toPass = attivitas[selectedIndex];
                         Navigator.push(
@@ -117,23 +139,14 @@ class _TaskListPageState extends State<TaskListPage> {
                                 QRScanner(key: null, selectedAttivita: toPass),
                           ),
                         );
-                      },
-                      child: const Text(
-                        'Scan QR Code',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
+                      }),
                 ),
               ),
-              SizedBox(
-                height: 20.h,
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+          ],
         ),
       ),
     );

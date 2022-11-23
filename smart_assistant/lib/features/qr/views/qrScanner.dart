@@ -7,6 +7,7 @@ import 'package:smart_assistant/shared/widgets/button.dart';
 import 'dart:developer';
 import 'dart:io';
 import '../../../core/navigator.dart';
+import '../../../shared/widgets/backAlert.dart';
 
 class QRScanner extends StatefulWidget {
   Attivita? attivita;
@@ -40,28 +41,29 @@ class _QRScannerState extends State<QRScanner> {
   Widget build(BuildContext context) {
     widget.oggetto = widget.attivita!.oggettoOggettos[0];
     String qrInput = widget.oggetto!.nome;
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                if (result != null)
-                  Text(
-                    'Machine: ${result!.code}',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                    ),
-                  )
-                else
-                  Text("Scan $qrInput's QR code",
+    return BackAlert(
+      child: Scaffold(
+        body: Column(
+          children: <Widget>[
+            Expanded(flex: 4, child: _buildQrView(context)),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  if (result != null)
+                    Text(
+                      'Machine: ${result!.code}',
                       style: TextStyle(
-                        fontSize: 28.sp,
-                      )),
-                if (result != null && result!.code == qrInput)
-                  SizedBox(
+                        fontSize: 20.sp,
+                      ),
+                    )
+                  else
+                    Text("Scan $qrInput's QR code",
+                        style: TextStyle(
+                          fontSize: 28.sp,
+                        )),
+                  if (result != null && result!.code == qrInput)
+                    SizedBox(
                       width: 100.w,
                       child: ButtonPrimary(
                         label: 'Start Task',
@@ -77,44 +79,46 @@ class _QRScannerState extends State<QRScanner> {
                             ),
                           );
                         },
-                      ))
-                else
-                  Text('QR not correct. Retry!',
-                      style: TextStyle(color: Colors.red, fontSize: 22.sp)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    ButtonIconNoBG(
-                      label: "Flash",
-                      icon: Icons.flash_on,
-                      onPressed: () async {
-                        await controller!.toggleFlash();
-                        setState(() {});
-                      },
-                      height: 55.h,
-                      width: 100.w,
-                      fontSize: 28.sp,
-                      iconSize: 30.sp,
-                    ),
-                    ButtonIconNoBG(
-                      label: "Flip",
-                      icon: Icons.flip_camera_android,
-                      onPressed: () async {
-                        await controller?.flipCamera();
-                        setState(() {});
-                      },
-                      height: 55.h,
-                      width: 100.w,
-                      fontSize: 28.sp,
-                      iconSize: 30.sp,
-                    ),
-                  ],
-                )
-              ],
+                      ),
+                    )
+                  else
+                    Text('QR not correct. Retry!',
+                        style: TextStyle(color: Colors.red, fontSize: 22.sp)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      ButtonIconNoBG(
+                        label: "Flash",
+                        icon: Icons.flash_on,
+                        onPressed: () async {
+                          await controller!.toggleFlash();
+                          setState(() {});
+                        },
+                        height: 55.h,
+                        width: 100.w,
+                        fontSize: 28.sp,
+                        iconSize: 30.sp,
+                      ),
+                      ButtonIconNoBG(
+                        label: "Flip",
+                        icon: Icons.flip_camera_android,
+                        onPressed: () async {
+                          await controller?.flipCamera();
+                          setState(() {});
+                        },
+                        height: 55.h,
+                        width: 100.w,
+                        fontSize: 28.sp,
+                        iconSize: 30.sp,
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -55,7 +55,7 @@
 				"codiceAttivita": "6",
 				"descrizione": "L’operazione di lappatura",
 				"durataPrevista": 1,
-				"priorita": "NORMALE",
+				"priorita": "ALTA",
 				"nome": "Lappatura",
 				"processoProcessos": [
 					{
@@ -131,7 +131,7 @@
 				"codiceAttivita": "6",
 				"descrizione": "L’operazione di lappatura",
 				"durataPrevista": 1,
-				"priorita": "NORMALE",
+				"priorita": "BASSA",
 				"nome": "Lappatura",
 				"processoProcessos": [
 					{
