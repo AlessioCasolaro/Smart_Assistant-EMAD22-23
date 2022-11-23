@@ -120,17 +120,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 flex: 4,
                 child: Column(
                   children: [
-                    SizedBox(height: 32.h),
+                    SizedBox(height: 64.h),
                     PageIndicatorWidget(
                       count: 3,
                       value: _page,
                       size: 8.w,
                     ),
-                    SizedBox(height: 32.h),
+                    SizedBox(height: 64.h),
                     ButtonPrimary(
                       label: 'Get Started',
+                      width: 120.w,
+                      height: 50.h,
+                      fontSize: 20.sp,
                       onPressed: () =>
-                          AppNavigator.pushNamedReplacement(loginRoute),
+                          AppNavigator.pushNamedReplacement(qrRoute),
                     ),
                     SizedBox(height: 42.h),
                   ],

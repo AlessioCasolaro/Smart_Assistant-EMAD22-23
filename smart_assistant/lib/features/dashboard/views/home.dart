@@ -87,12 +87,12 @@ class Dashboard extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: SizedBox(
-                  width: 120.w,
+                  width: 130.w,
                   height: 55.h,
                   child: ButtonIconPrimary(
                     label: 'Complete Task',
-                    height: 120.h,
-                    width: 55.w,
+                    height: 130.h,
+                    width: 80.w,
                     icon: Icons.done,
                     onPressed: () {},
                   )),

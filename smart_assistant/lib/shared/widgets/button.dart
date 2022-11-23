@@ -9,12 +9,16 @@ class ButtonPrimary extends StatelessWidget {
     Key? key,
     this.onPressed,
     required this.label,
+    required this.width,
+    required this.height,
+    required this.fontSize,
     this.btnColor,
   }) : super(key: key);
 
   final VoidCallback? onPressed;
   final String label;
   final Color? btnColor;
+  final double width, height, fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +29,18 @@ class ButtonPrimary extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           label,
-          style: TextStyles.body.copyWith(color: SmartAssistantColors.white),
+          style:
+              TextStyle(color: SmartAssistantColors.white, fontSize: fontSize),
         ),
         style: TextButton.styleFrom(
-          foregroundColor: effectiveBackgroundColor,
-          backgroundColor: effectiveBackgroundColor,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            side: BorderSide.none,
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
+            foregroundColor: effectiveBackgroundColor,
+            backgroundColor: effectiveBackgroundColor,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              side: BorderSide.none,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            minimumSize: Size(width, height)),
       ),
     );
   }
@@ -50,11 +55,13 @@ class ButtonIconNoBG extends StatelessWidget {
     required this.height,
     required this.width,
     required this.icon,
+    required this.fontSize,
+    required this.iconSize,
   }) : super(key: key);
 
   final VoidCallback? onPressed;
   final String label;
-  final double width, height;
+  final double width, height, fontSize, iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +81,14 @@ class ButtonIconNoBG extends StatelessWidget {
       child: Row(children: [
         Icon(
           icon,
-          size: 36,
+          size: iconSize,
           color: SmartAssistantColors.primary,
         ),
         const SizedBox(width: 16),
         Text(
           label,
-          style: TextStyles.body
-              .copyWith(color: SmartAssistantColors.primary, fontSize: 24),
+          style: TextStyle(
+              color: SmartAssistantColors.primary, fontSize: fontSize),
         ),
       ]),
     );
@@ -127,8 +134,7 @@ class ButtonIconPrimary extends StatelessWidget {
         const SizedBox(width: 16),
         Text(
           label,
-          style: TextStyles.body
-              .copyWith(color: SmartAssistantColors.white, fontSize: 24),
+          style: TextStyle(color: SmartAssistantColors.white, fontSize: 24),
         ),
       ]),
     );

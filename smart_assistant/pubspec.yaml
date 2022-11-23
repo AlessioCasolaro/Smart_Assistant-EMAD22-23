@@ -36,7 +36,6 @@ dependencies:
   flutter_native_splash: ^2.1.6
   flutter_screenutil: ^5.5.3+2
   flutter_spinkit: ^5.1.0
-  google_fonts: ^3.0.1
   pin_code_fields: ^7.4.0
   pulse_widget: ^0.0.2
   sleek_circular_slider: ^2.0.1
@@ -64,4 +63,9 @@ flutter:
   # Assets
   assets:
     - assets/images/
-    #- assets/icons/
+    
+  fonts:
+    - family: Verdana
+      fonts:
+        - asset: fonts/verdana.ttf
+        - asset: fonts/verdana-bold.ttf

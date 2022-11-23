@@ -21,7 +21,7 @@ class InputField extends StatelessWidget {
             decoration: const InputDecoration(
                 hintText: "Enter your email",
                 hintStyle: TextStyle(color: Colors.grey),
-                border: InputBorder.none),
+                border: OutlineInputBorder()),
           ),
         ),
         Container(
@@ -38,7 +38,7 @@ class InputField extends StatelessWidget {
             decoration: const InputDecoration(
                 hintText: "Enter your password",
                 hintStyle: TextStyle(color: Colors.grey),
-                border: InputBorder.none),
+                border: OutlineInputBorder()),
           ),
         ),
         Container(
@@ -47,7 +47,7 @@ class InputField extends StatelessWidget {
         Container(
           width: 200,
           height: 1,
-          color: SmartAssistantColors.grey,
+          color: SmartAssistantColors.red,
         ),
       ],
     );

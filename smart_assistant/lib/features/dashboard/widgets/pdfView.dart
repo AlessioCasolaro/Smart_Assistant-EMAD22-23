@@ -27,7 +27,7 @@ class PdfView extends StatelessWidget {
               boxDecoration: BoxDecoration(color: Color(0xFF1F75FE))),
           const SizedBox(height: 10),
           SizedBox(
-              height: MediaQuery.of(context).size.height - 165,
+              height: MediaQuery.of(context).size.height - 170,
               child: SfPdfViewer.network(document.url)),
         ],
       ),

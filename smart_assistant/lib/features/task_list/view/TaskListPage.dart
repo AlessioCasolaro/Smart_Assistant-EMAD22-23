@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:smart_assistant/features/task_list/widget/TaskList.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../../shared/res/res.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,26 +10,27 @@ import 'dart:convert';
 
 class TaskListPage extends StatefulWidget {
   const TaskListPage({Key? key}) : super(key: key);
-  
-   @override
-_TaskListPageState createState() => _TaskListPageState();
+
+  @override
+  _TaskListPageState createState() => _TaskListPageState();
 }
 
 class DataFromResponse {
   static Future<Response> getDataLocally(BuildContext context) async {
     final assetBundle = DefaultAssetBundle.of(context);
-    final data = await assetBundle.loadString('assets/images/jsonAttivita.json');
+    final data =
+        await assetBundle.loadString('assets/images/jsonAttivita.json');
     final reportData = responseFromJson(data);
-    
+
     return reportData;
   }
 }
 
 class _TaskListPageState extends State<TaskListPage> {
- List<Attivita> attivitas = [];
+  List<Attivita> attivitas = [];
 
- static List<Map<String, dynamic>> jsonResponse =
-    List<Map<String, dynamic>>.generate(
+  static List<Map<String, dynamic>> jsonResponse =
+      List<Map<String, dynamic>>.generate(
     10,
     (index) => {
       'codiceAttivita': '$index',
@@ -41,22 +41,21 @@ class _TaskListPageState extends State<TaskListPage> {
     },
   );
 
-void getAttivitas() async {
-  await DataFromResponse.getDataLocally(context).then((value) {
-    setState(() {
-      attivitas = value.data.attivitas;
+  void getAttivitas() async {
+    await DataFromResponse.getDataLocally(context).then((value) {
+      setState(() {
+        attivitas = value.data.attivitas;
+      });
     });
-  });
-  /*List<Attivita?> listAttivitas = [];
+    /*List<Attivita?> listAttivitas = [];
   int length = data?.data?.attivitas?.length ?? 0;
   for (var i = 0; i < length; i++) {
     final attivita = data?.data?.attivitas?.elementAt(i);
     listAttivitas.add(attivita);
   }
   attivitas = listAttivitas as List<Attivita>;*/
-}
+  }
 
-  
   @override
   Widget build(BuildContext) {
     getAttivitas();
@@ -75,7 +74,7 @@ void getAttivitas() async {
                     Icons.account_circle,
                     color: SmartAssistantColors.black,
                   ),
-                  ),
+                ),
                 GestureDetector(
                   onTap: () => null,
                   child: Icon(
@@ -93,7 +92,7 @@ void getAttivitas() async {
               children: [
                 Text(
                   'Tasks',
-                  style: GoogleFonts.roboto(
+                  style: TextStyle(
                     fontSize: 36.sp,
                     fontWeight: FontWeight.w700,
                     color: SmartAssistantColors.black,
@@ -140,5 +139,4 @@ void getAttivitas() async {
       ),
     );
   }
-
 }

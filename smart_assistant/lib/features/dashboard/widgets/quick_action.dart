@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 
-import '../../../../shared/res/res.dart';
-
 class QuickAction extends StatelessWidget {
   //final String action;
   const QuickAction({
@@ -24,6 +22,8 @@ class QuickAction extends StatelessWidget {
           width: width.w,
           icon: Icons.search,
           onPressed: () {},
+          fontSize: 20.sp,
+          iconSize: 28.sp,
         ),
         ButtonIconNoBG(
           label: 'Chatbot',
@@ -31,6 +31,8 @@ class QuickAction extends StatelessWidget {
           width: width.w,
           icon: Icons.smart_toy,
           onPressed: () {},
+          fontSize: 20.sp,
+          iconSize: 28.sp,
         ),
         ButtonIconNoBG(
           label: 'Human Help',
@@ -38,6 +40,8 @@ class QuickAction extends StatelessWidget {
           width: width.w,
           icon: Icons.engineering,
           onPressed: () {},
+          fontSize: 20.sp,
+          iconSize: 28.sp,
         ),
       ],
     );

@@ -1,10 +1,13 @@
 import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:smart_assistant/core/navigator.dart';
 import 'package:smart_assistant/features/chat_bot/view/ChatBot.dart';
 import 'package:smart_assistant/features/dashboard/views/home.dart';
 import 'package:smart_assistant/features/login/view/LoginPage.dart';
+import 'package:smart_assistant/features/qr/qrScanner.dart';
+import 'package:smart_assistant/features/qr/views/qr.dart';
 import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
 
 // Contains effective routes to navigate between screens
@@ -26,6 +29,11 @@ abstract class AppRouter {
         return getPageRoute(
           settings: settings,
           view: const TaskListPage(),
+        );
+      case qrRoute:
+        return getPageRoute(
+          settings: settings,
+          view: const QrView(),
         );
       case chatBotRoute:
         return getPageRoute(

@@ -48,6 +48,9 @@ class InputState extends State<InputWrapper> {
                 ),
                 ButtonPrimary(
                   label: "Login",
+                  width: 130,
+                  height: 50,
+                  fontSize: 28,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // If the form is valid, display a snackbar and navigate to the task list page.

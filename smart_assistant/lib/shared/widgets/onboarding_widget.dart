@@ -25,9 +25,10 @@ class OnboardingWidget extends StatelessWidget {
           SizedBox(height: 96.h),
           Text(
             title,
-            style: TextStyles.headline3.copyWith(
+            style: TextStyles.headline2.copyWith(
                 color: SmartAssistantColors.primary,
-                fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.w500,
+                fontSize: TextStyles.headline2.fontSize),
           ),
           SizedBox(height: 16.h),
           Text(
