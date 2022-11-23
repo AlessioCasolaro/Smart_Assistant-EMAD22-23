@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:smart_assistant/shared/res/res.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 import 'dart:developer';
@@ -8,7 +9,7 @@ import 'dart:io';
 import '../../core/navigator.dart';
 
 class QRScanner extends StatefulWidget {
-  const QRScanner({Key? key}) : super(key: key);
+  const QRScanner({Key? key, Attivita? selectedAttivita}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _QRScannerState();
@@ -32,7 +33,7 @@ class _QRScannerState extends State<QRScanner> {
 
   @override
   Widget build(BuildContext context) {
-    const String qrInput = "TAI 200";
+    const String qrInput = 'https://flutter.dev';
     return Scaffold(
       body: Column(
         children: <Widget>[

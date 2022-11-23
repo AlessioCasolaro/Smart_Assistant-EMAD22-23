@@ -1,18 +1,18 @@
-import 'dart:developer';
-
+import 'package:smart_assistant/features/qr/qrScanner.dart';
 import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:smart_assistant/features/task_list/widget/TaskList.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../shared/res/res.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:convert';
 
 class TaskListPage extends StatefulWidget {
   const TaskListPage({Key? key}) : super(key: key);
 
   @override
   _TaskListPageState createState() => _TaskListPageState();
+
+  static _TaskListPageState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_TaskListPageState>();
 }
 
 class DataFromResponse {
@@ -28,18 +28,7 @@ class DataFromResponse {
 
 class _TaskListPageState extends State<TaskListPage> {
   List<Attivita> attivitas = [];
-
-  static List<Map<String, dynamic>> jsonResponse =
-      List<Map<String, dynamic>>.generate(
-    10,
-    (index) => {
-      'codiceAttivita': '$index',
-      'descrizione': 'descrizione $index',
-      'durataPrevista': '$index',
-      'priorita': 'priorita $index',
-      'nome': 'nome $index',
-    },
-  );
+  int selectedIndex = 999;
 
   void getAttivitas() async {
     await DataFromResponse.getDataLocally(context).then((value) {
@@ -47,17 +36,10 @@ class _TaskListPageState extends State<TaskListPage> {
         attivitas = value.data.attivitas;
       });
     });
-    /*List<Attivita?> listAttivitas = [];
-  int length = data?.data?.attivitas?.length ?? 0;
-  for (var i = 0; i < length; i++) {
-    final attivita = data?.data?.attivitas?.elementAt(i);
-    listAttivitas.add(attivita);
-  }
-  attivitas = listAttivitas as List<Attivita>;*/
   }
 
   @override
-  Widget build(BuildContext) {
+  Widget build(BuildContext context) {
     getAttivitas();
     return Scaffold(
       backgroundColor: SmartAssistantColors.secondary,
@@ -72,6 +54,7 @@ class _TaskListPageState extends State<TaskListPage> {
                   onTap: () => null,
                   child: Icon(
                     Icons.account_circle,
+                    size: 70,
                     color: SmartAssistantColors.black,
                   ),
                 ),
@@ -79,6 +62,7 @@ class _TaskListPageState extends State<TaskListPage> {
                   onTap: () => null,
                   child: Icon(
                     Icons.notifications_outlined,
+                    size: 70,
                     color: SmartAssistantColors.black,
                   ),
                 ),
@@ -103,8 +87,9 @@ class _TaskListPageState extends State<TaskListPage> {
             const SizedBox(
               height: 20,
             ),
-            TaskList(attivitas: attivitas),
-            //align button to the bottom
+            TaskList(
+                callback: (index) => setState(() => selectedIndex = index),
+                attivitas: attivitas),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomRight,
@@ -119,9 +104,18 @@ class _TaskListPageState extends State<TaskListPage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () => null,
+                    onPressed: () {
+                      var toPass = attivitas[selectedIndex];
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const QRScanner(
+                              key: null, selectedAttivita: toPass),
+                        ),
+                      );
+                    },
                     child: const Text(
-                      'Start task',
+                      'Scan QR Code',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,

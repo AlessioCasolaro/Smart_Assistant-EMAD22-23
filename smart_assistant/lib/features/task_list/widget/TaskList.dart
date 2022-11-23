@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_assistant/features/task_list/classes/Response.dart';
-//import 'pdfView.dart';
 import '../../../../shared/res/res.dart';
+import '../view/TaskListPage.dart';
+
+typedef void StringCallback(int index);
 
 class TaskList extends StatefulWidget {
   List<Attivita> attivitas = [];
-  //List<Map<String, dynamic>> taskJson;
-  //List<Task> taskList = <Task>[];
+  final StringCallback callback;
 
   TaskList({
     super.key,
     required this.attivitas,
-  }) {
-    /*for (var i = 0; i < taskJson.length; i++) {
-      taskList = List<Task>.generate(
-          taskJson.length, (i) => Task.fromJson(taskJson[i]));
-    } */
-  } 
+    required this.callback,
+  }) {}
 
   @override
   State<TaskList> createState() => _TaskListState();
@@ -29,7 +26,7 @@ class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
     setState(() {
-      if(_selected.length != widget.attivitas.length) {
+      if (_selected.length != widget.attivitas.length) {
         _selected = List<bool>.generate(widget.attivitas.length, (i) => false);
       }
     });
@@ -60,6 +57,7 @@ class _TaskListState extends State<TaskList> {
               ),
               onTap: () {
                 setState(() {
+                  TaskListPage.of(context)?.selectedIndex = index;
                   for (var i = 0; i < widget.attivitas.length; i++) {
                     if (i == index) {
                       _selected[i] = true;
