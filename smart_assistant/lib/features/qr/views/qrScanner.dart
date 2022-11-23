@@ -38,7 +38,7 @@ class _QRScannerState extends State<QRScanner> {
   @override
   Widget build(BuildContext context) {
     widget.oggetto = widget.attivita!.oggettoOggettos[0];
-    String qrInput = widget.oggetto!.codiceOggetto;
+    String qrInput = widget.oggetto!.nome;
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -55,7 +55,7 @@ class _QRScannerState extends State<QRScanner> {
                     ),
                   )
                 else
-                  Text('SCAN A CODE $qrInput',
+                  Text("Scan $qrInput's QR code",
                       style: TextStyle(
                         fontSize: 28.sp,
                       )),
