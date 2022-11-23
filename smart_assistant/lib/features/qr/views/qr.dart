@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../qrScanner.dart';
+import 'qrScanner.dart';
 
 class QrView extends StatelessWidget {
   const QrView({Key? key}) : super(key: key);
@@ -7,7 +7,7 @@ class QrView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: QRScanner(),
-    );
+        //body: QRScanner(),
+        );
   }
 }

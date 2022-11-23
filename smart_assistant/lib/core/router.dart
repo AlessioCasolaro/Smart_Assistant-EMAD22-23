@@ -6,7 +6,7 @@ import 'package:smart_assistant/core/navigator.dart';
 import 'package:smart_assistant/features/chat_bot/view/ChatBot.dart';
 import 'package:smart_assistant/features/dashboard/views/home.dart';
 import 'package:smart_assistant/features/login/view/LoginPage.dart';
-import 'package:smart_assistant/features/qr/qrScanner.dart';
+import 'package:smart_assistant/features/qr/views/qrScanner.dart';
 import 'package:smart_assistant/features/qr/views/qr.dart';
 import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
 
@@ -45,7 +45,7 @@ abstract class AppRouter {
           settings: settings,
           view: Scaffold(
             body: Center(
-              child: Text("Can find route ${settings.name}"),
+              child: Text("Can't find route ${settings.name}"),
             ),
           ),
         );

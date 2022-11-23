@@ -1,4 +1,6 @@
-import 'package:smart_assistant/features/qr/qrScanner.dart';
+import 'dart:convert';
+
+import 'package:smart_assistant/features/qr/views/qrScanner.dart';
 import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:smart_assistant/features/task_list/widget/TaskList.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -105,12 +107,12 @@ class _TaskListPageState extends State<TaskListPage> {
                       ),
                     ),
                     onPressed: () {
-                      var toPass = attivitas[selectedIndex];
+                      Attivita toPass = attivitas[selectedIndex];
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const QRScanner(
-                              key: null, selectedAttivita: toPass),
+                          builder: (context) =>
+                              QRScanner(key: null, selectedAttivita: toPass),
                         ),
                       );
                     },
