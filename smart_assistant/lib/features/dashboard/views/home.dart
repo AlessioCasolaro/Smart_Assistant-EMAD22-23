@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 import '../../../../shared/res/res.dart';
 import '../../../core/navigator.dart';
@@ -7,6 +8,7 @@ import '../widgets/documentsList.dart';
 import '../widgets/widgets.dart';
 
 class Dashboard extends StatelessWidget {
+  Attivita? attivita;
   static List<String> docList = ['Doc1', 'Doc2', 'Doc3', 'Doc4']; //PROVA
   static List<String> urlList = [
     'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
@@ -14,7 +16,10 @@ class Dashboard extends StatelessWidget {
     'Url3',
     'Url4'
   ]; //PROVA
-  const Dashboard({Key? key}) : super(key: key);
+
+  Dashboard({Key? key, required Attivita startedAttivita}) : super(key: key) {
+    attivita = startedAttivita;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,9 @@ class Dashboard extends StatelessWidget {
               ],
             ),
             SizedBox(height: 32.h),
-            const MachineInfo(),
+            MachineInfo(
+              macchina: attivita!.oggettoOggettos[0],
+            ),
             //
             SizedBox(height: 16.h),
             const MachineStats(

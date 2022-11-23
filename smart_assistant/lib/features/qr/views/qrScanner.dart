@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:smart_assistant/features/dashboard/views/home.dart';
 import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 import 'dart:developer';
@@ -68,7 +69,14 @@ class _QRScannerState extends State<QRScanner> {
                         height: 55.h,
                         fontSize: 20.sp,
                         onPressed: () async {
-                          AppNavigator.pushNamedReplacement(dashboardRoute);
+                          //AppNavigator.pushNamedReplacement(dashboardRoute);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  Dashboard(startedAttivita: widget.attivita!),
+                            ),
+                          );
                         },
                       ))
                 else

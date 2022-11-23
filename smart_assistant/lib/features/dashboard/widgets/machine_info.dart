@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import '../../../../shared/res/res.dart';
 import '../../../core/navigator.dart';
 
 class MachineInfo extends StatelessWidget {
-  const MachineInfo({
-    Key? key,
-  }) : super(key: key);
+  OggettoOggetto? machine;
+  String serialNumber = '1234567890';
+
+  MachineInfo({Key? key, required OggettoOggetto macchina}) : super(key: key) {
+    machine = macchina;
+    serialNumber = machine!.codiceOggetto;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +48,7 @@ class MachineInfo extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Text('12345678',
+                    Text('$serialNumber',
                         style: TextStyle(fontSize: TextStyles.body.fontSize))
                   ],
                 ),
