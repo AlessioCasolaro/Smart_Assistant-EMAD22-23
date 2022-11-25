@@ -74,69 +74,72 @@ class _ToolListPageState extends State<ToolListPage> {
             SizedBox(
               height: 20.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            SizedBox(
+              height: 70.h,
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.circle, color: Colors.green),
-                      Text(
-                        'Attrezzatura',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          color: SmartAssistantColors.black,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.circle, color: Colors.green),
+                        Text(
+                          'Attrezzatura',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: SmartAssistantColors.black,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 8.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(Icons.circle, color: Colors.red),
-                      Text(
-                        'Ricambi',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          color: SmartAssistantColors.black,
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.circle, color: Colors.red),
+                        Text(
+                          'Ricambi',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            color: SmartAssistantColors.black,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    width: 100.w,
-                    height: 55.h,
-                    child: ButtonPrimary(
-                        label: 'Next',
-                        width: 100.w,
-                        height: 55.h,
-                        fontSize: 24,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  QRScanner(key: null, selectedAttivita: widget.attivita!),
-                            ),
-                          );
-                        }),
+                      ],
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      width: 100.w,
+                      height: 55.h,
+                      child: ButtonPrimary(
+                          label: 'Next',
+                          width: 100.w,
+                          height: 55.h,
+                          fontSize: 24,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    QRScanner(key: null, selectedAttivita: widget.attivita!),
+                              ),
+                            );
+                          }),
+                    ),
                   ),
                 ),
-              ),
-            ]),
+              ]),
+            ),
           ],
         ),
       ),
