@@ -1,10 +1,11 @@
-import 'package:smart_assistant/features/qr/views/qrScanner.dart';
 import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:smart_assistant/features/task_list/widget/TaskList.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 import '../../../../shared/res/res.dart';
 import 'package:flutter/material.dart';
+
+import '../../tool_list/view/ToolListPage.dart';
 
 class TaskListPage extends StatefulWidget {
   const TaskListPage({Key? key}) : super(key: key);
@@ -136,7 +137,7 @@ class _TaskListPageState extends State<TaskListPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                QRScanner(key: null, selectedAttivita: toPass),
+                                ToolListPage(selectedAttivita: toPass)
                           ),
                         );
                       }),
