@@ -4,13 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:jitsi_meet/jitsi_meet.dart';
 
 class VideoCallPage extends StatelessWidget {
+  const VideoCallPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Meeting());
+    return Scaffold(
+      body: Meeting(),
+    );
   }
 }
 
 class Meeting extends StatefulWidget {
+  const Meeting({super.key});
+
   @override
   _MeetingState createState() => _MeetingState();
 }
@@ -93,91 +99,91 @@ class _MeetingState extends State<Meeting> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 16.0,
           ),
           TextField(
             controller: serverText,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Server URL",
                 hintText: "Hint: Leave empty for meet.jitsi.si"),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14.0,
           ),
           TextField(
             controller: roomText,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Room",
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14.0,
           ),
           TextField(
             controller: subjectText,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Subject",
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14.0,
           ),
           TextField(
             controller: nameText,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Display Name",
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14.0,
           ),
           TextField(
             controller: emailText,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Email",
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14.0,
           ),
           TextField(
             controller: iosAppBarRGBAColor,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "AppBar Color(IOS only)",
                 hintText: "Hint: This HAS to be in HEX RGBA format"),
           ),
-          SizedBox(
+          const SizedBox(
             height: 14.0,
           ),
           CheckboxListTile(
-            title: Text("Audio Only"),
+            title: const Text("Audio Only"),
             value: isAudioOnly,
             onChanged: _onAudioOnlyChanged,
           ),
-          SizedBox(
+          const SizedBox(
             height: 14.0,
           ),
           CheckboxListTile(
-            title: Text("Audio Muted"),
+            title: const Text("Audio Muted"),
             value: isAudioMuted,
             onChanged: _onAudioMutedChanged,
           ),
-          SizedBox(
+          const SizedBox(
             height: 14.0,
           ),
           CheckboxListTile(
-            title: Text("Video Muted"),
+            title: const Text("Video Muted"),
             value: isVideoMuted,
             onChanged: _onVideoMutedChanged,
           ),
-          Divider(
+          const Divider(
             height: 48.0,
             thickness: 2.0,
           ),
@@ -188,7 +194,7 @@ class _MeetingState extends State<Meeting> {
               onPressed: () {
                 _joinMeeting();
               },
-              child: Text(
+              child: const Text(
                 "Join Meeting",
                 style: TextStyle(color: Colors.white),
               ),
@@ -197,7 +203,7 @@ class _MeetingState extends State<Meeting> {
                       MaterialStateColor.resolveWith((states) => Colors.blue)),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 48.0,
           ),
         ],

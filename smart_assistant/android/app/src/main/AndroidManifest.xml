@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.smart_assistant">
+    package="com.example.smart_assistant"
+    xmlns:tools="http://schemas.android.com/tools">
    <application
+        tools:replace="android:label"
         android:label="smart_assistant"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
@@ -30,5 +32,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <service android:enabled="true" android:name="org.jitsi.meet.sdk.ConnectionService" android:exported="true"/>
     </application>
 </manifest>
