@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:jitsi_meet/jitsi_meet.dart';
@@ -50,6 +48,9 @@ class _MeetingState extends State<Meeting> {
     double width = MediaQuery.of(context).size.width;
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
+        ),
         body: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 16.0,
@@ -73,7 +74,8 @@ class _MeetingState extends State<Meeting> {
                                 height: width * 0.60 * 0.70,
                                 child: JitsiMeetConferencing(
                                   extraJS: [
-                                    '<script>function echo(){console.log("running videoCall")};</script>',
+                                    // extraJs setup example
+                                    '<script>function echo(){console.log("echo!!!")};</script>',
                                     '<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>'
                                   ],
                                 ),
@@ -91,91 +93,91 @@ class _MeetingState extends State<Meeting> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          const SizedBox(
+          SizedBox(
             height: 16.0,
           ),
           TextField(
             controller: serverText,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Server URL",
                 hintText: "Hint: Leave empty for meet.jitsi.si"),
           ),
-          const SizedBox(
+          SizedBox(
             height: 14.0,
           ),
           TextField(
             controller: roomText,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Room",
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 14.0,
           ),
           TextField(
             controller: subjectText,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Subject",
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 14.0,
           ),
           TextField(
             controller: nameText,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Display Name",
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 14.0,
           ),
           TextField(
             controller: emailText,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Email",
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 14.0,
           ),
           TextField(
             controller: iosAppBarRGBAColor,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "AppBar Color(IOS only)",
                 hintText: "Hint: This HAS to be in HEX RGBA format"),
           ),
-          const SizedBox(
+          SizedBox(
             height: 14.0,
           ),
           CheckboxListTile(
-            title: const Text("Audio Only"),
+            title: Text("Audio Only"),
             value: isAudioOnly,
             onChanged: _onAudioOnlyChanged,
           ),
-          const SizedBox(
+          SizedBox(
             height: 14.0,
           ),
           CheckboxListTile(
-            title: const Text("Audio Muted"),
+            title: Text("Audio Muted"),
             value: isAudioMuted,
             onChanged: _onAudioMutedChanged,
           ),
-          const SizedBox(
+          SizedBox(
             height: 14.0,
           ),
           CheckboxListTile(
-            title: const Text("Video Muted"),
+            title: Text("Video Muted"),
             value: isVideoMuted,
             onChanged: _onVideoMutedChanged,
           ),
-          const Divider(
+          Divider(
             height: 48.0,
             thickness: 2.0,
           ),
@@ -186,7 +188,7 @@ class _MeetingState extends State<Meeting> {
               onPressed: () {
                 _joinMeeting();
               },
-              child: const Text(
+              child: Text(
                 "Join Meeting",
                 style: TextStyle(color: Colors.white),
               ),
@@ -195,7 +197,7 @@ class _MeetingState extends State<Meeting> {
                       MaterialStateColor.resolveWith((states) => Colors.blue)),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 48.0,
           ),
         ],
