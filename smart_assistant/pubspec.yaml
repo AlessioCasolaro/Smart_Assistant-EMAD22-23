@@ -43,6 +43,7 @@ dependencies:
   qr_code_scanner: ^1.0.1
   flutter_chat_ui: ^1.6.6
   bubble: ^1.2.1
+  jitsi_meet: ^4.0.0
 
 dev_dependencies:
   flutter_test:
