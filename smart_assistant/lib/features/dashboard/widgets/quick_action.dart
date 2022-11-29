@@ -31,6 +31,15 @@ class QuickAction extends StatelessWidget {
           height: height.h,
           width: width.w,
           icon: Icons.smart_toy,
+          onPressed: () {},
+          fontSize: 20.sp,
+          iconSize: 28.sp,
+        ),
+        ButtonIconNoBG(
+          label: 'Human Help',
+          height: height.h,
+          width: width.w,
+          icon: Icons.engineering,
           onPressed: () {
             Navigator.push(
               context,
@@ -40,15 +49,6 @@ class QuickAction extends StatelessWidget {
               ),
             );
           },
-          fontSize: 20.sp,
-          iconSize: 28.sp,
-        ),
-        ButtonIconNoBG(
-          label: 'Human Help',
-          height: height.h,
-          width: width.w,
-          icon: Icons.engineering,
-          onPressed: () {},
           fontSize: 20.sp,
           iconSize: 28.sp,
         ),
