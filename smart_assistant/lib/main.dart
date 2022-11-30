@@ -10,7 +10,10 @@ import 'shared/widgets/onboarding_widget.dart';
 import 'shared/widgets/page_indicator.dart';
 import 'shared/widgets/button.dart';
 
-void main() {
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+Future main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());

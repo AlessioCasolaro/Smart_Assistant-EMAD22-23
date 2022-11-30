@@ -10,8 +10,9 @@ class ToolListPage extends StatefulWidget {
   Attivita? attivita;
   List<AttivitaRicambiTipoRicambio>? ricambi;
   List<AttivitaTipoAttrezzaturaTipoAttrezzatura>? attrezzatura;
-  
-  ToolListPage({Key? key, required Attivita selectedAttivita}) : super(key: key) {
+
+  ToolListPage({Key? key, required Attivita selectedAttivita})
+      : super(key: key) {
     attivita = selectedAttivita;
     ricambi = selectedAttivita.attivitaRicambiTipoRicambios;
     attrezzatura = selectedAttivita.attivitaTipoAttrezzaturaTipoAttrezzaturas;
@@ -56,89 +57,96 @@ class _ToolListPageState extends State<ToolListPage> {
             ),
             Row(
               children: [
-            Text(
-              'Attrezzatura e ricambi',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: 36.sp,
-                fontWeight: FontWeight.w700,
-                color: SmartAssistantColors.black,
-              ),
-          ),
-              ],),
-          const SizedBox(
+                Text(
+                  'Attrezzatura e ricambi',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 36.sp,
+                    fontWeight: FontWeight.w700,
+                    color: SmartAssistantColors.black,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
               height: 20,
             ),
-            ToolList(ricambi: widget.attivita!.attivitaRicambiTipoRicambios,
-            attrezzatura: widget.attivita!.attivitaTipoAttrezzaturaTipoAttrezzaturas),
+            ToolList(
+                ricambi: widget.attivita!.attivitaRicambiTipoRicambios,
+                attrezzatura:
+                    widget.attivita!.attivitaTipoAttrezzaturaTipoAttrezzaturas),
             SizedBox(
               height: 20.h,
             ),
             SizedBox(
               height: 70.h,
-              child:Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.circle, color: Colors.green),
-                        Text(
-                          'Attrezzatura',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: SmartAssistantColors.black,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(Icons.build, color: Colors.purple),
+                            SizedBox(width: 10.w),
+                            Text(
+                              'Attrezzatura',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                color: SmartAssistantColors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(Icons.home_repair_service,
+                                color: Colors.lightBlue),
+                            SizedBox(width: 10.w),
+                            Text(
+                              'Ricambi',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                color: SmartAssistantColors.black,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(Icons.circle, color: Colors.red),
-                        Text(
-                          'Ricambi',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            color: SmartAssistantColors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      width: 100.w,
-                      height: 55.h,
-                      child: ButtonPrimary(
-                          label: 'Next',
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Container(
                           width: 100.w,
                           height: 55.h,
-                          fontSize: 24,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    QRScanner(key: null, selectedAttivita: widget.attivita!),
-                              ),
-                            );
-                          }),
+                          child: ButtonPrimary(
+                              label: 'Next',
+                              width: 100.w,
+                              height: 55.h,
+                              fontSize: 24,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => QRScanner(
+                                        key: null,
+                                        selectedAttivita: widget.attivita!),
+                                  ),
+                                );
+                              }),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ]),
+                  ]),
             ),
           ],
         ),

@@ -23,7 +23,7 @@ class ToolList extends StatefulWidget {
 class _ToolListState extends State<ToolList> {
   List<String> tools = [];
 
-  void fillList(){
+  void fillList() {
     for (var i = 0; i < widget.attrezzatura.length; i++) {
       tools.add(widget.attrezzatura[i].nome);
     }
@@ -31,7 +31,7 @@ class _ToolListState extends State<ToolList> {
       tools.add(widget.ricambi[i].nome);
     }
 
-    if(tools.length == 0){
+    if (tools.length == 0) {
       tools.add("Nessun elemento");
     }
   }
@@ -50,30 +50,28 @@ class _ToolListState extends State<ToolList> {
           itemBuilder: (context, index) {
             return ListTile(
               shape: RoundedRectangleBorder(
-                side: BorderSide(
-                    color: SmartAssistantColors.secondary,
-                    width: 2),
+                side:
+                    BorderSide(color: SmartAssistantColors.secondary, width: 2),
                 borderRadius: BorderRadius.circular(10),
               ),
               tileColor: SmartAssistantColors.secondary,
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
               leading: index <= widget.attrezzatura.length
-                ? Icon(Icons.circle, color: Colors.green)
-                : Icon(Icons.circle, color: Colors.red),
+                  ? const Icon(Icons.build, color: Colors.purple)
+                  : const Icon(Icons.home_repair_service,
+                      color: Colors.lightBlue),
               title: Text(
                 tools[index],
                 style: TextStyles.body.copyWith(
-                    fontSize: 18.sp,
-                    color: SmartAssistantColors.black
-                ),
+                    fontSize: 18.sp, color: SmartAssistantColors.black),
               ),
             );
           },
           separatorBuilder: (BuildContext context, int index) =>
               const Divider(height: 10),
         ),
-        ),
+      ),
     );
   }
 }

@@ -6,7 +6,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:smart_assistant/shared/res/colors.dart';
 import 'package:uuid/uuid.dart';
 
-//import './bot_service.dart';
+import '../back/bot_service.dart';
 
 class ChatBot extends StatefulWidget {
   const ChatBot({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _ChatBotState extends State<ChatBot> {
   final _bot = const types.User(id: "123");
 //id of bot and user doesn't matter here as we have only pair interaction
 
-  //BotService _botService = BotService();
+  BotService _botService = BotService();
 
   @override
   void initState() {
@@ -34,10 +34,10 @@ class _ChatBotState extends State<ChatBot> {
       messages.insert(0, message);
     });
     log("${message.toJson()["text"]}");
-    var data = /*await _botService.callBot(message.toJson()["text"]);*/ "Hello";
-    log(/*"#####${data['message']}"*/ data);
+    var data = await _botService.callBot(message.toJson()["text"]);
+    log("#####${data['message']}");
     setState(() {
-      messages.insert(0, botMessageReply(/*data['message']*/ data));
+      messages.insert(0, botMessageReply(data['message']));
     });
   }
 
@@ -67,7 +67,8 @@ class _ChatBotState extends State<ChatBot> {
         author: _bot,
         createdAt: DateTime.now().millisecondsSinceEpoch,
         id: const Uuid().v4(),
-        text: "Hello. My name is TUTU- your bot. How can I help you?",
+        text:
+            "Hello. My name is SmartAssistantBOT your bot. How can I help you?",
       ));
 
       setState(() {

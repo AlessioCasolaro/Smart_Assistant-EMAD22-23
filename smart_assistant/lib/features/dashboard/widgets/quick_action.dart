@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_assistant/core/navigator.dart';
+import 'package:smart_assistant/features/chat_bot/view/ChatBot.dart';
 import 'package:smart_assistant/features/video_call/view/VideoCallPage.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 
@@ -31,7 +33,12 @@ class QuickAction extends StatelessWidget {
           height: height.h,
           width: width.w,
           icon: Icons.smart_toy,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ChatBot()),
+            );
+          },
           fontSize: 20.sp,
           iconSize: 28.sp,
         ),
@@ -43,10 +50,7 @@ class QuickAction extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) =>
-                VideoCallPage()
-              ),
+              MaterialPageRoute(builder: (context) => VideoCallPage()),
             );
           },
           fontSize: 20.sp,
