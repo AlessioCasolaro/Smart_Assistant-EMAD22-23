@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -12,17 +11,12 @@ class BotService {
   String kAccessKeyId = '';
   String kSecretAccessKey = '';
   String botAlias = '';
-  String botAWSRegion = '';
+  String botAWSRegion = 'us-east-1';
 
   Future<Map<String, dynamic>> callBot(String message) async {
-    var response;
-    String requestUrl = "https://runtime.lex." +
-        botAWSRegion +
-        ".amazonaws.com/bot/" +
-        botName +
-        "/alias/" +
-        botAlias +
-        "/user/12345/text";
+    //https://runtime-v2-lex.us-east-1.amazonaws.com/bots/botId/botAliases/botAliasId/botLocales/localeId/sessions/sessionId/text
+    http.Response response;
+    String requestUrl = "";
 
     Sigv4Client client = Sigv4Client(
       region: botAWSRegion,
@@ -35,12 +29,14 @@ class BotService {
     final request = client.request(
       requestUrl,
       method: 'POST',
-      body: jsonEncode({'inputText': message}),
+      body: jsonEncode({'text': message}),
     );
+    //debugPrint("REQUEST" + request.body);
 
     response = await http.post(request.url,
         headers: request.headers, body: request.body);
     result = jsonDecode(response.body);
+    //debugPrint("Request" + request.toString());
     return result;
   }
 }

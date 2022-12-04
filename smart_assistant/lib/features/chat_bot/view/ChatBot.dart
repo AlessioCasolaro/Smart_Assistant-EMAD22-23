@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:smart_assistant/shared/res/colors.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../task_list/classes/Response.dart';
 import '../back/bot_service.dart';
 
 class ChatBot extends StatefulWidget {
@@ -21,7 +23,7 @@ class _ChatBotState extends State<ChatBot> {
   final _bot = const types.User(id: "123");
 //id of bot and user doesn't matter here as we have only pair interaction
 
-  BotService _botService = BotService();
+  final BotService _botService = BotService();
 
   @override
   void initState() {
@@ -33,12 +35,27 @@ class _ChatBotState extends State<ChatBot> {
     setState(() {
       messages.insert(0, message);
     });
-    log("${message.toJson()["text"]}");
+    //log("PRIMA print ${message.toJson()}");
     var data = await _botService.callBot(message.toJson()["text"]);
-    log("#####${data['message']}");
-    setState(() {
-      messages.insert(0, botMessageReply(data['message']));
-    });
+    messageString = jsonEncode(data["messages"]);
+    final response = responseFromJson(messageString);
+    debugPrint("Print data ${response}");
+
+    //Cicla e aggiunge i messaggi
+    for (var i = 0; i < data["messages"].length; i++) {
+      var message = data["messages"][i]["content"];
+      //log("Print message ${message}");
+
+      setState(() {
+        messages.insert(0, botMessageReply(message));
+      });
+    }
+
+    //Cicla e aggiunge i bottoni
+    for (var i = 0; i < data["messages"].length; i++) {
+      var buttons = data["messages"]["imageResponseCard"]["buttons"];
+      log("Print buttons ${buttons}");
+    }
   }
 
   types.Message botMessageReply(String message) {
@@ -85,7 +102,7 @@ class _ChatBotState extends State<ChatBot> {
             centerTitle: true,
             title: const Text("Chat-BOT"),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               iconSize: 20.0,
               onPressed: () {
                 _goBack(context);
@@ -99,10 +116,10 @@ class _ChatBotState extends State<ChatBot> {
           user: _user,
           theme: const DefaultChatTheme(
             primaryColor: Color(0xFF1F75FE),
-            receivedMessageBodyTextStyle: const TextStyle(
+            receivedMessageBodyTextStyle: TextStyle(
               fontSize: 24,
             ),
-            sentMessageBodyTextStyle: const TextStyle(
+            sentMessageBodyTextStyle: TextStyle(
               fontSize: 24,
               color: Colors.white,
             ),

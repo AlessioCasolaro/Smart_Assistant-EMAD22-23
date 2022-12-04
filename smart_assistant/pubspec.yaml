@@ -47,6 +47,8 @@ dependencies:
   
   flutter_dotenv: ^5.0.2
   sigv4: ^5.0.0
+  aws_common: ^0.3.3
+  aws_signature_v4: ^0.3.1
 
 
 
