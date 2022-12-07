@@ -7,11 +7,11 @@ import '../../../../shared/res/res.dart';
 import 'package:flutter/material.dart';
 
 class ToolListPage extends StatefulWidget {
-  Attivita? attivita;
+  AttivitaAttivitas? attivita;
   List<AttivitaRicambiTipoRicambio>? ricambi;
   List<AttivitaTipoAttrezzaturaTipoAttrezzatura>? attrezzatura;
 
-  ToolListPage({Key? key, required Attivita selectedAttivita})
+  ToolListPage({Key? key, required AttivitaAttivitas selectedAttivita})
       : super(key: key) {
     attivita = selectedAttivita;
     ricambi = selectedAttivita.attivitaRicambiTipoRicambios;

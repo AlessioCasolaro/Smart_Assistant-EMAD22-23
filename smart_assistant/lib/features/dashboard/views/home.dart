@@ -9,7 +9,7 @@ import '../widgets/documentsList.dart';
 import '../widgets/widgets.dart';
 
 class Dashboard extends StatelessWidget {
-  Attivita? attivita;
+  AttivitaAttivitas? attivita;
   static List<String> docList = ['Doc1', 'Doc2', 'Doc3', 'Doc4']; //PROVA
   static List<String> urlList = [
     'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
@@ -18,7 +18,8 @@ class Dashboard extends StatelessWidget {
     'Url4'
   ]; //PROVA
 
-  Dashboard({Key? key, required Attivita startedAttivita}) : super(key: key) {
+  Dashboard({Key? key, required AttivitaAttivitas startedAttivita})
+      : super(key: key) {
     attivita = startedAttivita;
   }
 

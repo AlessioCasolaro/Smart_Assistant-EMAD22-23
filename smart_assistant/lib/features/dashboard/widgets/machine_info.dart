@@ -24,7 +24,7 @@ class MachineInfo extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Machine Name',
+                  '${machine!.nome}',
                   style: TextStyles.body.copyWith(
                       color: SmartAssistantColors.primary,
                       fontSize: TextStyles.headline2.fontSize),

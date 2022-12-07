@@ -7,7 +7,7 @@ import '../view/TaskListPage.dart';
 typedef void StringCallback(int index);
 
 class TaskList extends StatefulWidget {
-  List<Attivita> attivitas = [];
+  List<AttivitaAttivitas> attivitas = [];
   final StringCallback callback;
 
   TaskList({

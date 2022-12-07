@@ -10,10 +10,11 @@ import '../../../core/navigator.dart';
 import '../../../shared/widgets/backAlert.dart';
 
 class QRScanner extends StatefulWidget {
-  Attivita? attivita;
+  AttivitaAttivitas? attivita;
   OggettoOggetto? oggetto;
 
-  QRScanner({Key? key, required Attivita selectedAttivita}) : super(key: key) {
+  QRScanner({Key? key, required AttivitaAttivitas selectedAttivita})
+      : super(key: key) {
     this.attivita = selectedAttivita;
   }
 

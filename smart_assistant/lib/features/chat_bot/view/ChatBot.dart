@@ -1,9 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:smart_assistant/shared/res/colors.dart';
 import 'package:uuid/uuid.dart';
 
@@ -25,9 +23,14 @@ class _ChatBotState extends State<ChatBot> {
 
   final BotService _botService = BotService();
 
+  Future loaddot() async {
+    await dotenv.load(fileName: ".env");
+  }
+
   @override
   void initState() {
     super.initState();
+    loaddot();
     _loadMessages();
   }
 
@@ -35,26 +38,17 @@ class _ChatBotState extends State<ChatBot> {
     setState(() {
       messages.insert(0, message);
     });
-    //log("PRIMA print ${message.toJson()}");
     var data = await _botService.callBot(message.toJson()["text"]);
-    messageString = jsonEncode(data["messages"]);
-    final response = responseFromJson(messageString);
-    debugPrint("Print data ${response}");
 
     //Cicla e aggiunge i messaggi
     for (var i = 0; i < data["messages"].length; i++) {
       var message = data["messages"][i]["content"];
-      //log("Print message ${message}");
-
+      //if (data["messages"][i].contains(["imageResponseCard"]))
+      //var temp = data["messages"][i]["imageResponseCard"];
+      //log("Print buttons ${temp["buttons"]}");
       setState(() {
         messages.insert(0, botMessageReply(message));
       });
-    }
-
-    //Cicla e aggiunge i bottoni
-    for (var i = 0; i < data["messages"].length; i++) {
-      var buttons = data["messages"]["imageResponseCard"]["buttons"];
-      log("Print buttons ${buttons}");
     }
   }
 

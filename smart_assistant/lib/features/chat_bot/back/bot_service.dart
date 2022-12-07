@@ -1,22 +1,24 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:sigv4/sigv4.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class BotService {
   late Map<String, dynamic> result;
-  String botName = '';
-  String kAccessKeyId = '';
-  String kSecretAccessKey = '';
-  String botAlias = '';
-  String botAWSRegion = 'us-east-1';
+  String bots = dotenv.env['BOTS'].toString()!;
+  String kAccessKeyId = dotenv.env['ACCESS_KEY']!;
+  String kSecretAccessKey = dotenv.env['SECRET_KEY']!;
+  String botAlias = dotenv.env['BOT_ALIAS'].toString()!;
+  String botAWSRegion = dotenv.env['REGION']!;
 
   Future<Map<String, dynamic>> callBot(String message) async {
     //https://runtime-v2-lex.us-east-1.amazonaws.com/bots/botId/botAliases/botAliasId/botLocales/localeId/sessions/sessionId/text
     http.Response response;
-    String requestUrl = "";
+    String requestUrl = "https://runtime-v2-lex.us-east-1.amazonaws.com/bots/" +
+        bots +
+        "/botAliases/" +
+        botAlias +
+        "/botLocales/en_US/sessions/12352/text";
 
     Sigv4Client client = Sigv4Client(
       region: botAWSRegion,
