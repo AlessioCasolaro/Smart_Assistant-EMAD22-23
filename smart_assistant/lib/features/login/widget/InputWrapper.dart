@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_assistant/core/navigator.dart';
 import 'package:smart_assistant/features/dashboard/views/home.dart';
+import 'package:smart_assistant/features/video_call/view/VideoCallPage.dart';
 import 'package:smart_assistant/shared/res/colors.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 
@@ -55,12 +56,12 @@ class InputState extends State<InputWrapper> {
                     if (_formKey.currentState!.validate()) {
                       // If the form is valid, display a snackbar and navigate to the task list page.
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Logging in...')),
+                        const SnackBar(content: Text('Loading activities. Please wait...')),
                       );
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const TaskListPage()),
+                            builder: (context) => VideoCallPage()),
                       );
                     }
                   },

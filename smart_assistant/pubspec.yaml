@@ -43,13 +43,12 @@ dependencies:
   qr_code_scanner: ^1.0.1
   flutter_chat_ui: ^1.6.6
   bubble: ^1.2.1
-  jitsi_meet: ^4.0.0
-  
   flutter_dotenv: ^5.0.2
   sigv4: ^5.0.0
   aws_common: ^0.3.3
   aws_signature_v4: ^0.3.1
-
+  agora_rtc_engine: ^6.0.0
+  permission_handler: ^10.2.0
 
 
 dev_dependencies:

@@ -1,309 +1,131 @@
-import 'dart:io';
-import 'package:flutter/foundation.dart';
+import 'dart:async';
+
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
-import 'package:jitsi_meet/jitsi_meet.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class VideoCallPage extends StatelessWidget {
-  const VideoCallPage({super.key});
+const appId = "1424e7e00ba341bc925af1b80403a4d7";
+const token = "<-- Insert Token -->";
+const channel = "Prova";
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Meeting(),
-    );
-  }
-}
-
-class Meeting extends StatefulWidget {
-  const Meeting({super.key});
+class VideoCallPage extends StatefulWidget {
+  const VideoCallPage({Key? key}) : super(key: key);
 
   @override
-  _MeetingState createState() => _MeetingState();
+  _VideoCallPageState createState() => _VideoCallPageState();
 }
 
-class _MeetingState extends State<Meeting> {
-  final serverText = TextEditingController();
-  final roomText = TextEditingController(text: "plugintestroom");
-  final subjectText = TextEditingController(text: "My Plugin Test Meeting");
-  final nameText = TextEditingController(text: "Plugin Test User");
-  final emailText = TextEditingController(text: "fake@email.com");
-  final iosAppBarRGBAColor =
-      TextEditingController(text: "#0080FF80"); //transparent blue
-  bool? isAudioOnly = true;
-  bool? isAudioMuted = true;
-  bool? isVideoMuted = true;
+class _VideoCallPageState extends State<VideoCallPage> {
+  int? _remoteUid;
+  bool _localUserJoined = false;
+  late RtcEngine _engine;
 
   @override
   void initState() {
     super.initState();
-    JitsiMeet.addListener(JitsiMeetingListener(
-        onConferenceWillJoin: _onConferenceWillJoin,
-        onConferenceJoined: _onConferenceJoined,
-        onConferenceTerminated: _onConferenceTerminated,
-        onError: _onError));
+    initAgora();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    JitsiMeet.removeAllListeners();
-  }
+  Future<void> initAgora() async {
+    // retrieve permissions
+    await [Permission.microphone, Permission.camera].request();
 
-  @override
-  Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
-          ),
-          child: kIsWeb
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: width * 0.30,
-                      child: meetConfig(),
-                    ),
-                    Container(
-                        width: width * 0.60,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                              color: Colors.white54,
-                              child: SizedBox(
-                                width: width * 0.60 * 0.70,
-                                height: width * 0.60 * 0.70,
-                                child: JitsiMeetConferencing(
-                                  extraJS: [
-                                    // extraJs setup example
-                                    '<script>function echo(){console.log("echo!!!")};</script>',
-                                    '<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>'
-                                  ],
-                                ),
-                              )),
-                        ))
-                  ],
-                )
-              : meetConfig(),
-        ),
+    //create the engine
+    _engine = createAgoraRtcEngine();
+    await _engine.initialize(const RtcEngineContext(
+      appId: appId,
+      channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
+    ));
+
+    _engine.registerEventHandler(
+      RtcEngineEventHandler(
+        onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+          debugPrint("local user ${connection.localUid} joined");
+          setState(() {
+            _localUserJoined = true;
+          });
+        },
+        onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
+          debugPrint("remote user $remoteUid joined");
+          setState(() {
+            _remoteUid = remoteUid;
+          });
+        },
+        onUserOffline: (RtcConnection connection, int remoteUid,
+            UserOfflineReasonType reason) {
+          debugPrint("remote user $remoteUid left channel");
+          setState(() {
+            _remoteUid = null;
+          });
+        },
+        onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
+          debugPrint(
+              '[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
+      },
       ),
+    );
+
+    await _engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
+    await _engine.enableVideo();
+    await _engine.startPreview();
+
+    await _engine.joinChannel(
+      token: token,
+      channelId: channel,
+      options: const ChannelMediaOptions(),
+      uid: 0,
     );
   }
 
-  Widget meetConfig() {
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 16.0,
+  // Create UI with local view and remote view
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Agora Video Call'),
+      ),
+      body: Stack(
+        children: [
+          Center(
+            child: _remoteVideo(),
           ),
-          TextField(
-            controller: serverText,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Server URL",
-                hintText: "Hint: Leave empty for meet.jitsi.si"),
-          ),
-          const SizedBox(
-            height: 14.0,
-          ),
-          TextField(
-            controller: roomText,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Room",
-            ),
-          ),
-          const SizedBox(
-            height: 14.0,
-          ),
-          TextField(
-            controller: subjectText,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Subject",
-            ),
-          ),
-          const SizedBox(
-            height: 14.0,
-          ),
-          TextField(
-            controller: nameText,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Display Name",
-            ),
-          ),
-          const SizedBox(
-            height: 14.0,
-          ),
-          TextField(
-            controller: emailText,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Email",
-            ),
-          ),
-          const SizedBox(
-            height: 14.0,
-          ),
-          TextField(
-            controller: iosAppBarRGBAColor,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "AppBar Color(IOS only)",
-                hintText: "Hint: This HAS to be in HEX RGBA format"),
-          ),
-          const SizedBox(
-            height: 14.0,
-          ),
-          CheckboxListTile(
-            title: const Text("Audio Only"),
-            value: isAudioOnly,
-            onChanged: _onAudioOnlyChanged,
-          ),
-          const SizedBox(
-            height: 14.0,
-          ),
-          CheckboxListTile(
-            title: const Text("Audio Muted"),
-            value: isAudioMuted,
-            onChanged: _onAudioMutedChanged,
-          ),
-          const SizedBox(
-            height: 14.0,
-          ),
-          CheckboxListTile(
-            title: const Text("Video Muted"),
-            value: isVideoMuted,
-            onChanged: _onVideoMutedChanged,
-          ),
-          const Divider(
-            height: 48.0,
-            thickness: 2.0,
-          ),
-          SizedBox(
-            height: 64.0,
-            width: double.maxFinite,
-            child: ElevatedButton(
-              onPressed: () {
-                _joinMeeting();
-              },
-              child: const Text(
-                "Join Meeting",
-                style: TextStyle(color: Colors.white),
+          Align(
+            alignment: Alignment.topLeft,
+            child: SizedBox(
+              width: 100,
+              height: 150,
+              child: Center(
+                child: _localUserJoined
+                    ? AgoraVideoView(
+                        controller: VideoViewController(
+                          rtcEngine: _engine,
+                          canvas: const VideoCanvas(uid: 0),
+                        ),
+                      )
+                    : const CircularProgressIndicator(),
               ),
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateColor.resolveWith((states) => Colors.blue)),
             ),
-          ),
-          const SizedBox(
-            height: 48.0,
           ),
         ],
       ),
     );
   }
 
-  _onAudioOnlyChanged(bool? value) {
-    setState(() {
-      isAudioOnly = value;
-    });
-  }
-
-  _onAudioMutedChanged(bool? value) {
-    setState(() {
-      isAudioMuted = value;
-    });
-  }
-
-  _onVideoMutedChanged(bool? value) {
-    setState(() {
-      isVideoMuted = value;
-    });
-  }
-
-  _joinMeeting() async {
-    String? serverUrl = serverText.text.trim().isEmpty ? null : serverText.text;
-
-    // Enable or disable any feature flag here
-    // If feature flag are not provided, default values will be used
-    // Full list of feature flags (and defaults) available in the README
-    Map<FeatureFlagEnum, bool> featureFlags = {
-      FeatureFlagEnum.WELCOME_PAGE_ENABLED: false,
-    };
-    if (!kIsWeb) {
-      // Here is an example, disabling features for each platform
-      if (Platform.isAndroid) {
-        // Disable ConnectionService usage on Android to avoid issues (see README)
-        featureFlags[FeatureFlagEnum.CALL_INTEGRATION_ENABLED] = false;
-      } else if (Platform.isIOS) {
-        // Disable PIP on iOS as it looks weird
-        featureFlags[FeatureFlagEnum.PIP_ENABLED] = false;
-      }
+  // Display remote user's video
+  Widget _remoteVideo() {
+    if (_remoteUid != null) {
+      return AgoraVideoView(
+        controller: VideoViewController.remote(
+          rtcEngine: _engine,
+          canvas: VideoCanvas(uid: _remoteUid),
+          connection: const RtcConnection(channelId: channel),
+        ),
+      );
+    } else {
+      return const Text(
+        'Please wait for remote user to join',
+        textAlign: TextAlign.center,
+      );
     }
-    // Define meetings options here
-    var options = JitsiMeetingOptions(room: roomText.text)
-      ..serverURL = serverUrl
-      ..subject = subjectText.text
-      ..userDisplayName = nameText.text
-      ..userEmail = emailText.text
-      ..iosAppBarRGBAColor = iosAppBarRGBAColor.text
-      ..audioOnly = isAudioOnly
-      ..audioMuted = isAudioMuted
-      ..videoMuted = isVideoMuted
-      ..featureFlags.addAll(featureFlags)
-      ..webOptions = {
-        "roomName": roomText.text,
-        "width": "100%",
-        "height": "100%",
-        "enableWelcomePage": false,
-        "chromeExtensionBanner": null,
-        "userInfo": {"displayName": nameText.text}
-      };
-
-    debugPrint("JitsiMeetingOptions: $options");
-    await JitsiMeet.joinMeeting(
-      options,
-      listener: JitsiMeetingListener(
-          onConferenceWillJoin: (message) {
-            debugPrint("${options.room} will join with message: $message");
-          },
-          onConferenceJoined: (message) {
-            debugPrint("${options.room} joined with message: $message");
-          },
-          onConferenceTerminated: (message) {
-            debugPrint("${options.room} terminated with message: $message");
-          },
-          genericListeners: [
-            JitsiGenericListener(
-                eventName: 'readyToClose',
-                callback: (dynamic message) {
-                  debugPrint("readyToClose callback");
-                }),
-          ]),
-    );
-  }
-
-  void _onConferenceWillJoin(message) {
-    debugPrint("_onConferenceWillJoin broadcasted with message: $message");
-  }
-
-  void _onConferenceJoined(message) {
-    debugPrint("_onConferenceJoined broadcasted with message: $message");
-  }
-
-  void _onConferenceTerminated(message) {
-    debugPrint("_onConferenceTerminated broadcasted with message: $message");
-  }
-
-  _onError(error) {
-    debugPrint("_onError broadcasted: $error");
   }
 }
