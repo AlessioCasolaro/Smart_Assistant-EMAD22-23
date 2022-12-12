@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "88563545567",
+    "project_id": "smartassistant-3a1ef",
+    "storage_bucket": "smartassistant-3a1ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88563545567:android:ae3b9a8643b65b98bc406a",
+        "android_client_info": {
+          "package_name": "com.example.smart_assistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88563545567-b3agis4a2otnc25o2ak292dlnsp3ju8s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smart_assistant",
+            "certificate_hash": "109350a9addf5804d9e094e99472c2e8ebff8422"
+          }
+        },
+        {
+          "client_id": "88563545567-i1qt54aqoo9vhani9ljdtfobg3l48fs4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1RvYiwrP1xKPRJ1tEMVR0th-XjfFtdpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88563545567-i1qt54aqoo9vhani9ljdtfobg3l48fs4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

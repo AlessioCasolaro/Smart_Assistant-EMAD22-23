@@ -56,12 +56,13 @@ class InputState extends State<InputWrapper> {
                     if (_formKey.currentState!.validate()) {
                       // If the form is valid, display a snackbar and navigate to the task list page.
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Loading activities. Please wait...')),
+                        const SnackBar(
+                            content:
+                                Text('Loading activities. Please wait...')),
                       );
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => VideoCallPage()),
+                        MaterialPageRoute(builder: (context) => TaskListPage()),
                       );
                     }
                   },

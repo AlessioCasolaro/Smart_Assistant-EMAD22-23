@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'core/navigator.dart';
 
 import 'shared/res/res.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return OverlaySupport(
+            child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Smart Assistant',
           theme: SmartAssistantTheme.lightTheme,
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
           home: const MyHomePage(),
           onGenerateRoute: AppRouter.generateRoutes,
           navigatorKey: AppNavigator.key,
-        );
+        ));
       },
     );
   }

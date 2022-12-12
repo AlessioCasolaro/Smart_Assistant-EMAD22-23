@@ -120,7 +120,13 @@ class _TaskListPageState extends State<TaskListPage> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => null,
+                  onTap: () {
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => {},
+                    );*/
+                  },
                   child: Icon(
                     Icons.notifications_outlined,
                     size: 70,
@@ -148,13 +154,37 @@ class _TaskListPageState extends State<TaskListPage> {
             const SizedBox(
               height: 20,
             ),
-            TaskList(
-                callback: (index) => setState(() => selectedIndex = index),
-                attivitas: attivitas),
+            attivitas.isNotEmpty
+                ? TaskList(
+                    callback: (index) => setState(() => selectedIndex = index),
+                    attivitas: attivitas)
+                : Center(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: const <Widget>[
+                        SizedBox(height: 300.0),
+                        SizedBox(
+                          child: CircularProgressIndicator(
+                              strokeWidth: 5,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  SmartAssistantColors.primary)),
+                          height: 100.0,
+                          width: 100.0,
+                        ),
+                        SizedBox(height: 50.0),
+                        Text(
+                          'Loading your tasks...',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w500,
+                            color: SmartAssistantColors.primary,
+                          ),
+                        ),
+                      ])),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomRight,
-                child: Container(
+                child: SizedBox(
                   width: 100.w,
                   height: 55.h,
                   child: ButtonPrimary(

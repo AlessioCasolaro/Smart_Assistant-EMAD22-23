@@ -4,8 +4,9 @@ import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-const appId = "1424e7e00ba341bc925af1b80403a4d7";
-const token = "<-- Insert Token -->";
+const appId = "54fd071157824221b82bac9459192a35";
+const token =
+    "007eJxTYODZ8l5uSsKFRbf3m78oWCjnUNKpKm+bbpOXIbfnU962U/cUGExN0lIMzA0NTc0tjEyMjAyTLIySEpMtTUwtDS2NEo1Nn/NOS24IZGRIPDOXmZEBAkF8VoaAovyyRAYGAFiRH2c=";
 const channel = "Prova";
 
 class VideoCallPage extends StatefulWidget {
@@ -61,7 +62,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
           debugPrint(
               '[onTokenPrivilegeWillExpire] connection: ${connection.toJson()}, token: $token');
-      },
+        },
       ),
     );
 
@@ -92,8 +93,8 @@ class _VideoCallPageState extends State<VideoCallPage> {
           Align(
             alignment: Alignment.topLeft,
             child: SizedBox(
-              width: 100,
-              height: 150,
+              width: 300,
+              height: 350,
               child: Center(
                 child: _localUserJoined
                     ? AgoraVideoView(
