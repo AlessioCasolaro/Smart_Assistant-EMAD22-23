@@ -6,6 +6,7 @@ import 'package:smart_assistant/core/navigator.dart';
 import 'package:smart_assistant/features/chat_bot/view/ChatBot.dart';
 import 'package:smart_assistant/features/dashboard/views/home.dart';
 import 'package:smart_assistant/features/login/view/LoginPage.dart';
+import 'package:smart_assistant/features/notification/view/notification.dart';
 import 'package:smart_assistant/features/qr/views/qrScanner.dart';
 import 'package:smart_assistant/features/qr/views/qr.dart';
 import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
@@ -34,6 +35,11 @@ abstract class AppRouter {
         return getPageRoute(
           settings: settings,
           view: const QrView(),
+        );
+      case notificationRoute:
+        return getPageRoute(
+          settings: settings,
+          view: const NotificationView(),
         );
       case chatBotRoute:
         return getPageRoute(

@@ -6,7 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 const appId = "54fd071157824221b82bac9459192a35";
 const token =
-    "007eJxTYODZ8l5uSsKFRbf3m78oWCjnUNKpKm+bbpOXIbfnU962U/cUGExN0lIMzA0NTc0tjEyMjAyTLIySEpMtTUwtDS2NEo1Nn/NOS24IZGRIPDOXmZEBAkF8VoaAovyyRAYGAFiRH2c=";
+    "007eJxTYPjhzftfXH2vnvWjJ8WCn3T1glX2fosJPfS8L9R0sbn7hf8KDKYmaSkG5oaGpuYWRiZGRoZJFkZJicmWJqaWhpZGicammT7TkxsCGRkcLBwYGKEQxGdlCCjKL0tkYAAAKYEeAA==";
 const channel = "Prova";
 
 class VideoCallPage extends StatefulWidget {

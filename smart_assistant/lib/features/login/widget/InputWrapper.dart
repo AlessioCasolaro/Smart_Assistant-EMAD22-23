@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_assistant/core/navigator.dart';
 import 'package:smart_assistant/features/dashboard/views/home.dart';
@@ -24,7 +27,8 @@ class InputState extends State<InputWrapper> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-
+  TextEditingController userController = TextEditingController();
+  TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -40,9 +44,11 @@ class InputState extends State<InputWrapper> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      color: SmartAssistantColors.white,
+                      //color: SmartAssistantColors.white,
                       borderRadius: BorderRadius.circular(10)),
-                  child: const InputField(),
+                  child: InputField(
+                      userController: userController,
+                      passController: passController),
                 ),
                 const SizedBox(
                   height: 30,
@@ -50,21 +56,53 @@ class InputState extends State<InputWrapper> {
                 ButtonPrimary(
                   label: "Login",
                   width: 130,
-                  height: 50,
-                  fontSize: 28,
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                  height: 80,
+                  fontSize: 30,
+                  onPressed: () async {
+                    //log("message" +myController.text +"pass" +await readData());
+                    if ((passController.text ==
+                            await readData(userController.text)) &
+                        _formKey.currentState!.validate()) {
+                      log("Login ok");
                       // If the form is valid, display a snackbar and navigate to the task list page.
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                            content:
-                                Text('Loading activities. Please wait...')),
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: SmartAssistantColors.secondary,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10))),
+                            content: Text(
+                              'Logged in successfully',
+                              style:
+                                  TextStyle(fontSize: 25, color: Colors.black),
+                            )),
                       );
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => TaskListPage()),
                       );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10))),
+                            content: Text(
+                              'Wrong username or password',
+                              style: TextStyle(fontSize: 25),
+                            )),
+                      );
                     }
+                    log("Login not ok");
                   },
                 ),
               ],
@@ -74,4 +112,13 @@ class InputState extends State<InputWrapper> {
       ),
     );
   }
+}
+
+Future<String> readData(String user) async {
+  DatabaseReference reference =
+      // FirebaseDatabase.instance.ref().child("users").child(user).child("name");
+      FirebaseDatabase.instance.ref().child("password");
+  DatabaseEvent event = await reference.once();
+  //log(event.snapshot.value.toString());
+  return event.snapshot.value.toString();
 }

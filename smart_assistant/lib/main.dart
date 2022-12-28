@@ -1,9 +1,12 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:smart_assistant/features/notification/view/notification.dart';
 import 'core/navigator.dart';
 
 import 'shared/res/res.dart';
@@ -14,6 +17,9 @@ import 'shared/widgets/button.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   await dotenv.load(fileName: ".env");
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -37,7 +43,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Smart Assistant',
           theme: SmartAssistantTheme.lightTheme,
-          //darkTheme: .darkTheme,
+          //darkTheme: SmartAssistantTheme.darkTheme,
           home: const MyHomePage(),
           onGenerateRoute: AppRouter.generateRoutes,
           navigatorKey: AppNavigator.key,
@@ -133,13 +139,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     SizedBox(height: 64.h),
                     ButtonPrimary(
-                      label: 'Get Started',
-                      width: 120.w,
-                      height: 50.h,
-                      fontSize: 20.sp,
-                      onPressed: () =>
-                          AppNavigator.pushNamedReplacement(loginRoute),
-                    ),
+                        label: 'Get Started',
+                        width: 120.w,
+                        height: 50.h,
+                        fontSize: 20.sp,
+                        onPressed: () =>
+                            //AppNavigator.pushNamedReplacement(loginRoute),
+                            AppNavigator.pushNamedReplacement(loginRoute)),
                     SizedBox(height: 42.h),
                   ],
                 ))

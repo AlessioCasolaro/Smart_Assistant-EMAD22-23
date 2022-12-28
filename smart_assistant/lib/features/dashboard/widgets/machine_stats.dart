@@ -1,15 +1,22 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:smart_assistant/features/dashboard/classes/Response.dart';
 import '../../../../shared/res/res.dart';
 
 class MachineStats extends StatelessWidget {
-  const MachineStats({
-    this.boxDecoration,
-    Key? key,
-  }) : super(key: key);
+  OggettoOggetto? machine;
+  BoxDecoration? boxDecoration;
+  String bearing1 = "", bearing2 = "", bearing3 = "", bearing4 = "";
 
-  final BoxDecoration? boxDecoration;
+  MachineStats(
+      {Key? key, required OggettoOggetto macchina, required BoxDecoration box})
+      : super(key: key) {
+    machine = macchina;
+    boxDecoration = box;
+    bearing1 = machine!.sensoresOggetto[3].nome;
+    bearing2 = machine!.sensoresOggetto[2].nome;
+    bearing3 = machine!.sensoresOggetto[1].nome;
+    bearing4 = machine!.sensoresOggetto[0].nome;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,19 +27,19 @@ class MachineStats extends StatelessWidget {
         Column(
           children: [
             Text(
-              'Temperature',
+              bearing1,
               style:
                   TextStyles.body.copyWith(color: SmartAssistantColors.white),
             ),
             Row(
               children: [
-                Icon(
-                  Icons.thermostat,
+                const Icon(
+                  Icons.graphic_eq,
                   size: 24,
                   color: SmartAssistantColors.white,
                 ),
                 Text(
-                  '23°C',
+                  "30 Hz",
                   style: TextStyles.body
                       .copyWith(color: SmartAssistantColors.white),
                 ),
@@ -43,19 +50,19 @@ class MachineStats extends StatelessWidget {
         Column(
           children: [
             Text(
-              'Pressure',
+              bearing2,
               style:
                   TextStyles.body.copyWith(color: SmartAssistantColors.white),
             ),
             Row(
               children: [
-                Icon(
-                  Icons.air,
+                const Icon(
+                  Icons.graphic_eq,
                   size: 24,
                   color: SmartAssistantColors.white,
                 ),
                 Text(
-                  '80%',
+                  '80 Hz',
                   style: TextStyles.body
                       .copyWith(color: SmartAssistantColors.white),
                 ),
@@ -66,19 +73,42 @@ class MachineStats extends StatelessWidget {
         Column(
           children: [
             Text(
-              'Energy Consumption',
+              bearing3,
               style:
                   TextStyles.body.copyWith(color: SmartAssistantColors.white),
             ),
             Row(
               children: [
-                Icon(
-                  Icons.bolt_sharp,
+                const Icon(
+                  Icons.graphic_eq,
                   size: 24,
                   color: SmartAssistantColors.white,
                 ),
                 Text(
-                  '250 KWh',
+                  '250 Hz',
+                  style: TextStyles.body
+                      .copyWith(color: SmartAssistantColors.white),
+                ),
+              ],
+            )
+          ],
+        ),
+        Column(
+          children: [
+            Text(
+              bearing4,
+              style:
+                  TextStyles.body.copyWith(color: SmartAssistantColors.white),
+            ),
+            Row(
+              children: [
+                const Icon(
+                  Icons.graphic_eq,
+                  size: 24,
+                  color: SmartAssistantColors.white,
+                ),
+                Text(
+                  '230 Hz',
                   style: TextStyles.body
                       .copyWith(color: SmartAssistantColors.white),
                 ),

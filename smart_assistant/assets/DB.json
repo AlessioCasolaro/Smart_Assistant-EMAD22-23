@@ -1,0 +1,44 @@
+{
+        "dataNascita":"1976-01-23",
+        "cognome":"Moretti",
+        "codiceUtente":"373",
+        "nome":"Potito",
+        "luogoNascita":"Cortenuova",
+        "codiceFiscale":"POTMOR76",
+        "tagliaScarpe":"40",
+        "tagliaVestiario":"S",
+        "lineasUtenteLinea":[
+           {
+              "strutturaStrutturas":{
+                 "codiceStruttura":"2",
+                 "coordinateGeo":"Salerno"
+              },
+              "codiceLinea":"202",
+              "nome":"produzione 1"
+           }
+        ],
+        "provinciaNascita":"BG",
+        "profilosUtenteProfilo":[
+           {
+              "nome":"Meccanico Specializzato",
+              "codiceProfilo":"1"
+           }
+        ],
+        "matricola":"424840E6",
+        "email":"po.moretti@mail.com",
+        "password":"123456",
+        "notifiche":[
+         {
+            "titolo":"Cambio Valvola Tai",
+            "corpo":"Si necessita di cambiare la valvola tai per il motore 1"
+         },
+         {
+            "titolo":"Cambio centralina motore 2",
+            "corpo":"Si necessita di cambiare la centralina del motore 2"
+         },
+         {
+            "titolo":"Configurazione centralina motore 3",
+            "corpo":"Si necessita di configurare la centralina del motore 3"
+         }
+      ]
+     }

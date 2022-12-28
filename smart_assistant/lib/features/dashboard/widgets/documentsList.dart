@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../classes/Response.dart';
 import 'document.dart';
 import 'pdfView.dart';
 import '../../../../shared/res/res.dart';
 
 class DocumentsList extends StatelessWidget {
   final List<Document> document;
-  const DocumentsList({
+  OggettoOggetto? machine;
+  DocumentsList({
     Key? key,
     required this.document,
-  }) : super(key: key);
+    required OggettoOggetto oggetto,
+  }) : super(key: key) {
+    machine = oggetto;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +44,8 @@ class DocumentsList extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PdfView(document: document[index]),
+                    builder: (context) =>
+                        PdfView(oggetto: machine!, document: document[index]),
                   ),
                 );
               },

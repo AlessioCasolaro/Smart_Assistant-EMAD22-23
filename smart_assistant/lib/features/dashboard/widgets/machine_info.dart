@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:smart_assistant/features/task_list/classes/Response.dart';
+import 'package:smart_assistant/features/dashboard/classes/Response.dart';
 import '../../../../shared/res/res.dart';
 import '../../../core/navigator.dart';
 
 class MachineInfo extends StatelessWidget {
   OggettoOggetto? machine;
-  String serialNumber = '1234567890';
+  String description = "", type = "";
 
   MachineInfo({Key? key, required OggettoOggetto macchina}) : super(key: key) {
     machine = macchina;
-    serialNumber = machine!.codiceOggetto;
+    description = "Description";
+    type = machine!.tipoOggettoTipoOggettos.nome;
   }
 
   @override
@@ -38,7 +39,7 @@ class MachineInfo extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      'S/N',
+                      'Description',
                       style: TextStyles.body.copyWith(
                           color: SmartAssistantColors.primary,
                           fontWeight: FontWeight.bold,
@@ -48,7 +49,7 @@ class MachineInfo extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Text('$serialNumber',
+                    Text('$description',
                         style: TextStyle(fontSize: TextStyles.body.fontSize))
                   ],
                 ),
@@ -61,7 +62,7 @@ class MachineInfo extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      'Last Maintenance',
+                      'Type',
                       style: TextStyles.body.copyWith(
                           color: SmartAssistantColors.primary,
                           fontWeight: FontWeight.bold),
@@ -71,7 +72,7 @@ class MachineInfo extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      '10/10/2021',
+                      '$type',
                       style: TextStyle(fontSize: TextStyles.body.fontSize),
                     )
                   ],
@@ -95,7 +96,9 @@ class MachineInfo extends StatelessWidget {
                   children: [
                     Text(
                       'Working',
-                      style: TextStyle(fontSize: TextStyles.body.fontSize),
+                      style: TextStyle(
+                          fontSize: TextStyles.body.fontSize,
+                          color: Colors.green),
                     )
                   ],
                 ),

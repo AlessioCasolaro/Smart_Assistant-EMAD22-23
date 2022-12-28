@@ -36,7 +36,9 @@ class PageIndicatorWidget extends StatelessWidget {
               shape: BoxShape.circle,
               color: i == value
                   ? SmartAssistantColors.primary
-                  : SmartAssistantColors.grey30,
+                  : Theme.of(context).brightness == Brightness.light
+                      ? SmartAssistantColors.grey30
+                      : SmartAssistantColors.white,
             ),
             duration: const Duration(milliseconds: 900),
           )

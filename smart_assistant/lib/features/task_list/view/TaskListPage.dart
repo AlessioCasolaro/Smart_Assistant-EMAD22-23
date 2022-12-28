@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:smart_assistant/features/notification/view/notification.dart';
 
 import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:smart_assistant/features/task_list/widget/TaskList.dart';
@@ -23,10 +25,13 @@ class TaskListPage extends StatefulWidget {
       context.findAncestorStateOfType<_TaskListPageState>();
 }
 
+Future loaddot() async {
+  await dotenv.load(fileName: ".env");
+}
+
 Future<http.Response> getData(String codUtente) {
   return http.post(
-    Uri.parse(
-        'https://7r9zkozeq7.execute-api.us-east-1.amazonaws.com/listaAttivitaOperatore'),
+    Uri.parse(dotenv.env['URL_TASKLIST'].toString()),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -38,16 +43,9 @@ Future<http.Response> getData(String codUtente) {
 
 class DataFromResponse {
   static Future<Response> getDataLocally(BuildContext context) async {
-    final assetBundle = DefaultAssetBundle.of(context);
-
-    //final data =
-    //    await assetBundle.loadString('assets/images/jsonAttivita.json');
-
     final data = await getData("503");
     log("LOG1 " + data.body.toString());
     final reportData = responseFromJson(data.body);
-
-    log("Log 2" + reportData.toString());
     return reportData;
   }
 }
@@ -113,7 +111,7 @@ class _TaskListPageState extends State<TaskListPage> {
               children: [
                 GestureDetector(
                   onTap: () => null,
-                  child: Icon(
+                  child: const Icon(
                     Icons.account_circle,
                     size: 70,
                     color: SmartAssistantColors.black,
@@ -121,13 +119,14 @@ class _TaskListPageState extends State<TaskListPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    /*Navigator.push(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => {},
-                    );*/
+                        builder: (context) => const NotificationView(),
+                      ),
+                    );
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.notifications_outlined,
                     size: 70,
                     color: SmartAssistantColors.black,
@@ -181,30 +180,33 @@ class _TaskListPageState extends State<TaskListPage> {
                           ),
                         ),
                       ])),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: SizedBox(
-                  width: 100.w,
-                  height: 55.h,
-                  child: ButtonPrimary(
-                      label: 'Next',
-                      width: 100.w,
-                      height: 55.h,
-                      fontSize: 24,
-                      onPressed: () {
-                        count = 0;
-                        AttivitaAttivitas toPass = attivitas[selectedIndex];
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ToolListPage(selectedAttivita: toPass)),
-                        );
-                      }),
-                ),
-              ),
-            ),
+            attivitas.isNotEmpty
+                ? Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: SizedBox(
+                        width: 100.w,
+                        height: 55.h,
+                        child: ButtonPrimary(
+                            label: 'Next',
+                            width: 100.w,
+                            height: 55.h,
+                            fontSize: 24,
+                            onPressed: () {
+                              count = 0;
+                              AttivitaAttivitas toPass =
+                                  attivitas[selectedIndex];
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ToolListPage(selectedAttivita: toPass)),
+                              );
+                            }),
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
             SizedBox(
               height: 20.h,
             ),

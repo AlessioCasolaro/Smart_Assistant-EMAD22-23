@@ -1,3 +1,4 @@
+import 'package:smart_assistant/features/notification/view/notification.dart';
 import 'package:smart_assistant/features/qr/views/qrScanner.dart';
 import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,7 +44,12 @@ class _ToolListPageState extends State<ToolListPage> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => null,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NotificationView(),
+                    ),
+                  ),
                   child: Icon(
                     Icons.notifications_outlined,
                     size: 70,

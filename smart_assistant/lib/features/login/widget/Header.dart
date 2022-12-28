@@ -19,14 +19,17 @@ class Header extends StatelessWidget {
             child: Container(
               child: Image.asset(
                 'assets/images/smartAssistantLogo.png',
-                width: 350,
-                height: 350,
+                width: 320,
+                height: 320,
               ),
             ),
           )),
+          const SizedBox(
+            height: 20,
+          ),
           Center(
             child: Text(
-              "Login",
+              "LOGIN",
               style: TextStyle(
                   color: SmartAssistantColors.white,
                   fontSize: TextStyles.headline1.fontSize),

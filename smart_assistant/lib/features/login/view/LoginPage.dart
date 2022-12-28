@@ -26,11 +26,10 @@ class LoginPage extends StatelessWidget {
             Expanded(
                 child: Container(
               decoration: const BoxDecoration(
-                  color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    topRight: Radius.circular(60),
-                  )),
+                topLeft: Radius.circular(60),
+                topRight: Radius.circular(60),
+              )),
               child: const InputWrapper(),
             ))
           ],

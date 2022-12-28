@@ -15,7 +15,7 @@ class QRScanner extends StatefulWidget {
 
   QRScanner({Key? key, required AttivitaAttivitas selectedAttivita})
       : super(key: key) {
-    this.attivita = selectedAttivita;
+    attivita = selectedAttivita;
   }
 
   @override
@@ -40,6 +40,9 @@ class _QRScannerState extends State<QRScanner> {
 
   @override
   Widget build(BuildContext context) {
+    log("QR" +
+        widget.attivita!.codiceAttivita +
+        widget.attivita!.oggettoOggettos[0].codiceOggetto);
     widget.oggetto = widget.attivita!.oggettoOggettos[0];
     String qrInput = widget.oggetto!.nome;
     return BackAlert(
@@ -75,8 +78,12 @@ class _QRScannerState extends State<QRScanner> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  Dashboard(startedAttivita: widget.attivita!),
+                              builder: (context) => Dashboard(
+                                startedAttivita:
+                                    widget.attivita!.codiceAttivita,
+                                selectedOggetto: widget
+                                    .attivita!.oggettoOggettos[0].codiceOggetto,
+                              ),
                             ),
                           );
                         },
@@ -97,8 +104,11 @@ class _QRScannerState extends State<QRScanner> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                Dashboard(startedAttivita: widget.attivita!),
+                            builder: (context) => Dashboard(
+                              startedAttivita: widget.attivita!.codiceAttivita,
+                              selectedOggetto: widget
+                                  .attivita!.oggettoOggettos[0].codiceOggetto,
+                            ),
                           ),
                         );
                       },

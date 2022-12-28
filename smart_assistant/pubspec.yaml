@@ -50,9 +50,9 @@ dependencies:
   agora_rtc_engine: ^6.0.0
   permission_handler: ^10.2.0
 
-  
   firebase_core: ^2.4.0
-  firebase_messaging: ^14.1.4
+  firebase_database: ^10.0.7
+  #firebase_messaging: ^14.1.4
   overlay_support: ^2.1.0
 
 dev_dependencies:
@@ -70,7 +70,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  
   # Assets
   assets:
     - assets/images/

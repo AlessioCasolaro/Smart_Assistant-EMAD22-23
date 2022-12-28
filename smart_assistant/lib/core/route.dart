@@ -4,3 +4,4 @@ const String dashboardRoute = '/dashboard';
 const String taskListRoute = '/taskList';
 const String chatBotRoute = '/chatBot';
 const String qrRoute = '/qrBot';
+const String notificationRoute = '/notification';
