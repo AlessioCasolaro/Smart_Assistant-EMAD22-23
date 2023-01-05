@@ -31,7 +31,7 @@ Future loaddot() async {
 
 Future<http.Response> getData(String codUtente) {
   return http.post(
-    Uri.parse(dotenv.env['URL_TASKLIST'].toString()),
+    Uri.parse(dotenv.env['URL_TASKLIST']!),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -43,7 +43,7 @@ Future<http.Response> getData(String codUtente) {
 
 class DataFromResponse {
   static Future<Response> getDataLocally(BuildContext context) async {
-    final data = await getData("503");
+    final data = await getData("373");
     log("LOG1 " + data.body.toString());
     final reportData = responseFromJson(data.body);
     return reportData;

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:sigv4/sigv4.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -31,14 +32,17 @@ class BotService {
     final request = client.request(
       requestUrl,
       method: 'POST',
-      body: jsonEncode({'text': message}),
+      body: jsonEncode({
+        "requestAttributes": {"codiceProcesso": "3"},
+        'text': message
+      }),
     );
-    //debugPrint("REQUEST" + request.body);
+    //log("REQUEST" + request.body);
 
     response = await http.post(request.url,
         headers: request.headers, body: request.body);
     result = jsonDecode(response.body);
-    //debugPrint("Request" + request.toString());
+    log("respone" + jsonDecode(response.body).toString());
     return result;
   }
 }

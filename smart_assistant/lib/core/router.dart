@@ -1,15 +1,18 @@
 import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+
 import 'package:smart_assistant/core/navigator.dart';
 import 'package:smart_assistant/features/chat_bot/view/ChatBot.dart';
-import 'package:smart_assistant/features/dashboard/views/home.dart';
+
 import 'package:smart_assistant/features/login/view/LoginPage.dart';
 import 'package:smart_assistant/features/notification/view/notification.dart';
-import 'package:smart_assistant/features/qr/views/qrScanner.dart';
+
 import 'package:smart_assistant/features/qr/views/qr.dart';
 import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
+
+import 'package:smart_assistant/features/test/test.dart';
+import 'package:smart_assistant/features/test/videoTest.dart';
 
 // Contains effective routes to navigate between screens
 abstract class AppRouter {
@@ -21,11 +24,11 @@ abstract class AppRouter {
           settings: settings,
           view: const LoginPage(),
         );
-      /*case dashboardRoute:
+      case testRoute:
         return getPageRoute(
-          settings: settings,  //Inserire parametri fittizi (creare Attivita fake)
-          view: Dashboard(),  //oppure togliere
-        );*/
+          settings: settings,
+          view: PorcupineWake(),
+        );
       case taskListRoute:
         return getPageRoute(
           settings: settings,

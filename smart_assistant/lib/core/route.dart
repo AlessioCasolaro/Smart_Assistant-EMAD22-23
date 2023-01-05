@@ -5,3 +5,4 @@ const String taskListRoute = '/taskList';
 const String chatBotRoute = '/chatBot';
 const String qrRoute = '/qrBot';
 const String notificationRoute = '/notification';
+const String testRoute = '/test';
