@@ -11,7 +11,7 @@ import 'package:smart_assistant/features/notification/view/notification.dart';
 import 'package:smart_assistant/features/qr/views/qr.dart';
 import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
 
-import 'package:smart_assistant/features/test/test.dart';
+import 'package:smart_assistant/features/test/definitiva.dart';
 import 'package:smart_assistant/features/test/videoTest.dart';
 
 // Contains effective routes to navigate between screens

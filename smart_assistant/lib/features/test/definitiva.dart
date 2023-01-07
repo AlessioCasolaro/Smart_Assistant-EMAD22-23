@@ -2,13 +2,17 @@ import 'dart:developer';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'dart:convert';
+
+import 'package:sound_stream/sound_stream.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:porcupine_flutter/porcupine.dart';
 import 'package:porcupine_flutter/porcupine_manager.dart';
 import 'package:porcupine_flutter/porcupine_error.dart';
 
-import 'cheetah_manager.dart';
-import 'package:cheetah_flutter/cheetah_error.dart';
+
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -24,6 +28,7 @@ Future loaddot() async {
 class _PorcupineWakeState extends State<PorcupineWake>
     with WidgetsBindingObserver {
   final String accessKey = dotenv.env['PICOKEY']!;
+  final String STTKey = dotenv.env['DEEPGRAMKEY']!;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Map<String, BuiltInKeyword> _keywordMap = {};
@@ -40,11 +45,16 @@ class _PorcupineWakeState extends State<PorcupineWake>
   PorcupineManager? _porcupineManager;
 
   String transcriptText = ""; //per cheetah
-  CheetahManager? _cheetahManager;
   final ScrollController _controller = ScrollController();
-  bool isProcessingCheetah = false;
-  bool isErrorCheetah = false;
-  String errorMessageCheetah = "";
+
+  final String serverUrl =
+    'wss://api.deepgram.com/v1/listen?encoding=linear16&sample_rate=16000&language=en-US';
+
+  final RecorderStream _recorder = RecorderStream();
+  late StreamSubscription _recorderStatus;
+  late StreamSubscription _audioStream;
+  late IOWebSocketChannel channel;
+
 
   @override
   void initState() {
@@ -54,14 +64,22 @@ class _PorcupineWakeState extends State<PorcupineWake>
       backgroundColour = defaultColour;
       transcriptText = "";
     });
+    WidgetsBinding.instance?.addPostFrameCallback(onLayoutDone);
     WidgetsBinding.instance.addObserver(this);
     _initializeKeywordMap();
     loadNewKeyword("jarvis");
-    initCheetah();
+  }
+
+  void onLayoutDone(Duration timeStamp) async {
+    await Permission.microphone.request();
+    setState(() {});
   }
 
   @override
   void dispose() {
+    _recorderStatus.cancel();
+    _audioStream.cancel();
+    channel.sink.close();
     WidgetsBinding.instance?.removeObserver(this);
     super.dispose();
   }
@@ -125,7 +143,7 @@ class _PorcupineWakeState extends State<PorcupineWake>
     }
   }
 
-  void wakeWordCallback(int keywordIndex) {
+  void wakeWordCallback(int keywordIndex) async {
     if (keywordIndex >= 0) {
       setState(() {
         backgroundColour = detectionColour;
@@ -135,13 +153,17 @@ class _PorcupineWakeState extends State<PorcupineWake>
           backgroundColour = defaultColour;
         });
       });
-      _startProcessingCheetah();
-      log("Jarvis detected, starting Cheetah");
 
-      Future.delayed(const Duration(seconds: 10), () {
-        log("Stopping Cheetah");
-        _stopProcessingCheetah();
+      await _porcupineManager?.stop();
+      log("Jarvis detected, starting Cheetah");
+      
+      _startRecord();
+
+      Future.delayed(const Duration(seconds: 10), () async {
+        _stopRecord();
       });
+
+      await _porcupineManager?.start();
     }
   }
 
@@ -164,6 +186,7 @@ class _PorcupineWakeState extends State<PorcupineWake>
     try {
       await _porcupineManager?.start();
       setState(() {
+        
         isProcessingPorcupine = true;
       });
     } on PorcupineException catch (ex) {
@@ -204,92 +227,58 @@ class _PorcupineWakeState extends State<PorcupineWake>
     }
   }
 
-//FINE PROCUPINE/////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
+  
+  Future<void> _initStream() async {
+    channel = IOWebSocketChannel.connect(Uri.parse(serverUrl),
+        headers: {'Authorization': 'Token $STTKey'});
 
-  Future<void> initCheetah() async {
-    String platform = Platform.isAndroid
-        ? "android"
-        : Platform.isIOS
-            ? "ios"
-            : throw CheetahRuntimeException(
-                "This demo supports iOS and Android only.");
-    String modelPath = "assets/models/$platform/cheetah_params.pv";
+    channel.stream.listen((event) async {
+      final parsedJson = jsonDecode(event);
 
-    try {
-      _cheetahManager = await CheetahManager.create(
-          accessKey, modelPath, transcriptCallback, errorCallbackCheetah);
-    } on CheetahInvalidArgumentException catch (ex) {
-      errorCallbackCheetah(CheetahInvalidArgumentException(
-          "${ex.message}\nEnsure your accessKey '$accessKey' is a valid access key."));
-    } on CheetahActivationException {
-      errorCallbackCheetah(
-          CheetahActivationException("AccessKey activation error."));
-    } on CheetahActivationLimitException {
-      errorCallbackCheetah(CheetahActivationLimitException(
-          "AccessKey reached its device limit."));
-    } on CheetahActivationRefusedException {
-      errorCallbackCheetah(
-          CheetahActivationRefusedException("AccessKey refused."));
-    } on CheetahActivationThrottledException {
-      errorCallbackCheetah(
-          CheetahActivationThrottledException("AccessKey has been throttled."));
-    } on CheetahException catch (ex) {
-      errorCallbackCheetah(ex);
-    }
-  }
-
-  void transcriptCallback(String transcript) {
-    bool shouldScroll =
-        _controller.position.pixels == _controller.position.maxScrollExtent;
-
-    setState(() {
-      transcriptText = transcriptText + transcript;
+      updateText(parsedJson['channel']['alternatives'][0]['transcript']);
     });
-    log("TESTO: " + transcriptText);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (shouldScroll && !_controller.position.atEdge) {
-        _controller.jumpTo(_controller.position.maxScrollExtent);
+    _audioStream = _recorder.audioStream.listen((data) {
+      channel.sink.add(data);
+    });
+
+    _recorderStatus = _recorder.status.listen((status) {
+      if (mounted) {
+        setState(() {});
       }
     });
+
+    await Future.wait([
+      _recorder.initialize(),
+    ]);
   }
 
-  void errorCallbackCheetah(CheetahException error) {
+  void _startRecord() async {
+    transcriptText = "";
+    _initStream();
+
+    await _recorder.start();
+
+    setState(() {});
+  }
+
+  void _stopRecord() async {
+    await _recorder.stop();
+    await _audioStream?.cancel();
+    setState(() {});
+  }
+
+  void updateText(newText) {
     setState(() {
-      isErrorCheetah = true;
-      errorMessageCheetah = error.message!;
+      transcriptText = transcriptText + ' ' + newText;
     });
   }
 
-  Future<void> _startProcessingCheetah() async {
-    if (isProcessingCheetah) {
-      return;
-    }
-
-    try {
-      await _cheetahManager!.startProcess();
-      setState(() {
-        transcriptText = "";
-        isProcessingCheetah = true;
-      });
-    } on CheetahException catch (ex) {
-      print("Failed to start audio capture: ${ex.message}");
-    }
-  }
-
-  Future<void> _stopProcessingCheetah() async {
-    if (!isProcessingCheetah) {
-      return;
-    }
-
-    try {
-      await _cheetahManager!.stopProcess();
-      setState(() {
-        isProcessingCheetah = false;
-      });
-    } on CheetahException catch (ex) {
-      print("Failed to start audio capture: ${ex.message}");
-    }
+  void resetText() {
+    setState(() {
+      transcriptText = '';
+    });
   }
 
   Color picoBlue = Color.fromRGBO(55, 125, 255, 1);
