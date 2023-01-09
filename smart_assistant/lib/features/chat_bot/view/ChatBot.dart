@@ -1,127 +1,94 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:smart_assistant/shared/res/colors.dart';
-import 'package:uuid/uuid.dart';
+import 'dart:convert';
+import 'dart:developer';
 
-import '../../task_list/classes/Response.dart';
+import 'package:chat_package/chat_package.dart';
+import 'package:chat_package/models/chat_message.dart';
+import 'package:chat_package/models/media/chat_media.dart';
+import 'package:chat_package/models/media/media_type.dart';
+import 'package:flutter/material.dart';
+
 import '../back/bot_service.dart';
 
 class ChatBot extends StatefulWidget {
-  const ChatBot({Key? key}) : super(key: key);
+  ChatBot({Key? key}) : super(key: key);
 
   @override
   _ChatBotState createState() => _ChatBotState();
 }
 
+final BotService _botService = BotService();
+
 class _ChatBotState extends State<ChatBot> {
-  List<types.Message> messages = [];
-  final _user = const types.User(id: '1234556');
-  final _bot = const types.User(id: "123");
-//id of bot and user doesn't matter here as we have only pair interaction
-
-  final BotService _botService = BotService();
-
-  Future loaddot() async {
-    await dotenv.load(fileName: ".env");
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loaddot();
-    _loadMessages();
-  }
-
-  void _addMessage(types.Message message) async {
+  void _addMessage(ChatMessage message) async {
+    ChatMessage result;
+    String messageText;
     setState(() {
       messages.insert(0, message);
     });
-    var data = await _botService.callBot(message.toJson()["text"]);
+    var data = await _botService.callBot(
+      jsonEncode({'text': message.text}),
+    );
 
     //Cicla e aggiunge i messaggi
     for (var i = 0; i < data["messages"].length; i++) {
-      var message = data["messages"][i]["content"];
-      //if (data["messages"][i].contains(["imageResponseCard"]))
-      //var temp = data["messages"][i]["imageResponseCard"];
-      //log("Print buttons ${temp["buttons"]}");
+      messageText = data["messages"][i]["content"].toString();
+      log(data["messages"][i]["content"]);
+      if (messageText.contains("youtu")) {
+        result = ChatMessage(
+          isSender: false,
+          text: messageText,
+          chatMedia: ChatMedia(
+            url: messageText,
+            mediaType: MediaType.videoMediaType(),
+          ),
+        );
+      } else {
+        result = ChatMessage(
+          isSender: false,
+          text: messageText,
+        );
+      }
+
       setState(() {
-        messages.insert(0, botMessageReply(message));
+        messages.add(result);
       });
     }
   }
 
-  types.Message botMessageReply(String message) {
-    return types.TextMessage(
-      author: _bot,
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: const Uuid().v4(),
-      text: message,
-    );
-  }
-
-  void _handleSendPressed(types.PartialText message) {
-    final textMessage = types.TextMessage(
-      author: _user,
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: const Uuid().v4(),
-      text: message.text,
-    );
-    _addMessage(textMessage);
-  }
-
-  void _loadMessages() async {
-    List<types.Message> messagesList = [];
-    Future.delayed(const Duration(milliseconds: 300), () {
-      messagesList.add(types.TextMessage(
-        author: _bot,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: const Uuid().v4(),
-        text:
-            "Hello. My name is SmartAssistantBOT your bot. How can I help you?",
-      ));
-
-      setState(() {
-        messages = messagesList;
-      });
-    });
-  }
-
+  List<ChatMessage> messages = [
+    ChatMessage(
+      isSender: true,
+      text: 'this is a banana',
+      chatMedia: ChatMedia(
+        url:
+            'https://images.pexels.com/photos/7194915/pexels-photo-7194915.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+        mediaType: MediaType.imageMediaType(),
+      ),
+    ),
+    ChatMessage(
+      isSender: false,
+      text: "test",
+      chatMedia: ChatMedia(
+        url: 'https://youtu.be/lzBExDLJvpE',
+        mediaType: MediaType.videoMediaType(),
+      ),
+    ),
+    ChatMessage(isSender: false, text: 'wow that is cool'),
+  ];
+  final scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            automaticallyImplyLeading: false,
-            centerTitle: true,
-            title: const Text("Chat-BOT"),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              iconSize: 20.0,
-              onPressed: () {
-                _goBack(context);
-              },
-            ),
-            backgroundColor: SmartAssistantColors.primary),
-        body: Chat(
-          messages: messages,
-          showUserNames: true,
-          onSendPressed: _handleSendPressed,
-          user: _user,
-          theme: const DefaultChatTheme(
-            primaryColor: Color(0xFF1F75FE),
-            receivedMessageBodyTextStyle: TextStyle(
-              fontSize: 24,
-            ),
-            sentMessageBodyTextStyle: TextStyle(
-              fontSize: 24,
-              color: Colors.white,
-            ),
-          ),
-        ));
-  }
-
-  _goBack(BuildContext context) {
-    Navigator.pop(context);
+      appBar: AppBar(),
+      body: ChatScreen(
+        messages: messages,
+        onTextSubmit: (textMessage) {
+          setState(() {
+            messages.add(textMessage);
+            _addMessage(textMessage);
+          });
+        },
+      ),
+    );
   }
 }

@@ -11,6 +11,8 @@ import 'package:smart_assistant/features/qr/views/qrScanner.dart';
 import 'package:smart_assistant/features/qr/views/qr.dart';
 import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
 
+import 'package:smart_assistant/features/test/videoTest.dart';
+
 // Contains effective routes to navigate between screens
 abstract class AppRouter {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -44,7 +46,7 @@ abstract class AppRouter {
       case chatBotRoute:
         return getPageRoute(
           settings: settings,
-          view: const ChatBot(),
+          view: ChatBot(),
         );
       default:
         return getPageRoute(

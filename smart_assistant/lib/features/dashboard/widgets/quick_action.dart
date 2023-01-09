@@ -36,7 +36,7 @@ class QuickAction extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ChatBot()),
+              MaterialPageRoute(builder: (context) => ChatBot()),
             );
           },
           fontSize: 20.sp,
