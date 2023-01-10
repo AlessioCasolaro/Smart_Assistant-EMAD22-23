@@ -56,7 +56,7 @@ class _ChatBotState extends State<ChatBot> {
   }
 
   List<ChatMessage> messages = [
-    ChatMessage(
+    /*ChatMessage(
       isSender: true,
       text: 'this is a banana',
       chatMedia: ChatMedia(
@@ -72,8 +72,11 @@ class _ChatBotState extends State<ChatBot> {
         url: 'https://youtu.be/lzBExDLJvpE',
         mediaType: MediaType.videoMediaType(),
       ),
-    ),
-    ChatMessage(isSender: false, text: 'wow that is cool'),
+    ),*/
+    ChatMessage(
+        isSender: false,
+        text:
+            'Hello! I am Jarvis, your personal assistant. How can I help you?'),
   ];
   final scrollController = ScrollController();
   @override
@@ -81,6 +84,13 @@ class _ChatBotState extends State<ChatBot> {
     return Scaffold(
       appBar: AppBar(),
       body: ChatScreen(
+        chatInputFieldDecoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(100),
+        ),
+        attachmentClick: null,
+        senderColor: Colors.blue,
+        chatInputFieldColor: Color.fromARGB(255, 182, 219, 236),
         messages: messages,
         onTextSubmit: (textMessage) {
           setState(() {
