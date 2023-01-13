@@ -43,7 +43,7 @@ Future<http.Response> getData(String codUtente) {
 
 class DataFromResponse {
   static Future<Response> getDataLocally(BuildContext context) async {
-    final data = await getData("503");
+    final data = await getData("373");
     log("LOG1 " + data.body.toString());
     final reportData = responseFromJson(data.body);
     return reportData;

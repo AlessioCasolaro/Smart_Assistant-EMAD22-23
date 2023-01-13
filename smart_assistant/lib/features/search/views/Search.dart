@@ -24,7 +24,7 @@ Future loaddot() async {
 
 Future<http.Response> getData(String titolo) {
   return http.post(
-    Uri.parse(dotenv.env['URL_DASHBOARD'].toString()),
+    Uri.parse(dotenv.env['URL_SEARCH'].toString()),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
