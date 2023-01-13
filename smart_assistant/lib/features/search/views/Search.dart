@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:core'; // Per lista?
+import 'dart:core';
 
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -9,19 +9,11 @@ import 'package:http/http.dart' as http;
 import 'package:smart_assistant/features/chat_bot/models/responseParser.dart';
 import 'package:smart_assistant/features/dashboard/classes/Response.dart';
 
-// void main() {
-//   runApp(SearchView());
-// }
-
 class SearchView extends StatefulWidget {
   static List<String> docList = [];
   static List<String> urlList = [];
 
-  SearchView({Key? key, required OggettoOggetto oggetto})
-      : super(
-            key:
-                key); // Se cambio OggettoOggetto in ContenutosOggetto si rompe in quick action
-
+  SearchView({Key? key, required OggettoOggetto oggetto}) : super(key: key);
   @override
   State<SearchView> createState() => _SearchViewState();
 }
@@ -58,8 +50,7 @@ class _SearchViewState extends State<SearchView> {
   OggettoOggetto? oggetto;
 
   late Attivita attivita;
-  List<ContenutosOggetto> contenutoOggetto =
-      []; // Si dovrebbe aggiungere un ! qui ma sirome, da come ho letto potrebbe esserci una funzione che si chiama List che fa conflitto
+  List<ContenutosOggetto> contenutoOggetto = [];
   Future<void> getAttivitas() async {
     await DataFromResponse.getDataLocally(context, searchValue).then((value) {
       setState(() {
@@ -79,27 +70,6 @@ class _SearchViewState extends State<SearchView> {
     }
   }
 
-  final List<String> _suggestions = [
-    'Afeganistan',
-    'Albania',
-    'Algeria',
-    'Australia',
-    'Brazil',
-    'German',
-    'Madagascar',
-    'Mozambique',
-    'Portugal',
-    'Zambia'
-  ];
-
-  Future<List<String>> _fetchSuggestions(String searchValue) async {
-    await Future.delayed(const Duration(milliseconds: 750));
-
-    return _suggestions.where((element) {
-      return element.toLowerCase().contains(searchValue.toLowerCase());
-    }).toList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -107,13 +77,16 @@ class _SearchViewState extends State<SearchView> {
         theme: ThemeData(primarySwatch: Colors.orange),
         home: Scaffold(
             appBar: EasySearchBar(
-                title: const Text('Example'),
-                onSearch: (value) => setState(() => searchValue = value),
-                actions: [
-                  IconButton(icon: const Icon(Icons.person), onPressed: () {})
-                ],
-                asyncSuggestions: (value) async =>
-                    await _fetchSuggestions(value)),
+              title: const Text('Example'),
+              onSearch: (value) => setState(() => searchValue = value),
+              actions: [
+                IconButton(
+                    icon: const Icon(Icons.person),
+                    onPressed: () {
+                      getAttivitas().whenComplete(() => fillDocList());
+                    })
+              ],
+            ),
             drawer: Drawer(
                 child: ListView(padding: EdgeInsets.zero, children: [
               const DrawerHeader(
