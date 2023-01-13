@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_assistant/core/navigator.dart';
 import 'package:smart_assistant/features/chat_bot/view/ChatBot.dart';
+import 'package:smart_assistant/features/dashboard/classes/Response.dart';
 import 'package:smart_assistant/features/video_call/view/VideoCallPage.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 
+import '../../search/views/Search.dart';
+
 class QuickAction extends StatelessWidget {
-  //final String action;
-  const QuickAction({
+  OggettoOggetto? ogg;
+  QuickAction({
+    required OggettoOggetto oggetto,
     Key? key,
     //required this.action,
-  }) : super(key: key);
+  }) : super(key: key) {
+    ogg = oggetto;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,13 @@ class QuickAction extends StatelessWidget {
           height: height.h,
           width: width.w,
           icon: Icons.search,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SearchView(oggetto: ogg!)),
+            );
+          },
           fontSize: 20.sp,
           iconSize: 28.sp,
         ),
@@ -36,7 +47,7 @@ class QuickAction extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ChatBot()),
+              MaterialPageRoute(builder: (context) => ChatBot()),
             );
           },
           fontSize: 20.sp,

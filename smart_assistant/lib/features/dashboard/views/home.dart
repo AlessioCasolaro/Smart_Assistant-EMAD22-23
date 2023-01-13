@@ -178,7 +178,7 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           //
                           SizedBox(height: 16.h),
-                          const QuickAction(),
+                          QuickAction(oggetto: oggetto[0]),
 
                           SizedBox(height: 32.h),
                           //Titolo al centro
