@@ -31,7 +31,10 @@ class BotService {
     final request = client.request(
       requestUrl,
       method: 'POST',
-      body: jsonEncode({'text': message}),
+      body: jsonEncode({
+        "requestAttributes": {"codiceProcesso": "3"},
+        'text': message
+      }),
     );
     //debugPrint("REQUEST" + request.body);
 

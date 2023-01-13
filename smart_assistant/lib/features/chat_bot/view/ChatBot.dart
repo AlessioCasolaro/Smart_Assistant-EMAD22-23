@@ -22,9 +22,7 @@ class _ChatBotState extends State<ChatBot> {
   void _addMessage(ChatMessage message) async {
     ChatMessage result;
     String messageText;
-    setState(() {
-      messages.insert(0, message);
-    });
+
     var data = await _botService.callBot(
       jsonEncode({'text': message.text}),
     );
@@ -45,7 +43,7 @@ class _ChatBotState extends State<ChatBot> {
       } else {
         result = ChatMessage(
           isSender: false,
-          text: messageText,
+          text: utf8.decode(messageText.runes.toList()),
         );
       }
 
@@ -73,6 +71,14 @@ class _ChatBotState extends State<ChatBot> {
         mediaType: MediaType.videoMediaType(),
       ),
     ),*/
+    ChatMessage(
+      isSender: false,
+      text: "Document:\t" + "test",
+      chatMedia: ChatMedia(
+        url: 'https://documenti-mskine.s3.amazonaws.com/001.pdf',
+        mediaType: MediaType.audioMediaType(),
+      ),
+    ),
     ChatMessage(
         isSender: false,
         text:
