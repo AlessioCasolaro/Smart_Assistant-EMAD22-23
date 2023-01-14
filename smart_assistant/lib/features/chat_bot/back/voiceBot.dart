@@ -1,16 +1,8 @@
-import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
-
-import 'package:chat_package/chat_package.dart';
-import 'package:chat_package/models/chat_message.dart';
-import 'package:chat_package/models/media/chat_media.dart';
-import 'package:chat_package/models/media/media_type.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
-
-import '../back/bot_service.dart';
-
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'dart:io';
+import 'dart:convert';
 
 import 'package:sound_stream/sound_stream.dart';
 import 'package:web_socket_channel/io.dart';
@@ -20,20 +12,18 @@ import 'package:porcupine_flutter/porcupine.dart';
 import 'package:porcupine_flutter/porcupine_manager.dart';
 import 'package:porcupine_flutter/porcupine_error.dart';
 
-class ChatBot extends StatefulWidget {
-  ChatBot({Key? key}) : super(key: key);
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+class VoiceBot extends StatefulWidget {
   @override
-  _ChatBotState createState() => _ChatBotState();
+  _VoiceBotState createState() => _VoiceBotState();
 }
 
 Future loaddot() async {
   await dotenv.load(fileName: ".env");
 }
 
-final BotService _botService = BotService();
-
-class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
+class _VoiceBotState extends State<VoiceBot> with WidgetsBindingObserver {
   final String accessKey = dotenv.env['PICOKEY']!;
   final String STTKey = dotenv.env['DEEPGRAMKEY']!;
 
@@ -61,10 +51,6 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
   late StreamSubscription _recorderStatus;
   late StreamSubscription _audioStream;
   late IOWebSocketChannel channel;
-  IconData isRecording = Icons.mic_off;
-  String isRecordingText = "Not Recording";
-
-  late ChatMessage voiceMessage;
 
   @override
   void initState() {
@@ -78,12 +64,6 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     _initializeKeywordMap();
     loadNewKeyword("jarvis");
-
-    _toggleProcessingPorcupine();
-
-    Future.delayed(const Duration(seconds: 5), () async {
-      _startProcessingPorcupine();
-    });
   }
 
   void onLayoutDone(Duration timeStamp) async {
@@ -171,21 +151,12 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
       });
 
       await _porcupineManager?.stop();
-      log("Jarvis detected, starting listening");
+      log("Jarvis detected, starting Cheetah");
 
       _startRecord();
 
       Future.delayed(const Duration(seconds: 10), () async {
         _stopRecord();
-      }).whenComplete(() {
-        voiceMessage = ChatMessage(
-          text: transcriptText,
-          isSender: true,
-        );
-        setState(() {
-          messages.add(voiceMessage);
-          _addMessage(voiceMessage);
-        });
       });
 
       await _porcupineManager?.start();
@@ -284,19 +255,13 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
 
     await _recorder.start();
 
-    setState(() {
-      isRecording = Icons.mic;
-      isRecordingText = "Recording...";
-    });
+    setState(() {});
   }
 
   void _stopRecord() async {
     await _recorder.stop();
     await _audioStream?.cancel();
-    setState(() {
-      isRecording = Icons.mic_off;
-      isRecordingText = "Stopped recording";
-    });
+    setState(() {});
   }
 
   void updateText(newText) {
@@ -311,114 +276,87 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
     });
   }
 
-  //////////////////////CHATBOT////////////////////////
-  void _addMessage(ChatMessage message) async {
-    ChatMessage result;
-    String messageText;
-
-    var data = await _botService.callBot(
-      jsonEncode({'text': message.text}),
-    );
-
-    //Cicla e aggiunge i messaggi
-    for (var i = 0; i < data["messages"].length; i++) {
-      messageText = data["messages"][i]["content"].toString();
-      log(data.toString());
-      if (messageText.contains("youtu")) {
-        result = ChatMessage(
-          isSender: false,
-          text: messageText,
-          chatMedia: ChatMedia(
-            url: messageText,
-            mediaType: MediaType.videoMediaType(),
-          ),
-        );
-      } else {
-        result = ChatMessage(
-          isSender: false,
-          text: utf8.decode(messageText.runes.toList()),
-        );
-      }
-
-      setState(() {
-        messages.add(result);
-      });
-    }
-  }
-
-  List<ChatMessage> messages = [
-    /*ChatMessage(
-      isSender: true,
-      text: 'this is a banana',
-      chatMedia: ChatMedia(
-        url:
-            'https://images.pexels.com/photos/7194915/pexels-photo-7194915.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-        mediaType: MediaType.imageMediaType(),
-      ),
-    ),
-    ChatMessage(
-      isSender: false,
-      text: "test",
-      chatMedia: ChatMedia(
-        url: 'https://youtu.be/lzBExDLJvpE',
-        mediaType: MediaType.videoMediaType(),
-      ),
-    ),
-    ChatMessage(
-      isSender: false,
-      text: "Document:\t" + "test",
-      chatMedia: ChatMedia(
-        url: 'https://documenti-mskine.s3.amazonaws.com/001.pdf',
-        mediaType: MediaType.audioMediaType(),
-      ),
-    ),*/
-    ChatMessage(
-        isSender: false,
-        text:
-            'Hello! I am Jarvis, your personal assistant. How can I help you?'),
-  ];
-  final scrollController = ScrollController();
+  Color picoBlue = Color.fromRGBO(55, 125, 255, 1);
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        _stopRecord();
-        _toggleProcessingPorcupine();
-        Navigator.pop(context, false);
-
-        return Future.value(false);
-      },
-      child: Scaffold(
+    return MaterialApp(
+      home: Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: backgroundColour,
         appBar: AppBar(
-            actions: [
-              Text(isRecordingText),
-              const SizedBox(width: 10),
-              Icon(isRecording)
-            ],
-            leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  _stopRecord();
-                  _toggleProcessingPorcupine();
-                  Navigator.pop(context, true);
-                })),
-        body: ChatScreen(
-          chatInputFieldDecoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          attachmentClick: null,
-          senderColor: Colors.blue,
-          chatInputFieldColor: Color.fromARGB(255, 182, 219, 236),
-          messages: messages,
-          onTextSubmit: (textMessage) {
-            setState(() {
-              messages.add(textMessage);
-              _addMessage(textMessage);
-            });
-          },
+          title: const Text('Porcupine Demo'),
+          backgroundColor: picoBlue,
+        ),
+        body: Column(
+          children: [
+            buildCheetahTextArea(context),
+            buildStartButton(context),
+            buildErrorMessage(context)
+          ],
         ),
       ),
     );
+  }
+
+  buildStartButton(BuildContext context) {
+    final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
+        primary: picoBlue,
+        shape: CircleBorder(),
+        textStyle: TextStyle(color: Colors.white));
+
+    return Expanded(
+      flex: 2,
+      child: Container(
+          child: SizedBox(
+              width: 150,
+              height: 150,
+              child: ElevatedButton(
+                style: buttonStyle,
+                onPressed: (isButtonDisabledPorcupine || isErrorPorcupine)
+                    ? null
+                    : _toggleProcessingPorcupine,
+                child: Text(isProcessingPorcupine ? "Stop" : "Start",
+                    style: TextStyle(fontSize: 30)),
+              ))),
+    );
+  }
+
+  buildErrorMessage(BuildContext context) {
+    return Expanded(
+        flex: 1,
+        child: Container(
+            alignment: Alignment.center,
+            margin: EdgeInsets.only(left: 20, right: 20),
+            decoration: !isErrorPorcupine
+                ? null
+                : BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(5)),
+            child: !isErrorPorcupine
+                ? null
+                : Text(
+                    errorMessagePorcupine,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  )));
+  }
+
+  buildCheetahTextArea(BuildContext context) {
+    return Expanded(
+        flex: 6,
+        child: Container(
+            alignment: Alignment.topCenter,
+            color: Color(0xff25187e),
+            margin: EdgeInsets.all(10),
+            child: SingleChildScrollView(
+                controller: _controller,
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.all(10),
+                physics: RangeMaintainingScrollPhysics(),
+                child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      transcriptText,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )))));
   }
 }

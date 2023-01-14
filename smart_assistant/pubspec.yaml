@@ -62,6 +62,10 @@ dependencies:
   flutter_picker: ^2.0.5
   youtube_player_flutter: ^8.1.2
   chat_package: ^1.0.0
+  sound_stream: ^0.3.0
+  web_socket_channel: ^2.3.0
+  fluttertoast: ^8.1.2
+  
 
 dev_dependencies:
   flutter_test:

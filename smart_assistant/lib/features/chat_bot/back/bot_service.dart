@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:sigv4/sigv4.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -10,6 +12,7 @@ class BotService {
   String kSecretAccessKey = dotenv.env['SECRET_KEY']!;
   String botAlias = dotenv.env['BOT_ALIAS'].toString()!;
   String botAWSRegion = dotenv.env['REGION']!;
+  var rng = Random();
 
   Future<Map<String, dynamic>> callBot(String message) async {
     //https://runtime-v2-lex.us-east-1.amazonaws.com/bots/botId/botAliases/botAliasId/botLocales/localeId/sessions/sessionId/text
@@ -18,7 +21,9 @@ class BotService {
         bots +
         "/botAliases/" +
         botAlias +
-        "/botLocales/en_US/sessions/12352/text";
+        "/botLocales/en_US/sessions/" +
+        rng.nextInt(100).toString() +
+        "/text";
 
     Sigv4Client client = Sigv4Client(
       region: botAWSRegion,
@@ -32,7 +37,7 @@ class BotService {
       requestUrl,
       method: 'POST',
       body: jsonEncode({
-        "requestAttributes": {"codiceProcesso": "3"},
+        "requestAttributes": {"codiceProcesso": "3", "codiceAttivita": "6"},
         'text': message
       }),
     );
@@ -41,7 +46,7 @@ class BotService {
     response = await http.post(request.url,
         headers: request.headers, body: request.body);
     result = jsonDecode(response.body);
-    //debugPrint("Request" + request.toString());
+    //print("Request" + request.toString());
     return result;
   }
 }
