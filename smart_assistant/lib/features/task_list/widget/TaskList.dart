@@ -32,6 +32,12 @@ class _TaskListState extends State<TaskList> {
     });
     return Container(
       //dimensione
+      decoration: const BoxDecoration(
+          //color: Colors.green,
+          borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(60),
+        topRight: Radius.circular(60),
+      )),
       height: 650.h,
       child: Scaffold(
         backgroundColor: SmartAssistantColors.white,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_assistant/shared/res/res.dart';
 import '../widget/Header.dart';
 import '../widget/InputWrapper.dart';
 
@@ -23,13 +24,24 @@ class LoginPage extends StatelessWidget {
               height: 60,
             ),
             const Header(),
+            SizedBox(
+              height: 50,
+              child: Container(
+                  decoration: const BoxDecoration(
+                      color: SmartAssistantColors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(60),
+                        topRight: Radius.circular(60),
+                      ))),
+            ),
             Expanded(
                 child: Container(
               decoration: const BoxDecoration(
+                  color: Colors.green,
                   borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(60),
-                topRight: Radius.circular(60),
-              )),
+                    topLeft: Radius.circular(60),
+                    topRight: Radius.circular(60),
+                  )),
               child: const InputWrapper(),
             ))
           ],

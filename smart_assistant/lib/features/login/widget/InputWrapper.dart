@@ -31,6 +31,7 @@ class InputState extends State<InputWrapper> {
   TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    String codiceUtente = "";
     return Form(
       key: _formKey,
       child: Scaffold(
@@ -44,7 +45,7 @@ class InputState extends State<InputWrapper> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      //color: SmartAssistantColors.white,
+                      color: SmartAssistantColors.white,
                       borderRadius: BorderRadius.circular(10)),
                   child: InputField(
                       userController: userController,
@@ -63,6 +64,7 @@ class InputState extends State<InputWrapper> {
                     if ((passController.text ==
                             await readData(userController.text)) &
                         _formKey.currentState!.validate()) {
+                      codiceUtente = await readUser(userController.text);
                       log("Login ok");
                       // If the form is valid, display a snackbar and navigate to the task list page.
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -83,7 +85,9 @@ class InputState extends State<InputWrapper> {
                       );
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => TaskListPage()),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                TaskListPage(utente: codiceUtente)),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -118,6 +122,15 @@ Future<String> readData(String user) async {
   DatabaseReference reference =
       // FirebaseDatabase.instance.ref().child("users").child(user).child("name");
       FirebaseDatabase.instance.ref().child("password");
+  DatabaseEvent event = await reference.once();
+  //log(event.snapshot.value.toString());
+  return event.snapshot.value.toString();
+}
+
+Future<String> readUser(String user) async {
+  DatabaseReference reference =
+      // FirebaseDatabase.instance.ref().child("users").child(user).child("name");
+      FirebaseDatabase.instance.ref().child("codiceUtente");
   DatabaseEvent event = await reference.once();
   //log(event.snapshot.value.toString());
   return event.snapshot.value.toString();

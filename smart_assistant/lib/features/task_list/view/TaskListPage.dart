@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_assistant/features/notification/view/notification.dart';
@@ -14,9 +15,12 @@ import 'package:flutter/material.dart';
 import '../../tool_list/view/ToolListPage.dart';
 
 int count = 0;
+String codUtente = "";
 
 class TaskListPage extends StatefulWidget {
-  const TaskListPage({Key? key}) : super(key: key);
+  TaskListPage({required String utente, Key? key}) : super(key: key) {
+    codUtente = utente;
+  }
 
   @override
   _TaskListPageState createState() => _TaskListPageState();
@@ -43,7 +47,7 @@ Future<http.Response> getData(String codUtente) {
 
 class DataFromResponse {
   static Future<Response> getDataLocally(BuildContext context) async {
-    final data = await getData("503");
+    final data = await getData(codUtente);
     log("LOG1 " + data.body.toString());
     final reportData = responseFromJson(data.body);
     return reportData;
@@ -214,5 +218,14 @@ class _TaskListPageState extends State<TaskListPage> {
         ),
       ),
     );
+  }
+
+  Future<String> readData(String user) async {
+    DatabaseReference reference =
+        // FirebaseDatabase.instance.ref().child("users").child(user).child("name");
+        FirebaseDatabase.instance.ref().child("codiceUtente");
+    DatabaseEvent event = await reference.once();
+    //log(event.snapshot.value.toString());
+    return event.snapshot.value.toString();
   }
 }
