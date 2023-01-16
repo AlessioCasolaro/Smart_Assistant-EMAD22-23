@@ -144,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 50.h,
                         fontSize: 20.sp,
                         onPressed: () =>
-                            AppNavigator.pushNamedReplacement(loginRoute)),
+                            AppNavigator.pushNamedReplacement(chatBotRoute)),
                     //AppNavigator.pushNamedReplacement(loginRoute)),
                     SizedBox(height: 42.h),
                   ],

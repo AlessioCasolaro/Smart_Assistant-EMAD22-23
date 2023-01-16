@@ -319,11 +319,11 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
     var data = await _botService.callBot(
       jsonEncode({'text': message.text}),
     );
-
+    log(data.toString());
     //Cicla e aggiunge i messaggi
     for (var i = 0; i < data["messages"].length; i++) {
       messageText = data["messages"][i]["content"].toString();
-      log(data.toString());
+
       if (messageText.contains("youtu")) {
         result = ChatMessage(
           isSender: false,

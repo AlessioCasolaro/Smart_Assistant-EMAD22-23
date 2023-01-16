@@ -22,7 +22,7 @@ class BotService {
         "/botAliases/" +
         botAlias +
         "/botLocales/en_US/sessions/" +
-        rng.nextInt(100).toString() +
+        (1000 + rng.nextInt(1000)).toString() +
         "/text";
 
     Sigv4Client client = Sigv4Client(
@@ -37,7 +37,7 @@ class BotService {
       requestUrl,
       method: 'POST',
       body: jsonEncode({
-        "requestAttributes": {"codiceProcesso": "3", "codiceAttivita": "6"},
+        "requestAttributes": {"codiceProcesso": "3", "codiceTopic": "1"},
         'text': message
       }),
     );
