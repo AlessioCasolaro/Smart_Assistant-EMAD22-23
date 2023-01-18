@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'res.dart';
 
-class SmartAssistantTheme {
+class SmartAssistantTheme with ChangeNotifier {
   static final ThemeData lightTheme = ThemeData(
       primaryColor: SmartAssistantColors.primary,
       scaffoldBackgroundColor: SmartAssistantColors.white,
@@ -34,7 +34,7 @@ class SmartAssistantTheme {
 
   static final ThemeData darkTheme = ThemeData(
       primaryColor: SmartAssistantColors.primary,
-      scaffoldBackgroundColor: SmartAssistantColors.black,
+      scaffoldBackgroundColor: Color(0xFF2D2D30),
       splashColor: Colors.transparent,
       brightness: Brightness.dark,
       highlightColor: Colors.transparent,

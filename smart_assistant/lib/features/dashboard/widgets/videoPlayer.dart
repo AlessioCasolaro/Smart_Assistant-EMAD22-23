@@ -124,7 +124,7 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
       child: Container(
         child: MachineStats(
           macchina: machine!,
-          box: BoxDecoration(color: Colors.white),
+          box: BoxDecoration(),
         ),
       ),
     );

@@ -116,10 +116,14 @@ class _SearchViewState extends State<SearchView> {
             Container(
               width: 600.h,
               child: TextField(
+                style: TextStyle(fontSize: 26.0, height: 1.5),
                 decoration: InputDecoration(
-                  hintText: 'Search your document',
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50.0),
+                  hintText: 'Search your document...',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide(color: Color(0xFF1F75FE))),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
                       borderSide: BorderSide(color: Color(0xFF1F75FE))),
                 ),
                 controller: _controller,
@@ -133,38 +137,41 @@ class _SearchViewState extends State<SearchView> {
                 },
               ),
             ),
-            SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 32.h),
-                      //Titolo al centro
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Documents list',
-                            style: TextStyles.body.copyWith(
-                              fontSize: TextStyles.headline2.fontSize,
-                              color: SmartAssistantColors.primary,
-                            ),
-                          )
-                        ],
-                      ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 32.h),
+                        //Titolo al centro
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Documents list',
+                              style: TextStyles.body.copyWith(
+                                fontSize: TextStyles.headline2.fontSize,
+                                color: SmartAssistantColors.primary,
+                              ),
+                            )
+                          ],
+                        ),
 
-                      DocumentsList(
-                        oggetto: ogg!,
-                        document: List.generate(
-                          SearchView.docList.length,
-                          (i) => Document(
-                            'Documento ' + SearchView.docList[i],
-                            SearchView.urlList[i],
+                        DocumentsList(
+                          heightGet: 650.h,
+                          oggetto: ogg!,
+                          document: List.generate(
+                            SearchView.docList.length,
+                            (i) => Document(
+                              'Documento ' + SearchView.docList[i],
+                              SearchView.urlList[i],
+                            ),
                           ),
                         ),
-                      ),
-                    ]),
+                      ]),
+                ),
               ),
             ),
           ],

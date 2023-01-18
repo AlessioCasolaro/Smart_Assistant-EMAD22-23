@@ -5,11 +5,10 @@ import '../../../core/navigator.dart';
 
 class MachineInfo extends StatelessWidget {
   OggettoOggetto? machine;
-  String description = "", type = "";
+  String type = "";
 
   MachineInfo({Key? key, required OggettoOggetto macchina}) : super(key: key) {
     machine = macchina;
-    description = "Description";
     type = machine!.tipoOggettoTipoOggettos.nome;
   }
 
@@ -32,29 +31,7 @@ class MachineInfo extends StatelessWidget {
                 ),
               ],
             ),
-            //Riga 2 colonne
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      'Description',
-                      style: TextStyles.body.copyWith(
-                          color: SmartAssistantColors.primary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: TextStyles.body.fontSize),
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text('$description',
-                        style: TextStyle(fontSize: TextStyles.body.fontSize))
-                  ],
-                ),
-              ],
-            ),
+
             //Riga 2 colonne
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

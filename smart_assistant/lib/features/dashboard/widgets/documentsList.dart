@@ -9,18 +9,21 @@ import '../../../../shared/res/res.dart';
 class DocumentsList extends StatelessWidget {
   final List<Document> document;
   OggettoOggetto? machine;
+  var height;
   DocumentsList({
     Key? key,
     required this.document,
     required OggettoOggetto oggetto,
+    required heightGet,
   }) : super(key: key) {
     machine = oggetto;
+    height = heightGet;
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350.h,
+      height: height,
       child: Scaffold(
         body: ListView.separated(
           itemCount: document.length,

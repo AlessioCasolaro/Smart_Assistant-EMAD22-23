@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'core/navigator.dart';
 
@@ -37,11 +38,12 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Smart Assistant',
+          darkTheme: SmartAssistantTheme.darkTheme,
           theme: SmartAssistantTheme.lightTheme,
-          //darkTheme: SmartAssistantTheme.darkTheme,
+          themeMode: ThemeMode.system,
           home: const MyHomePage(),
           onGenerateRoute: AppRouter.generateRoutes,
           navigatorKey: AppNavigator.key,
@@ -91,6 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    context.theme;
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -143,7 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         fontSize: 20.sp,
                         onPressed: () =>
                             AppNavigator.pushNamedReplacement(loginRoute)),
-                    //AppNavigator.pushNamedReplacement(loginRoute)),
                     SizedBox(height: 42.h),
                   ],
                 ))

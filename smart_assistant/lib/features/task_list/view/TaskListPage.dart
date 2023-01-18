@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart' as getPackage;
 import 'package:http/http.dart' as http;
 import 'package:smart_assistant/features/notification/view/notification.dart';
 
@@ -105,7 +106,7 @@ class _TaskListPageState extends State<TaskListPage> {
     }
 
     return Scaffold(
-      backgroundColor: SmartAssistantColors.white,
+      //backgroundColor: SmartAssistantColors.white,
       body: Container(
         padding: EdgeInsets.only(top: 40.h, left: 10.w, right: 10.w),
         child: Column(
@@ -114,12 +115,22 @@ class _TaskListPageState extends State<TaskListPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () => null,
-                  child: const Icon(
-                    Icons.account_circle,
-                    size: 70,
-                    color: SmartAssistantColors.black,
-                  ),
+                  onTap: () {
+                    getPackage.Get.isDarkMode
+                        ? getPackage.Get.changeTheme(ThemeData.light())
+                        : getPackage.Get.changeTheme(ThemeData.dark());
+                  },
+                  child: getPackage.Get.isDarkMode
+                      ? const Icon(
+                          Icons.light_mode,
+                          size: 70,
+                          //color: SmartAssistantColors.black,
+                        )
+                      : const Icon(
+                          Icons.dark_mode,
+                          size: 70,
+                          //color: SmartAssistantColors.black,
+                        ),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -133,7 +144,7 @@ class _TaskListPageState extends State<TaskListPage> {
                   child: const Icon(
                     Icons.notifications_outlined,
                     size: 70,
-                    color: SmartAssistantColors.black,
+                    //color: SmartAssistantColors.black,
                   ),
                 ),
               ],
@@ -149,7 +160,7 @@ class _TaskListPageState extends State<TaskListPage> {
                   style: TextStyle(
                     fontSize: 36.sp,
                     fontWeight: FontWeight.w700,
-                    color: SmartAssistantColors.black,
+                    //color: SmartAssistantColors.black,
                   ),
                 ),
               ],

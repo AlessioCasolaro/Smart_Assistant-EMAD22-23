@@ -38,6 +38,7 @@ dependencies:
   flutter_native_splash: ^2.1.6
   flutter_screenutil: ^5.5.3+2
   flutter_spinkit: ^5.1.0
+  get: ^4.6.5
 
 
   syncfusion_flutter_pdfviewer: ^20.3.56

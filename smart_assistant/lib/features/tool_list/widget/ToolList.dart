@@ -43,7 +43,7 @@ class _ToolListState extends State<ToolList> {
       //dimensione
       height: 650.h,
       child: Scaffold(
-        backgroundColor: SmartAssistantColors.white,
+        //backgroundColor: SmartAssistantColors.white,
         body: ListView.separated(
           physics: const BouncingScrollPhysics(),
           itemCount: tools.length,

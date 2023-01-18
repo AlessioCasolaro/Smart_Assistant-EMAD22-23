@@ -4,7 +4,7 @@ import 'package:smart_assistant/features/task_list/classes/Response.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_assistant/features/tool_list/widget/ToolList.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
-import '../../../../shared/res/res.dart';
+import 'package:get/get.dart' as getPackage;
 import 'package:flutter/material.dart';
 
 class ToolListPage extends StatefulWidget {
@@ -27,7 +27,7 @@ class _ToolListPageState extends State<ToolListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SmartAssistantColors.white,
+      //backgroundColor: SmartAssistantColors.white,
       body: Container(
         padding: EdgeInsets.only(top: 40.h, left: 10.w, right: 10.w),
         child: Column(
@@ -36,12 +36,22 @@ class _ToolListPageState extends State<ToolListPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () => null,
-                  child: Icon(
-                    Icons.account_circle,
-                    size: 70,
-                    color: SmartAssistantColors.black,
-                  ),
+                  onTap: () {
+                    getPackage.Get.isDarkMode
+                        ? getPackage.Get.changeTheme(ThemeData.light())
+                        : getPackage.Get.changeTheme(ThemeData.dark());
+                  },
+                  child: getPackage.Get.isDarkMode
+                      ? const Icon(
+                          Icons.light_mode,
+                          size: 70,
+                          //color: SmartAssistantColors.black,
+                        )
+                      : const Icon(
+                          Icons.dark_mode,
+                          size: 70,
+                          //color: SmartAssistantColors.black,
+                        ),
                 ),
                 GestureDetector(
                   onTap: () => Navigator.push(
@@ -53,7 +63,7 @@ class _ToolListPageState extends State<ToolListPage> {
                   child: Icon(
                     Icons.notifications_outlined,
                     size: 70,
-                    color: SmartAssistantColors.black,
+                    //color: SmartAssistantColors.black,
                   ),
                 ),
               ],
@@ -69,7 +79,7 @@ class _ToolListPageState extends State<ToolListPage> {
                   style: TextStyle(
                     fontSize: 36.sp,
                     fontWeight: FontWeight.w700,
-                    color: SmartAssistantColors.black,
+                    //color: SmartAssistantColors.black,
                   ),
                 ),
               ],
@@ -102,7 +112,7 @@ class _ToolListPageState extends State<ToolListPage> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontSize: 18.sp,
-                                color: SmartAssistantColors.black,
+                                //color: SmartAssistantColors.black,
                               ),
                             ),
                           ],
@@ -121,7 +131,7 @@ class _ToolListPageState extends State<ToolListPage> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontSize: 18.sp,
-                                color: SmartAssistantColors.black,
+                                //color: SmartAssistantColors.black,
                               ),
                             ),
                           ],

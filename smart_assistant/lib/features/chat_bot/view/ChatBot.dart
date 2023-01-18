@@ -73,6 +73,7 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
   late IOWebSocketChannel channel;
   IconData isRecording = Icons.mic_off;
   String isRecordingText = "Not Recording";
+  bool isRecordingBool = false;
 
   late ChatMessage voiceMessage;
   bool isTopic = false;
@@ -104,9 +105,11 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    _recorderStatus.cancel();
-    _audioStream.cancel();
-    channel.sink.close();
+    if (isRecordingBool) {
+      _recorderStatus.cancel();
+      _audioStream.cancel();
+      channel.sink.close();
+    }
     WidgetsBinding.instance?.removeObserver(this);
     super.dispose();
   }
@@ -298,6 +301,7 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
     setState(() {
       isRecording = Icons.mic;
       isRecordingText = "Recording...";
+      isRecordingBool = true;
     });
   }
 
@@ -477,9 +481,16 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
             backgroundColor: SmartAssistantColors.primary,
             elevation: 0,
             actions: [
-              Text(isRecordingText),
-              const SizedBox(width: 10),
-              Icon(isRecording)
+              Container(
+                  padding: //inserisci del padding
+                      EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  child: Row(
+                    children: [
+                      Text(isRecordingText),
+                      const SizedBox(width: 20),
+                      Icon(isRecording)
+                    ],
+                  ))
             ],
             leading: IconButton(
                 icon: const Icon(Icons.arrow_back),

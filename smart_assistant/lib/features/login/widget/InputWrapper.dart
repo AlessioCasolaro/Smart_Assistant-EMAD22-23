@@ -45,7 +45,7 @@ class InputState extends State<InputWrapper> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      color: SmartAssistantColors.white,
+                      //color: SmartAssistantColors.white,
                       borderRadius: BorderRadius.circular(10)),
                   child: InputField(
                       userController: userController,

@@ -40,7 +40,7 @@ class _TaskListState extends State<TaskList> {
       )),
       height: 650.h,
       child: Scaffold(
-        backgroundColor: SmartAssistantColors.white,
+        //backgroundColor: SmartAssistantColors.white,
         body: ListView.separated(
           physics: const BouncingScrollPhysics(),
           itemCount: widget.attivitas.length,

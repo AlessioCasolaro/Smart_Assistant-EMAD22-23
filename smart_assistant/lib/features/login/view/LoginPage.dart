@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:smart_assistant/shared/res/res.dart';
 import '../widget/Header.dart';
 import '../widget/InputWrapper.dart';
+import 'package:get/get.dart' as getPackage;
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Container(
@@ -27,8 +29,10 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 50,
               child: Container(
-                  decoration: const BoxDecoration(
-                      color: SmartAssistantColors.white,
+                  decoration: BoxDecoration(
+                      color: getPackage.Get.isDarkMode
+                          ? Color(0xFF2D2D30)
+                          : SmartAssistantColors.white,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60),

@@ -12,6 +12,7 @@ import '../../notification/view/notification.dart';
 import '../widgets/documentsList.dart';
 import '../widgets/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:get/get.dart' as getPackage;
 
 import 'package:smart_assistant/features/dashboard/classes/Response.dart';
 
@@ -136,15 +137,24 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               GestureDetector(
-                                onTap: () => AppNavigator.pushNamed(
-                                  dashboardRoute,
-                                  arguments: const Icon(
-                                    Icons.notifications_outlined,
-                                    color: SmartAssistantColors.grey,
-                                  ),
-                                ),
-                                child:
-                                    const Icon(Icons.account_circle, size: 75),
+                                onTap: () {
+                                  getPackage.Get.isDarkMode
+                                      ? getPackage.Get.changeTheme(
+                                          ThemeData.light())
+                                      : getPackage.Get.changeTheme(
+                                          ThemeData.dark());
+                                },
+                                child: getPackage.Get.isDarkMode
+                                    ? const Icon(
+                                        Icons.light_mode,
+                                        size: 70,
+                                        //color: SmartAssistantColors.black,
+                                      )
+                                    : const Icon(
+                                        Icons.dark_mode,
+                                        size: 70,
+                                        //color: SmartAssistantColors.black,
+                                      ),
                               ),
                               GestureDetector(
                                 onTap: () {
@@ -159,7 +169,6 @@ class _DashboardState extends State<Dashboard> {
                                 child: const Icon(
                                   Icons.notifications_outlined,
                                   size: 70,
-                                  color: SmartAssistantColors.black,
                                 ),
                               ),
                             ],
@@ -197,6 +206,7 @@ class _DashboardState extends State<Dashboard> {
                           ),
 
                           DocumentsList(
+                            heightGet: 350.h,
                             oggetto: oggetto[0],
                             document: List.generate(
                               Dashboard.docList.length,
