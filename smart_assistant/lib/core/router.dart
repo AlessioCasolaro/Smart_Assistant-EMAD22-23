@@ -26,11 +26,6 @@ abstract class AppRouter {
           settings: settings,  //Inserire parametri fittizi (creare Attivita fake)
           view: Dashboard(),  //oppure togliere
         );*/
-      case taskListRoute:
-        return getPageRoute(
-          settings: settings,
-          view: const TaskListPage(),
-        );
       case qrRoute:
         return getPageRoute(
           settings: settings,
@@ -40,11 +35,6 @@ abstract class AppRouter {
         return getPageRoute(
           settings: settings,
           view: const NotificationView(),
-        );
-      case chatBotRoute:
-        return getPageRoute(
-          settings: settings,
-          view: const ChatBot(),
         );
       default:
         return getPageRoute(

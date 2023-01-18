@@ -4,7 +4,7 @@ import 'package:smart_assistant/core/navigator.dart';
 class BackAlert extends StatefulWidget {
   Widget child;
   BackAlert({Key? key, required this.child}) : super(key: key) {
-    child = this.child;
+    child = child;
   }
 
   @override
@@ -27,7 +27,7 @@ class _BackAlertState extends State<BackAlert> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.pop(context);
                   Navigator.popAndPushNamed(context, taskListRoute);
                 },
                 child: const Text('Yes'),

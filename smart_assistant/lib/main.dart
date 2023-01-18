@@ -5,8 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:overlay_support/overlay_support.dart';
-import 'package:smart_assistant/features/notification/view/notification.dart';
+
 import 'core/navigator.dart';
 
 import 'shared/res/res.dart';
@@ -38,8 +37,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return OverlaySupport(
-            child: MaterialApp(
+        return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Smart Assistant',
           theme: SmartAssistantTheme.lightTheme,
@@ -47,7 +45,7 @@ class MyApp extends StatelessWidget {
           home: const MyHomePage(),
           onGenerateRoute: AppRouter.generateRoutes,
           navigatorKey: AppNavigator.key,
-        ));
+        );
       },
     );
   }
@@ -144,8 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 50.h,
                         fontSize: 20.sp,
                         onPressed: () =>
-                            //AppNavigator.pushNamedReplacement(loginRoute),
                             AppNavigator.pushNamedReplacement(loginRoute)),
+                    //AppNavigator.pushNamedReplacement(loginRoute)),
                     SizedBox(height: 42.h),
                   ],
                 ))
