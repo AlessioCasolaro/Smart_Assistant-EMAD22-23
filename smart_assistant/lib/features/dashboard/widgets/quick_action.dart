@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_assistant/core/navigator.dart';
 import 'package:smart_assistant/features/chat_bot/view/ChatBot.dart';
 import 'package:smart_assistant/features/video_call/view/VideoCallPage.dart';
 import 'package:smart_assistant/shared/widgets/button.dart';
 
+import '../../dashboard/classes/Response.dart';
+
 class QuickAction extends StatelessWidget {
-  //final String action;
-  const QuickAction({
+  OggettoOggetto? ogg;
+  QuickAction({
+    required OggettoOggetto oggetto,
     Key? key,
     //required this.action,
-  }) : super(key: key);
-
+  }) : super(key: key) {
+    ogg = oggetto;
+  }
   @override
   Widget build(BuildContext context) {
     const width = 120.0;
@@ -36,7 +39,7 @@ class QuickAction extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ChatBot()),
+              MaterialPageRoute(builder: (context) => ChatBot(oggetto: ogg!)),
             );
           },
           fontSize: 20.sp,

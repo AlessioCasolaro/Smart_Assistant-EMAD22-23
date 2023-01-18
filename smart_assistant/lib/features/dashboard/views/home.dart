@@ -97,11 +97,12 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Container(
       child: oggetto.isEmpty
-          ? Center(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const <Widget>[
-                  SizedBox(height: 200.0),
+          ? Scaffold(
+              body: Center(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const <Widget>[
+                  SizedBox(height: 300.0),
                   SizedBox(
                     child: CircularProgressIndicator(
                         strokeWidth: 5,
@@ -112,14 +113,14 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   SizedBox(height: 50.0),
                   Text(
-                    'Loading your dashboard...',
+                    'Loading task selected...',
                     style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 36,
+                      fontWeight: FontWeight.w400,
                       color: SmartAssistantColors.primary,
                     ),
                   ),
-                ]))
+                ])))
           : BackAlert(
               child: Scaffold(
                 body: SingleChildScrollView(
@@ -178,7 +179,7 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           //
                           SizedBox(height: 16.h),
-                          const QuickAction(),
+                          QuickAction(oggetto: oggetto[0]),
 
                           SizedBox(height: 32.h),
                           //Titolo al centro

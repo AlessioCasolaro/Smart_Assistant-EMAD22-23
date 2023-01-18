@@ -7,8 +7,13 @@ import 'package:chat_package/models/chat_message.dart';
 import 'package:chat_package/models/media/chat_media.dart';
 import 'package:chat_package/models/media/media_type.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_assistant/features/dashboard/widgets/widgets.dart';
+import 'package:smart_assistant/features/dashboard/classes/Response.dart'
+    as DashResp;
 
+import '../../../shared/res/colors.dart';
 import '../back/bot_service.dart';
+import '../models/responseParser.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -20,8 +25,13 @@ import 'package:porcupine_flutter/porcupine.dart';
 import 'package:porcupine_flutter/porcupine_manager.dart';
 import 'package:porcupine_flutter/porcupine_error.dart';
 
+DashResp.OggettoOggetto? ogg;
+
 class ChatBot extends StatefulWidget {
-  ChatBot({Key? key}) : super(key: key);
+  ChatBot({required DashResp.OggettoOggetto oggetto, Key? key})
+      : super(key: key) {
+    ogg = oggetto;
+  }
 
   @override
   _ChatBotState createState() => _ChatBotState();
@@ -65,6 +75,7 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
   String isRecordingText = "Not Recording";
 
   late ChatMessage voiceMessage;
+  bool isTopic = false;
 
   @override
   void initState() {
@@ -313,36 +324,111 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
 
   //////////////////////CHATBOT////////////////////////
   void _addMessage(ChatMessage message) async {
-    ChatMessage result;
-    String messageText;
+    Response response;
+    late ChatMessage result;
+    Response messageText;
+    var data;
+    var jsonTopic;
+    bool isYoutube = false;
 
-    var data = await _botService.callBot(
-      jsonEncode({'text': message.text}),
-    );
-    log(data.toString());
-    //Cicla e aggiunge i messaggi
-    for (var i = 0; i < data["messages"].length; i++) {
-      messageText = data["messages"][i]["content"].toString();
+    if (!isTopic) {
+      data = await _botService.callBot(
+        jsonEncode({'text': message.text}),
+        null,
+      );
+    } else {
+      data = await _botService.callBot(
+        jsonEncode({'text': "aiutami con l'intervento"}),
+        message.text,
+      );
+    }
+    log("Log chiamata" + data.toString());
+    var fixJson = jsonEncode(data);
+    final resp = responseFromJson(fixJson);
 
-      if (messageText.contains("youtu")) {
+    //Cicla sulla response
+    for (var i = 0; i < resp!.messages!.length; i++) {
+      log(resp.messages![i]!.content![i]!.codiceTopic.toString());
+
+      if (resp.messages![i]!.content![0]!.codiceTopic != null &&
+          resp.messages![i]!.content![0]!.codiceTopic != "") {
+        //Se trova un topic
+        String topicGenerated =
+            "Scegli uno dei seguenti topic e ti consiglierò un documento:\n\n";
+        for (var j = 0; j < resp.messages![i]!.content!.length; j++) {
+          //Cicla sui topic
+          topicGenerated = topicGenerated +
+              resp.messages![i]!.content![j]!.codiceTopic.toString() +
+              " " +
+              resp.messages![i]!.content![j]!.nome.toString() +
+              "\n";
+        }
         result = ChatMessage(
+          //Crea il messaggio con il topic
           isSender: false,
-          text: messageText,
-          chatMedia: ChatMedia(
-            url: messageText,
-            mediaType: MediaType.videoMediaType(),
-          ),
+          text: topicGenerated,
         );
+        isTopic =
+            true; //Setta la variabile isTopic a true per far eseguire il passo successivo della lambda, ovvero restituire i documenti consigliati per quel topic
+
+        setState(() {
+          messages.add(result);
+        });
+      } else if (resp.messages![i]!.content![0]!.riferimentoDocumentale !=
+              null &&
+          resp.messages![i]!.content![0]!.riferimentoDocumentale != "") {
+        //Altrimenti se trova un documento
+
+        for (var j = 0; j < resp.messages![i]!.content!.length; j++) {
+          if ((resp.messages![i]!.content![0]!
+                  .riferimentoDocumentale) //Se è un video di youtube
+              .toString()
+              .contains("youtu")) {
+            isYoutube = true; // Setta la variabile isYoutube a true
+          }
+          result = ChatMessage(
+            //Aggiunge il messaggio a seconda dell'esito della isYoutube
+            isSender: false,
+            text: isYoutube
+                ? "Video:\t" + resp.messages![i]!.content![j]!.titolo.toString()
+                : "Document:\t" +
+                    resp.messages![i]!.content![j]!.titolo.toString(),
+            chatMedia: ChatMedia(
+              url: resp.messages![i]!.content![j]!.riferimentoDocumentale
+                  .toString(),
+              mediaType: isYoutube
+                  ? MediaType.videoMediaType() //Se è un video di youtube
+                  : MediaType
+                      .audioMediaType(), //Se è un documento(i documenti vengono trattati come audioMediaType)
+            ),
+          );
+          isYoutube =
+              false; //A prescindere setto la variabile isYoutube a false
+          isTopic =
+              false; //Ho finito di trattare il topic, setto la variabile isTopic a false
+          setState(() {
+            messages.add(result);
+          });
+        }
+      } else if (resp.messages![i]!.content![0]!.stringa != null &&
+          resp.messages![i]!.content![0]!.stringa != "") {
+        //Se non trova ne topic ne documenti
+        result = ChatMessage(
+            isSender: false,
+            text: utf8.decode(
+                resp.messages![i]!.content![0]!.stringa!.runes.toList()));
+        setState(() {
+          messages.add(result);
+        });
       } else {
         result = ChatMessage(
-          isSender: false,
-          text: utf8.decode(messageText.runes.toList()),
-        );
+            isSender: false,
+            text: utf8.decode(
+                resp.messages![i]!.content![0]!.toString().runes.toList()));
+        setState(() {
+          messages.add(result);
+        });
       }
-
-      setState(() {
-        messages.add(result);
-      });
     }
   }
 
@@ -382,14 +468,14 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        _stopRecord();
-        _toggleProcessingPorcupine();
         Navigator.pop(context, false);
 
         return Future.value(false);
       },
       child: Scaffold(
         appBar: AppBar(
+            backgroundColor: SmartAssistantColors.primary,
+            elevation: 0,
             actions: [
               Text(isRecordingText),
               const SizedBox(width: 10),
@@ -398,25 +484,35 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
             leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
-                  _stopRecord();
+                  //_stopRecord();
                   _toggleProcessingPorcupine();
                   Navigator.pop(context, true);
                 })),
-        body: ChatScreen(
-          chatInputFieldDecoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          attachmentClick: null,
-          senderColor: Colors.blue,
-          chatInputFieldColor: Color.fromARGB(255, 182, 219, 236),
-          messages: messages,
-          onTextSubmit: (textMessage) {
-            setState(() {
-              messages.add(textMessage);
-              _addMessage(textMessage);
-            });
-          },
+        body: Column(
+          children: [
+            MachineStats(
+                macchina: ogg!,
+                box: const BoxDecoration(color: Color(0xFF1F75FE))),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ChatScreen(
+                chatInputFieldDecoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                attachmentClick: null,
+                senderColor: Colors.blue,
+                chatInputFieldColor: Color.fromARGB(255, 182, 219, 236),
+                messages: messages,
+                onTextSubmit: (textMessage) {
+                  setState(() {
+                    messages.add(textMessage);
+                    _addMessage(textMessage);
+                  });
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

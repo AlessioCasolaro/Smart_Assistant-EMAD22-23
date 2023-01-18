@@ -2,117 +2,122 @@
 //
 //     final response = responseFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-Response responseFromJson(String str) => Response.fromJson(json.decode(str));
+Response? responseFromJson(String str) => Response.fromJson(json.decode(str));
 
-String responseToJson(Response data) => json.encode(data.toJson());
+String responseToJson(Response? data) => json.encode(data!.toJson());
 
 class Response {
   Response({
-    required this.interpretations,
-    required this.messages,
-    required this.sessionId,
-    required this.sessionState,
+    this.interpretations,
+    this.messages,
+    this.requestAttributes,
+    this.sessionId,
+    this.sessionState,
   });
 
-  List<Interpretation> interpretations;
-  List<Message> messages;
-  int sessionId;
-  SessionState sessionState;
+  List<Interpretation?>? interpretations;
+  List<Message?>? messages;
+  RequestAttributes? requestAttributes;
+  String? sessionId;
+  SessionState? sessionState;
 
   factory Response.fromJson(Map<String, dynamic> json) => Response(
-        interpretations: List<Interpretation>.from(
-            json["interpretations"].map((x) => Interpretation.fromJson(x))),
-        messages: List<Message>.from(
-            json["messages"].map((x) => Message.fromJson(x))),
+        interpretations: json["interpretations"] == null
+            ? []
+            : List<Interpretation?>.from(json["interpretations"]!
+                .map((x) => Interpretation.fromJson(x))),
+        messages: json["messages"] == null
+            ? []
+            : List<Message?>.from(
+                json["messages"]!.map((x) => Message.fromJson(x))),
+        requestAttributes:
+            RequestAttributes.fromJson(json["requestAttributes"]),
         sessionId: json["sessionId"],
         sessionState: SessionState.fromJson(json["sessionState"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "interpretations":
-            List<dynamic>.from(interpretations.map((x) => x.toJson())),
-        "messages": List<dynamic>.from(messages.map((x) => x.toJson())),
+        "interpretations": interpretations == null
+            ? []
+            : List<dynamic>.from(interpretations!.map((x) => x!.toJson())),
+        "messages": messages == null
+            ? []
+            : List<dynamic>.from(messages!.map((x) => x!.toJson())),
+        "requestAttributes": requestAttributes!.toJson(),
         "sessionId": sessionId,
-        "sessionState": sessionState.toJson(),
+        "sessionState": sessionState!.toJson(),
       };
 }
 
 class Interpretation {
   Interpretation({
-    required this.intent,
+    this.intent,
     this.nluConfidence,
   });
 
-  InterpretationIntent intent;
+  InterpretationIntent? intent;
   NluConfidence? nluConfidence;
 
   factory Interpretation.fromJson(Map<String, dynamic> json) => Interpretation(
         intent: InterpretationIntent.fromJson(json["intent"]),
-        nluConfidence: json["nluConfidence"] == null
-            ? null
-            : NluConfidence.fromJson(json["nluConfidence"]),
+        nluConfidence: null,
       );
 
   Map<String, dynamic> toJson() => {
-        "intent": intent.toJson(),
-        "nluConfidence": nluConfidence == null ? null : nluConfidence!.toJson(),
+        "intent": intent!.toJson(),
+        "nluConfidence": nluConfidence,
       };
 }
 
 class InterpretationIntent {
   InterpretationIntent({
-    required this.confirmationState,
-    required this.name,
-    required this.slots,
-    required this.state,
+    this.confirmationState,
+    this.name,
+    this.slots,
+    this.state,
   });
 
-  dynamic confirmationState;
-  String name;
-  PurpleSlots slots;
-  String state;
+  String? confirmationState;
+  String? name;
+  Slots? slots;
+  String? state;
 
   factory InterpretationIntent.fromJson(Map<String, dynamic> json) =>
       InterpretationIntent(
         confirmationState: json["confirmationState"],
         name: json["name"],
-        slots: PurpleSlots.fromJson(json["slots"]),
-        state: json["state"] == null ? null : json["state"],
+        slots: Slots.fromJson(json["slots"]),
+        state: json["state"],
       );
 
   Map<String, dynamic> toJson() => {
         "confirmationState": confirmationState,
         "name": name,
-        "slots": slots.toJson(),
-        "state": state == null ? null : state,
+        "slots": slots!.toJson(),
+        "state": state,
       };
 }
 
-class PurpleSlots {
-  PurpleSlots({
-    required this.elencoAspetti,
-    required this.flowerType,
-    required this.pickupDate,
-    required this.pickupTime,
+class Slots {
+  Slots({
+    this.flowerType,
+    this.pickupDate,
+    this.pickupTime,
   });
 
-  dynamic elencoAspetti;
   dynamic flowerType;
   dynamic pickupDate;
   dynamic pickupTime;
 
-  factory PurpleSlots.fromJson(Map<String, dynamic> json) => PurpleSlots(
-        elencoAspetti: json["ElencoAspetti"],
+  factory Slots.fromJson(Map<String, dynamic> json) => Slots(
         flowerType: json["FlowerType"],
         pickupDate: json["PickupDate"],
         pickupTime: json["PickupTime"],
       );
 
   Map<String, dynamic> toJson() => {
-        "ElencoAspetti": elencoAspetti,
         "FlowerType": flowerType,
         "PickupDate": pickupDate,
         "PickupTime": pickupTime,
@@ -121,10 +126,10 @@ class PurpleSlots {
 
 class NluConfidence {
   NluConfidence({
-    required this.score,
+    this.score,
   });
 
-  double score;
+  double? score;
 
   factory NluConfidence.fromJson(Map<String, dynamic> json) => NluConfidence(
         score: json["score"].toDouble(),
@@ -139,83 +144,92 @@ class Message {
   Message({
     this.content,
     this.contentType,
-    this.imageResponseCard,
   });
 
-  String? content;
+  List<Content?>? content;
   String? contentType;
-  ImageResponseCard? imageResponseCard;
 
   factory Message.fromJson(Map<String, dynamic> json) => Message(
-        content: json["content"] == null ? null : json["content"],
+        content: json["content"] == null
+            ? []
+            : List<Content?>.from(
+                json["content"]!.map((x) => Content.fromJson(x))),
         contentType: json["contentType"],
-        imageResponseCard: json["imageResponseCard"] == null
-            ? null
-            : ImageResponseCard.fromJson(json["imageResponseCard"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "content": content == null ? null : content,
+        "content": content == null
+            ? []
+            : List<dynamic>.from(content!.map((x) => x!.toJson())),
         "contentType": contentType,
-        "imageResponseCard":
-            imageResponseCard == null ? null : imageResponseCard!.toJson(),
       };
 }
 
-class ImageResponseCard {
-  ImageResponseCard({
-    required this.buttons,
-    required this.title,
+class Content {
+  Content({
+    this.stringa,
+    this.titolo,
+    this.riferimentoDocumentale,
+    this.codiceTopic,
+    this.nome,
   });
 
-  List<Button> buttons;
-  String title;
+  String? stringa;
+  String? titolo;
+  String? riferimentoDocumentale;
+  String? codiceTopic;
+  String? nome;
 
-  factory ImageResponseCard.fromJson(Map<String, dynamic> json) =>
-      ImageResponseCard(
-        buttons:
-            List<Button>.from(json["buttons"].map((x) => Button.fromJson(x))),
-        title: json["title"],
+  factory Content.fromJson(Map<String, dynamic> json) => Content(
+        stringa: json["stringa"],
+        titolo: json["titolo"],
+        riferimentoDocumentale: json["riferimentoDocumentale"],
+        codiceTopic: json["codiceTopic"],
+        nome: json["nome"],
       );
 
   Map<String, dynamic> toJson() => {
-        "buttons": List<dynamic>.from(buttons.map((x) => x.toJson())),
-        "title": title,
+        "stringa": stringa,
+        "titolo": titolo,
+        "riferimentoDocumentale": riferimentoDocumentale,
+        "codiceTopic": codiceTopic,
+        "nome": nome,
       };
 }
 
-class Button {
-  Button({
-    required this.text,
-    required this.value,
+class RequestAttributes {
+  RequestAttributes({
+    this.codiceAttivita,
+    this.codiceProcesso,
   });
 
-  String text;
-  String value;
+  String? codiceAttivita;
+  String? codiceProcesso;
 
-  factory Button.fromJson(Map<String, dynamic> json) => Button(
-        text: json["text"],
-        value: json["value"],
+  factory RequestAttributes.fromJson(Map<String, dynamic> json) =>
+      RequestAttributes(
+        codiceAttivita: json["codiceAttivita"],
+        codiceProcesso: json["codiceProcesso"],
       );
 
   Map<String, dynamic> toJson() => {
-        "text": text,
-        "value": value,
+        "codiceAttivita": codiceAttivita,
+        "codiceProcesso": codiceProcesso,
       };
 }
 
 class SessionState {
   SessionState({
-    required this.dialogAction,
-    required this.intent,
-    required this.originatingRequestId,
-    required this.sessionAttributes,
+    this.dialogAction,
+    this.intent,
+    this.originatingRequestId,
+    this.sessionAttributes,
   });
 
-  DialogAction dialogAction;
-  SessionStateIntent intent;
-  String originatingRequestId;
-  SessionAttributes sessionAttributes;
+  DialogAction? dialogAction;
+  SessionStateIntent? intent;
+  String? originatingRequestId;
+  SessionAttributes? sessionAttributes;
 
   factory SessionState.fromJson(Map<String, dynamic> json) => SessionState(
         dialogAction: DialogAction.fromJson(json["dialogAction"]),
@@ -226,75 +240,55 @@ class SessionState {
       );
 
   Map<String, dynamic> toJson() => {
-        "dialogAction": dialogAction.toJson(),
-        "intent": intent.toJson(),
+        "dialogAction": dialogAction!.toJson(),
+        "intent": intent!.toJson(),
         "originatingRequestId": originatingRequestId,
-        "sessionAttributes": sessionAttributes.toJson(),
+        "sessionAttributes": sessionAttributes!.toJson(),
       };
 }
 
 class DialogAction {
   DialogAction({
-    required this.slotToElicit,
-    required this.type,
+    this.type,
   });
 
-  String slotToElicit;
-  String type;
+  String? type;
 
   factory DialogAction.fromJson(Map<String, dynamic> json) => DialogAction(
-        slotToElicit: json["slotToElicit"],
         type: json["type"],
       );
 
   Map<String, dynamic> toJson() => {
-        "slotToElicit": slotToElicit,
         "type": type,
       };
 }
 
 class SessionStateIntent {
   SessionStateIntent({
-    required this.confirmationState,
-    required this.name,
-    required this.slots,
-    required this.state,
+    this.confirmationState,
+    this.name,
+    this.slots,
+    this.state,
   });
 
-  dynamic confirmationState;
-  String name;
-  FluffySlots slots;
-  String state;
+  String? confirmationState;
+  String? name;
+  SessionAttributes? slots;
+  String? state;
 
   factory SessionStateIntent.fromJson(Map<String, dynamic> json) =>
       SessionStateIntent(
         confirmationState: json["confirmationState"],
         name: json["name"],
-        slots: FluffySlots.fromJson(json["slots"]),
+        slots: SessionAttributes.fromJson(json["slots"]),
         state: json["state"],
       );
 
   Map<String, dynamic> toJson() => {
         "confirmationState": confirmationState,
         "name": name,
-        "slots": slots.toJson(),
+        "slots": slots!.toJson(),
         "state": state,
-      };
-}
-
-class FluffySlots {
-  FluffySlots({
-    required this.elencoAspetti,
-  });
-
-  dynamic elencoAspetti;
-
-  factory FluffySlots.fromJson(Map<String, dynamic> json) => FluffySlots(
-        elencoAspetti: json["ElencoAspetti"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "ElencoAspetti": elencoAspetti,
       };
 }
 
