@@ -1,14 +1,9 @@
 import 'dart:async';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:smart_assistant/shared/res/colors.dart';
-
-const appId = "54fd071157824221b82bac9459192a35";
-const token =
-    "007eJxTYPjhzftfXH2vnvWjJ8WCn3T1glX2fosJPfS8L9R0sbn7hf8KDKYmaSkG5oaGpuYWRiZGRoZJFkZJicmWJqaWhpZGicammT7TkxsCGRkcLBwYGKEQxGdlCCjKL0tkYAAAKYEeAA==";
-const channel = "Prova";
 
 class VideoCallPage extends StatefulWidget {
   const VideoCallPage({Key? key}) : super(key: key);
@@ -17,10 +12,18 @@ class VideoCallPage extends StatefulWidget {
   _VideoCallPageState createState() => _VideoCallPageState();
 }
 
+Future loaddot() async {
+  await dotenv.load(fileName: ".env");
+}
+
 class _VideoCallPageState extends State<VideoCallPage> {
   int? _remoteUid;
   bool _localUserJoined = false;
   late RtcEngine _engine;
+
+  String appId = dotenv.env['AGORA_APPID'].toString();
+  String token = dotenv.env['AGORA_TOKEN'].toString();
+  String channel = dotenv.env['AGORA_CHANNEL'].toString();
 
   bool isCameraOn = true;
   bool isMicOn = true;
@@ -38,7 +41,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
 
     //create the engine
     _engine = createAgoraRtcEngine();
-    await _engine.initialize(const RtcEngineContext(
+    await _engine.initialize(RtcEngineContext(
       appId: appId,
       channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
     ));
@@ -251,7 +254,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
         controller: VideoViewController.remote(
           rtcEngine: _engine,
           canvas: VideoCanvas(uid: _remoteUid),
-          connection: const RtcConnection(channelId: channel),
+          connection: RtcConnection(channelId: channel),
         ),
       );
     } else {
