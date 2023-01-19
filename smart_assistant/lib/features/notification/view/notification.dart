@@ -106,6 +106,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     title: Text(item.headerValue.toString(),
                         style: const TextStyle(
                           fontSize: 30.0,
+                          color: Colors.black,
                         )),
                     children: <Widget>[
                       const SizedBox(height: 15),
@@ -117,6 +118,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           child: Text(item.expandedValue,
                               style: const TextStyle(
                                 fontSize: 24.0,
+                                color: Colors.black,
                               )),
                         ),
                       ),
@@ -132,7 +134,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           },
                           child: const Align(
                               alignment: Alignment.centerRight,
-                              child: Icon(Icons.delete, size: 30)),
+                              child: Icon(
+                                Icons.delete,
+                                size: 30,
+                                color: Colors.black,
+                              )),
                         ),
                       ),
                     ],
