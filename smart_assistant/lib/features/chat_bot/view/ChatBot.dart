@@ -176,27 +176,21 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
 
   void wakeWordCallback(int keywordIndex) async {
     if (keywordIndex >= 0) {
-      setState(() {
-        backgroundColour = detectionColour;
-      });
-      Future.delayed(const Duration(milliseconds: 1000), () {
-        setState(() {
-          backgroundColour = defaultColour;
-        });
-      });
-
       await _porcupineManager?.stop();
       log("Jarvis detected, starting listening");
 
       _startRecord();
 
-      Future.delayed(const Duration(seconds: 10), () async {
+      Future.delayed(const Duration(seconds: 5), () async {
         _stopRecord();
       }).whenComplete(() {
         voiceMessage = ChatMessage(
           text: transcriptText,
           isSender: true,
         );
+
+        if (!mounted) return;
+
         setState(() {
           messages.add(voiceMessage);
           _addMessage(voiceMessage);
