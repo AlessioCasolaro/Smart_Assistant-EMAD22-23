@@ -61,6 +61,9 @@ dependencies:
 
   youtube_player_flutter: ^8.1.2 #Per le copertine
   youtube_player_iframe: ^2.2.2 #Per il player
+
+  #test
+  flutter_inappwebview: ^5.7.2+3
   
 
 dev_dependencies:

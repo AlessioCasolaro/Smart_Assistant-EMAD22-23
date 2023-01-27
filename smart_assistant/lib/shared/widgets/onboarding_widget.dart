@@ -22,7 +22,6 @@ class OnboardingWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(image),
-          SizedBox(height: 96.h),
           Text(
             title,
             style: TextStyles.headline2.copyWith(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_assistant/shared/res/colors.dart';
 import 'package:smart_assistant/shared/res/typography.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Header extends StatelessWidget {
   const Header({super.key});
@@ -15,17 +16,17 @@ class Header extends StatelessWidget {
           Center(
               child: CircleAvatar(
             backgroundColor: SmartAssistantColors.white,
-            radius: 200,
+            radius: 150,
             child: Container(
               child: Image.asset(
                 'assets/images/smartAssistantLogo.png',
-                width: 320,
-                height: 320,
+                width: 220.w,
+                height: 220.h,
               ),
             ),
           )),
-          const SizedBox(
-            height: 20,
+          SizedBox(
+            height: 20.h,
           ),
           Center(
             child: Text(

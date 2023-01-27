@@ -1,49 +1,50 @@
 import 'package:flutter/material.dart';
 import 'res.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextStyles {
-  static TextStyle headline1 = const TextStyle(
-    fontSize: 60,
+  static TextStyle headline1 = TextStyle(
+    fontSize: 60.sp,
     fontWeight: FontWeight.w400,
     color: SmartAssistantColors.black,
     height: 1.4,
     fontFamily: 'Verdana',
   );
 
-  static TextStyle headline2 = const TextStyle(
-    fontSize: 48,
+  static TextStyle headline2 = TextStyle(
+    fontSize: 48.sp,
     fontWeight: FontWeight.w400,
     color: SmartAssistantColors.black,
     height: 1.4,
     fontFamily: 'Verdana',
   );
 
-  static TextStyle headline3 = const TextStyle(
-    fontSize: 34,
+  static TextStyle headline3 = TextStyle(
+    fontSize: 34.sp,
     fontWeight: FontWeight.w400,
     color: SmartAssistantColors.black,
     fontFamily: 'Verdana',
     height: 1.4,
   );
 
-  static TextStyle headline4 = const TextStyle(
-    fontSize: 24,
+  static TextStyle headline4 = TextStyle(
+    fontSize: 24.sp,
     fontWeight: FontWeight.w400,
     color: SmartAssistantColors.black,
     fontFamily: 'Verdana',
     height: 1.4,
   );
 
-  static TextStyle body = const TextStyle(
-    fontSize: 22,
+  static TextStyle body = TextStyle(
+    fontSize: 22.sp,
     fontWeight: FontWeight.w400,
     color: SmartAssistantColors.black,
     fontFamily: 'Verdana',
     height: 1.4,
   );
 
-  static TextStyle subtitle = const TextStyle(
-    fontSize: 12,
+  static TextStyle subtitle = TextStyle(
+    fontSize: 12.sp,
     fontWeight: FontWeight.w400,
     color: SmartAssistantColors.black,
     fontFamily: 'Verdana',

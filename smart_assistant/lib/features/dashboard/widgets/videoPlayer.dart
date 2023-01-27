@@ -3,7 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smart_assistant/features/dashboard/classes/Response.dart';
-import 'package:smart_assistant/features/dashboard/widgets/machine_statsRow.dart';
+import 'package:smart_assistant/features/dashboard/widgets/machine_stats.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../shared/res/res.dart';
@@ -79,15 +80,14 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
         backgroundColor: SmartAssistantColors.primary,
         elevation: 0,
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(height: 30),
-            _buildYtbView(),
-            _buildTitle(),
-            _buildMachineStatsView(),
-          ],
-        ),
+      body: Column(
+        children: [
+          MachineStats(
+              macchina: machine!,
+              box: const BoxDecoration(color: Color(0xFF1F75FE))),
+          SizedBox(height: 120.h),
+          _buildYtbView(),
+        ],
       ),
     );
   }
@@ -98,35 +98,6 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
       child: _ytbPlayerController != null
           ? YoutubePlayerIFrame(controller: _ytbPlayerController)
           : Center(child: CircularProgressIndicator()),
-    );
-  }
-
-  _buildTitle() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Machine Stats',
-            style: TextStyles.body.copyWith(
-              fontSize: TextStyles.headline2.fontSize,
-              color: SmartAssistantColors.primary,
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  _buildMachineStatsView() {
-    return Expanded(
-      child: Container(
-        child: MachineStats(
-          macchina: machine!,
-          box: BoxDecoration(),
-        ),
-      ),
     );
   }
 }

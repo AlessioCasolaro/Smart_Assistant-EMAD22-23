@@ -18,8 +18,8 @@ class QuickAction extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    const width = 120.0;
-    const height = 55;
+    var width = 120;
+    var height = 55;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
