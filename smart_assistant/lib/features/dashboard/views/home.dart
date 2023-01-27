@@ -220,12 +220,12 @@ class _DashboardState extends State<Dashboard> {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: SizedBox(
-                                width: 150.w,
-                                height: 50.h,
+                                width: 160.w,
+                                height: 55.h,
                                 child: ButtonIconPrimary(
                                   label: 'Complete Task',
-                                  height: 130.h,
-                                  width: 0.w,
+                                  height: 150.h,
+                                  width: 50.w,
                                   icon: Icons.done,
                                   onPressed: () {},
                                 )),
