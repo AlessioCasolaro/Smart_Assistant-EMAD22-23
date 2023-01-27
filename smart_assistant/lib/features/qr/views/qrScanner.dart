@@ -56,7 +56,7 @@ class _QRScannerState extends State<QRScanner> {
                 children: <Widget>[
                   if (result != null)
                     Text(
-                      'Machine: ${result!.code}',
+                      'Machine code scanned: ${result!.code}',
                       style: TextStyle(
                         fontSize: 20.sp,
                       ),
@@ -89,31 +89,11 @@ class _QRScannerState extends State<QRScanner> {
                         },
                       ),
                     )
+                  else if (result == null)
+                    SizedBox()
                   else
                     Text('QR not correct. Retry!',
                         style: TextStyle(color: Colors.red, fontSize: 22.sp)),
-                  SizedBox(
-                    //PER DEBUG, RIMUOVERE
-                    width: 120.w,
-                    child: ButtonPrimary(
-                      label: 'Start Task DEBUG',
-                      width: 100.w,
-                      height: 55.h,
-                      fontSize: 20.sp,
-                      onPressed: () async {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Dashboard(
-                              startedAttivita: widget.attivita!.codiceAttivita,
-                              selectedOggetto: widget
-                                  .attivita!.oggettoOggettos[0].codiceOggetto,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,

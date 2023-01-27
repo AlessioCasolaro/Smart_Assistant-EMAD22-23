@@ -190,7 +190,7 @@ class _DashboardState extends State<Dashboard> {
                           SizedBox(height: 16.h),
                           QuickAction(oggetto: oggetto[0]),
 
-                          SizedBox(height: 32.h),
+                          SizedBox(height: 16.h),
                           //Titolo al centro
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -206,7 +206,7 @@ class _DashboardState extends State<Dashboard> {
                           ),
 
                           DocumentsList(
-                            heightGet: 350.h,
+                            heightGet: 330.h,
                             oggetto: oggetto[0],
                             document: List.generate(
                               Dashboard.docList.length,
@@ -217,17 +217,15 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
 
-                          //Align button to bottom
-                          //SizedBox(height: 32.h),
                           Align(
                             alignment: Alignment.bottomRight,
                             child: SizedBox(
-                                width: 130.w,
-                                height: 55.h,
+                                width: 150.w,
+                                height: 50.h,
                                 child: ButtonIconPrimary(
                                   label: 'Complete Task',
                                   height: 130.h,
-                                  width: 80.w,
+                                  width: 0.w,
                                   icon: Icons.done,
                                   onPressed: () {},
                                 )),

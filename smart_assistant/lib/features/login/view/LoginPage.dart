@@ -3,6 +3,7 @@ import 'package:smart_assistant/shared/res/res.dart';
 import '../widget/Header.dart';
 import '../widget/InputWrapper.dart';
 import 'package:get/get.dart' as getPackage;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -22,12 +23,12 @@ class LoginPage extends StatelessWidget {
         ),
         child: Column(
           children: <Widget>[
-            const SizedBox(
-              height: 60,
-            ),
-            const Header(),
             SizedBox(
-              height: 50,
+              height: 60.h,
+            ),
+            Header(),
+            SizedBox(
+              height: 50.h,
               child: Container(
                   decoration: BoxDecoration(
                       color: getPackage.Get.isDarkMode

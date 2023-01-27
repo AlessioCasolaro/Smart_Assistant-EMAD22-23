@@ -93,8 +93,9 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
 
     _toggleProcessingPorcupine();
 
-    Future.delayed(const Duration(seconds: 5), () async {
+    Future.delayed(const Duration(seconds: 4), () async {
       _startProcessingPorcupine();
+      isRecordingText = "Waiting for keyword";
     });
   }
 

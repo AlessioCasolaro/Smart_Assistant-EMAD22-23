@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../res/res.dart';
 
 enum BtnState { active, inactive }
@@ -128,13 +128,13 @@ class ButtonIconPrimary extends StatelessWidget {
       child: Row(children: [
         Icon(
           icon,
-          size: 36,
+          size: 36.sp,
           color: SmartAssistantColors.white,
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: 5.w),
         Text(
           label,
-          style: TextStyle(color: SmartAssistantColors.white, fontSize: 24),
+          style: TextStyle(color: SmartAssistantColors.white, fontSize: 22.sp),
         ),
       ]),
     );

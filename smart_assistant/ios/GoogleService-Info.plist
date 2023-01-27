@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>88563545567-3bfemmh1hh0cdfumr3hqu9v8hp7plhji.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.88563545567-3bfemmh1hh0cdfumr3hqu9v8hp7plhji</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>88563545567-b3agis4a2otnc25o2ak292dlnsp3ju8s.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBM6DA7841VLavUOoe67l78K2PGOoA9IOw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>88563545567</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.smartAssistant</string>
+	<key>PROJECT_ID</key>
+	<string>smartassistant-3a1ef</string>
+	<key>STORAGE_BUCKET</key>
+	<string>smartassistant-3a1ef.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:88563545567:ios:05c8ac7fbc4b3635bc406a</string>
+	<key>DATABASE_URL</key>
+	<string>https://smartassistant-3a1ef-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>
