@@ -154,7 +154,7 @@ class _VoiceBotState extends State<VoiceBot> with WidgetsBindingObserver {
 
       _startRecord();
 
-      Future.delayed(const Duration(seconds: 10), () async {
+      Future.delayed(const Duration(seconds: 5), () async {
         _stopRecord();
       });
 
