@@ -14,7 +14,7 @@
             <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" tools:ignore="ProtectedPermissions" />
    <application
         tools:replace="android:label"
-        android:label="smart_assistant"
+        android:label="Smart Assistant"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true">

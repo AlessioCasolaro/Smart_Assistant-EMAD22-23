@@ -27,28 +27,20 @@ class LoginPage extends StatelessWidget {
               height: 60.h,
             ),
             Header(),
-            SizedBox(
-              height: 50.h,
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: getPackage.Get.isDarkMode
-                          ? Color(0xFF2D2D30)
-                          : SmartAssistantColors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60),
-                        topRight: Radius.circular(60),
-                      ))),
+            Container(
+              height: 40.h,
+              decoration: BoxDecoration(
+                  color: getPackage.Get.isDarkMode
+                      ? Color(0xFF2D2D30)
+                      : SmartAssistantColors.white,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(90),
+                    topRight: Radius.circular(90),
+                  )),
             ),
             Expanded(
-                child: Container(
-              decoration: const BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    topRight: Radius.circular(60),
-                  )),
-              child: const InputWrapper(),
-            ))
+              child: InputWrapper(),
+            )
           ],
         ),
       ),

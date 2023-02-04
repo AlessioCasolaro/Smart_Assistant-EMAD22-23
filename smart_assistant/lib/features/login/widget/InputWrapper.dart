@@ -1,15 +1,19 @@
 import 'dart:developer';
 
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_assistant/core/navigator.dart';
-import 'package:smart_assistant/features/dashboard/views/home.dart';
-import 'package:smart_assistant/features/video_call/view/VideoCallPage.dart';
-import 'package:smart_assistant/shared/res/colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:smart_assistant/shared/widgets/button.dart';
 
+import '../../../shared/res/colors.dart';
+import '../../../shared/res/typography.dart';
 import '../../task_list/view/TaskListPage.dart';
 import '../widget/InputField.dart';
+
+import 'package:get/get.dart' as getPackage;
 
 class InputWrapper extends StatefulWidget {
   const InputWrapper({super.key});
@@ -32,89 +36,92 @@ class InputState extends State<InputWrapper> {
   @override
   Widget build(BuildContext context) {
     String codiceUtente = "";
-    return Form(
-      key: _formKey,
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(30),
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                const SizedBox(
-                  height: 40,
+    return Container(
+        decoration: BoxDecoration(
+            color: getPackage.Get.isDarkMode
+                ? Color(0xFF2D2D30)
+                : SmartAssistantColors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(60),
+              topRight: Radius.circular(60),
+            )),
+        child: Form(
+          key: _formKey,
+          child: Scaffold(
+            body: Container(
+              decoration: BoxDecoration(
+                  color: getPackage.Get.isDarkMode
+                      ? Color(0xFF2D2D30)
+                      : SmartAssistantColors.white,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(60),
+                    topRight: Radius.circular(600),
+                  )),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Center(
+                        child: Text(
+                          "Sign In",
+                          style: TextStyle(
+                              color: getPackage.Get.isDarkMode
+                                  ? SmartAssistantColors.white
+                                  : SmartAssistantColors.primary,
+                              fontSize: TextStyles.headline2.fontSize),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                        child: InputField(
+                            userController: userController,
+                            passController: passController),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      ButtonPrimary(
+                        label: "Login",
+                        width: 100.w,
+                        height: 50.h,
+                        fontSize: 30.sp,
+                        onPressed: () async {
+                          if ((passController.text ==
+                                  await readData(userController.text)) &
+                              _formKey.currentState!.validate()) {
+                            codiceUtente = await readUser(userController.text);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      TaskListPage(utente: codiceUtente)),
+                            );
+                          } else {
+                            CherryToast.error(
+                                    title: Text("Login error!",
+                                        style: TextStyle(
+                                          color: SmartAssistantColors.red,
+                                          fontSize: 18.sp,
+                                        )),
+                                    description:
+                                        Text("Wrong username or password!"),
+                                    toastPosition: Position.bottom,
+                                    animationType: AnimationType.fromTop,
+                                    autoDismiss: true)
+                                .show(context);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      //color: SmartAssistantColors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: InputField(
-                      userController: userController,
-                      passController: passController),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                ButtonPrimary(
-                  label: "Login",
-                  width: 130,
-                  height: 80,
-                  fontSize: 30,
-                  onPressed: () async {
-                    //log("message" +myController.text +"pass" +await readData());
-                    if ((passController.text ==
-                            await readData(userController.text)) &
-                        _formKey.currentState!.validate()) {
-                      codiceUtente = await readUser(userController.text);
-                      log("Login ok");
-                      // If the form is valid, display a snackbar and navigate to the task list page.
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            backgroundColor: SmartAssistantColors.secondary,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10))),
-                            content: Text(
-                              'Logged in successfully',
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.black),
-                            )),
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                TaskListPage(utente: codiceUtente)),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            backgroundColor: Colors.red,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: Radius.circular(10))),
-                            content: Text(
-                              'Wrong username or password',
-                              style: TextStyle(fontSize: 25),
-                            )),
-                      );
-                    }
-                    log("Login not ok");
-                  },
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
 

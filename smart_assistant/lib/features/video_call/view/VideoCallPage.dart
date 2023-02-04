@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:smart_assistant/shared/res/colors.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 class VideoCallPage extends StatefulWidget {
   const VideoCallPage({Key? key}) : super(key: key);
@@ -16,13 +21,30 @@ Future loaddot() async {
   await dotenv.load(fileName: ".env");
 }
 
+final remoteConfig = FirebaseRemoteConfig.instance;
+
+// Fetching, caching, and activating remote config
+void _initConfig() async {
+  await remoteConfig.setConfigSettings(RemoteConfigSettings(
+    fetchTimeout: const Duration(minutes: 1),
+    minimumFetchInterval: const Duration(seconds: 5),
+  ));
+
+  await remoteConfig.setDefaults(const {
+    "AGORA_TOKEN": "NULL",
+  });
+
+  await remoteConfig.fetchAndActivate();
+}
+
 class _VideoCallPageState extends State<VideoCallPage> {
   int? _remoteUid;
   bool _localUserJoined = false;
   late RtcEngine _engine;
 
   String appId = dotenv.env['AGORA_APPID'].toString();
-  String token = dotenv.env['AGORA_TOKEN'].toString();
+  //String token = dotenv.env['AGORA_TOKEN'].toString();
+  String token = remoteConfig.getString('AGORA_TOKEN');
   String channel = dotenv.env['AGORA_CHANNEL'].toString();
 
   bool isCameraOn = true;
@@ -32,12 +54,18 @@ class _VideoCallPageState extends State<VideoCallPage> {
   @override
   void initState() {
     super.initState();
+    _initConfig();
     initAgora();
   }
 
   Future<void> initAgora() async {
     // retrieve permissions
-    await [Permission.microphone, Permission.camera, Permission.storage, Permission.mediaLibrary].request();
+    await [
+      Permission.microphone,
+      Permission.camera,
+      Permission.storage,
+      Permission.mediaLibrary
+    ].request();
 
     //create the engine
     _engine = createAgoraRtcEngine();
@@ -122,30 +150,29 @@ class _VideoCallPageState extends State<VideoCallPage> {
                 children: [
                   RawMaterialButton(
                     onPressed: () async {
-                      if(isCameraOn){
+                      if (isCameraOn) {
                         await _engine.disableVideo();
                         setState(() {
                           isCameraOn = false;
                         });
-                      }
-                      else{
+                      } else {
                         await _engine.enableVideo();
                         setState(() {
                           isCameraOn = true;
                         });
                       }
                     },
-                    child: isCameraOn ? 
-                    const Icon(
-                      Icons.videocam,
-                      color: Colors.white,
-                      size: 35.0,
-                    ) :
-                    const Icon(
-                      Icons.videocam_off,
-                      color: Colors.white,
-                      size: 35.0,
-                    ),
+                    child: isCameraOn
+                        ? const Icon(
+                            Icons.videocam,
+                            color: Colors.white,
+                            size: 35.0,
+                          )
+                        : const Icon(
+                            Icons.videocam_off,
+                            color: Colors.white,
+                            size: 35.0,
+                          ),
                     shape: const CircleBorder(),
                     elevation: 2.0,
                     fillColor: SmartAssistantColors.primary,
@@ -153,31 +180,29 @@ class _VideoCallPageState extends State<VideoCallPage> {
                   ),
                   RawMaterialButton(
                     onPressed: () async {
-                      if(isMicOn){
+                      if (isMicOn) {
                         await _engine.muteLocalAudioStream(true);
                         setState(() {
                           isMicOn = false;
                         });
-                      }
-                      else{
+                      } else {
                         await _engine.muteLocalAudioStream(false);
                         setState(() {
                           isMicOn = true;
                         });
                       }
                     },
-                    child: 
-                    isMicOn ? 
-                    const Icon(
-                      Icons.mic,
-                      color: Colors.white,
-                      size: 35.0,
-                    ) :
-                    const Icon(
-                      Icons.mic_off,
-                      color: Colors.white,
-                      size: 35.0,
-                    ),
+                    child: isMicOn
+                        ? const Icon(
+                            Icons.mic,
+                            color: Colors.white,
+                            size: 35.0,
+                          )
+                        : const Icon(
+                            Icons.mic_off,
+                            color: Colors.white,
+                            size: 35.0,
+                          ),
                     shape: const CircleBorder(),
                     elevation: 2.0,
                     fillColor: SmartAssistantColors.primary,
@@ -205,18 +230,18 @@ class _VideoCallPageState extends State<VideoCallPage> {
                       setState(() {
                         isFrontCamera = !isFrontCamera;
                       });
-                    }, 
-                    child: isFrontCamera ? 
-                    const Icon(
-                      Icons.camera_rear,
-                      color: Colors.white,
-                      size: 35.0,
-                    ) :
-                    const Icon(
-                      Icons.camera_front,
-                      color: Colors.white,
-                      size: 35.0,
-                    ) ,
+                    },
+                    child: isFrontCamera
+                        ? const Icon(
+                            Icons.camera_rear,
+                            color: Colors.white,
+                            size: 35.0,
+                          )
+                        : const Icon(
+                            Icons.camera_front,
+                            color: Colors.white,
+                            size: 35.0,
+                          ),
                     shape: const CircleBorder(),
                     elevation: 2.0,
                     fillColor: SmartAssistantColors.primary,
@@ -225,9 +250,13 @@ class _VideoCallPageState extends State<VideoCallPage> {
                   RawMaterialButton(
                     onPressed: () async {
                       DateTime today = DateTime.now();
-                      String dateStr = "${today.hour}${today.minute}${today.second}-${today.day}-${today.month}-${today.year}";
-                      await _engine.takeSnapshot(uid: 0, filePath: '/storage/emulated/0/Android/data/com.example.smart_assistant/files/Screenshot-$dateStr.jpg'); //Screenshot-184500-20-10-2020.jpg
-                    }, 
+                      String dateStr =
+                          "${today.hour}${today.minute}${today.second}-${today.day}-${today.month}-${today.year}";
+                      await _engine.takeSnapshot(
+                          uid: 0,
+                          filePath:
+                              '/storage/emulated/0/Android/data/com.example.smart_assistant/files/Screenshot-$dateStr.jpg'); //Screenshot-184500-20-10-2020.jpg
+                    },
                     child: const Icon(
                       Icons.screenshot,
                       color: Colors.white,

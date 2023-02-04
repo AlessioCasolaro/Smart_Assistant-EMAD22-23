@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:smart_assistant/shared/res/res.dart';
 
-class InputField extends StatelessWidget {
+class InputField extends StatefulWidget {
   TextEditingController userController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
   InputField(
       {super.key, required this.userController, required this.passController});
+
+  @override
+  State<InputField> createState() => _InputFieldState();
+}
+
+class _InputFieldState extends State<InputField> {
+  bool _passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +22,7 @@ class InputField extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10),
           child: TextFormField(
-            controller: userController,
+            controller: widget.userController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter your email';
@@ -24,6 +31,8 @@ class InputField extends StatelessWidget {
             },
             style: const TextStyle(fontSize: 28),
             decoration: InputDecoration(
+                prefixIcon: Icon(Icons.email),
+                prefixIconColor: SmartAssistantColors.primary,
                 hintText: "Enter your email",
                 hintStyle: TextStyle(
                   color: Theme.of(context).brightness == Brightness.light
@@ -47,7 +56,9 @@ class InputField extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10),
           child: TextFormField(
-            controller: passController,
+            keyboardType: TextInputType.text,
+            obscureText: !_passwordVisible, //This will obscure text dynamically
+            controller: widget.passController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter your password';
@@ -55,9 +66,23 @@ class InputField extends StatelessWidget {
 
               return null;
             },
-            obscureText: true,
             style: const TextStyle(fontSize: 28),
             decoration: InputDecoration(
+                prefixIcon: Icon(Icons.lock),
+                prefixIconColor: SmartAssistantColors.primary,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    // Based on passwordVisible state choose the icon
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                  onPressed: () {
+                    // Update the state i.e. toogle the state of passwordVisible variable
+                    setState(() {
+                      _passwordVisible = !_passwordVisible;
+                    });
+                  },
+                ),
                 hintText: "Enter your password",
                 hintStyle: TextStyle(
                   color: Theme.of(context).brightness == Brightness.light

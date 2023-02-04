@@ -6,7 +6,10 @@ import 'package:chat_package/chat_package.dart';
 import 'package:chat_package/models/chat_message.dart';
 import 'package:chat_package/models/media/chat_media.dart';
 import 'package:chat_package/models/media/media_type.dart';
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_assistant/features/dashboard/widgets/widgets.dart';
 import 'package:smart_assistant/features/dashboard/classes/Response.dart'
     as DashResp;
@@ -44,33 +47,32 @@ Future loaddot() async {
 final BotService _botService = BotService();
 
 class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
+  //Loading the .env keys
   final String accessKey = dotenv.env['PICOKEY']!;
   final String STTKey = dotenv.env['DEEPGRAMKEY']!;
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  //Porcupine
   final Map<String, BuiltInKeyword> _keywordMap = {};
-
   bool isErrorPorcupine = false;
   String errorMessagePorcupine = "";
 
   bool isButtonDisabledPorcupine = false;
   bool isProcessingPorcupine = false;
-  Color detectionColour = Color(0xff00e5c3);
-  Color defaultColour = Color(0xfff5fcff);
-  Color? backgroundColour;
-  String currentKeyword = "Click to choose a keyword";
+
+  String currentKeyword = "jarvis";
   PorcupineManager? _porcupineManager;
 
-  String transcriptText = ""; //per cheetah
-  final ScrollController _controller = ScrollController();
-
+  //Deepgram
   final String serverUrl =
       'wss://api.deepgram.com/v1/listen?encoding=linear16&sample_rate=16000&language=en-US';
 
+  String transcriptText = ""; // Deepgram
   final RecorderStream _recorder = RecorderStream();
   late StreamSubscription _recorderStatus;
   late StreamSubscription _audioStream;
   late IOWebSocketChannel channel;
+
+  //Microphone
   IconData isRecording = Icons.mic_off;
   String isRecordingText = "Not Recording";
   bool isRecordingBool = false;
@@ -83,18 +85,13 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
     super.initState();
     setState(() {
       isButtonDisabledPorcupine = true;
-      backgroundColour = defaultColour;
-      transcriptText = "";
     });
     WidgetsBinding.instance?.addPostFrameCallback(onLayoutDone);
     WidgetsBinding.instance.addObserver(this);
     _initializeKeywordMap();
-    loadNewKeyword("jarvis");
 
-    _toggleProcessingPorcupine();
-
-    Future.delayed(const Duration(seconds: 4), () async {
-      _startProcessingPorcupine();
+    Future.delayed(const Duration(seconds: 5), () async {
+      _toggleProcessingPorcupine();
       isRecordingText = "Waiting for keyword";
     });
   }
@@ -181,6 +178,22 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
 
       _startRecord();
 
+      CherryToast(
+              icon: Icons.mic,
+              iconColor: SmartAssistantColors.primary,
+              iconSize: 20.sp,
+              themeColor: SmartAssistantColors.primary,
+              title: Text("Jarvis is listening ...",
+                  style: TextStyle(
+                    color: SmartAssistantColors.primary,
+                    fontSize: 18.sp,
+                  )),
+              toastPosition: Position.bottom,
+              toastDuration: Duration(seconds: 5),
+              animationType: AnimationType.fromTop,
+              autoDismiss: true)
+          .show(context);
+
       Future.delayed(const Duration(seconds: 5), () async {
         _stopRecord();
       }).whenComplete(() {
@@ -260,7 +273,7 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
     }
   }
 
-  ////////////////////////////////////////////////////////////////
+  ///////////////////////////Deepgram/////////////////////////////////////
 
   Future<void> _initStream() async {
     channel = IOWebSocketChannel.connect(Uri.parse(serverUrl),
@@ -337,7 +350,9 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
       );
     } else {
       data = await _botService.callBot(
-        jsonEncode({'text': "aiutami con l'intervento"}),
+        jsonEncode({
+          'text': "aiutami con l'intervento"
+        }), //Per continuare col flusso di topic
         message.text,
       );
     }
@@ -432,31 +447,6 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
   }
 
   List<ChatMessage> messages = [
-    /*ChatMessage(
-      isSender: true,
-      text: 'this is a banana',
-      chatMedia: ChatMedia(
-        url:
-            'https://images.pexels.com/photos/7194915/pexels-photo-7194915.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-        mediaType: MediaType.imageMediaType(),
-      ),
-    ),
-    ChatMessage(
-      isSender: false,
-      text: "test",
-      chatMedia: ChatMedia(
-        url: 'https://youtu.be/lzBExDLJvpE',
-        mediaType: MediaType.videoMediaType(),
-      ),
-    ),
-    ChatMessage(
-      isSender: false,
-      text: "Document:\t" + "test",
-      chatMedia: ChatMedia(
-        url: 'https://documenti-mskine.s3.amazonaws.com/001.pdf',
-        mediaType: MediaType.audioMediaType(),
-      ),
-    ),*/
     ChatMessage(
         isSender: false,
         text:

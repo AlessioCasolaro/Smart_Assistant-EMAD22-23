@@ -8,36 +8,22 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Center(
-              child: CircleAvatar(
-            backgroundColor: SmartAssistantColors.white,
-            radius: 150,
-            child: Container(
-              child: Image.asset(
-                'assets/images/smartAssistantLogo.png',
-                width: 220.w,
-                height: 220.h,
-              ),
-            ),
-          )),
-          SizedBox(
-            height: 20.h,
-          ),
-          Center(
-            child: Text(
-              "LOGIN",
-              style: TextStyle(
-                  color: SmartAssistantColors.white,
-                  fontSize: TextStyles.headline1.fontSize),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Center(
+          child: Container(
+            child: Image.asset(
+              'assets/images/SmartAssistantLogoWhite.png',
+              width: 220.w,
+              height: 220.h,
             ),
           ),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+      ],
     );
   }
 }
