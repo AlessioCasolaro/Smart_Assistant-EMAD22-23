@@ -1,10 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:smart_assistant/core/navigator.dart';
+import 'package:smart_assistant/features/task_list/view/TaskListPage.dart';
+
+String codiceUtente = "";
 
 class BackAlert extends StatefulWidget {
   Widget child;
-  BackAlert({Key? key, required this.child}) : super(key: key) {
+
+  BackAlert({Key? key, required this.child, required String codUtente})
+      : super(key: key) {
     child = child;
+    codiceUtente = codUtente;
   }
 
   @override
@@ -28,7 +36,8 @@ class _BackAlertState extends State<BackAlert> {
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  Navigator.popAndPushNamed(context, taskListRoute);
+                  Navigator.popAndPushNamed(context, taskListRoute,
+                      arguments: codiceUtente);
                 },
                 child: const Text('Yes'),
               ),
@@ -40,6 +49,7 @@ class _BackAlertState extends State<BackAlert> {
 
   @override
   Widget build(BuildContext context) {
+    log("UTENTE Backalert" + codiceUtente);
     return WillPopScope(onWillPop: _onWillPop, child: widget.child);
   }
 }

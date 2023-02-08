@@ -22,7 +22,7 @@ class MachineInfo extends StatelessWidget {
           Row(
             children: [
               Text(
-                '${machine!.nome}',
+                '${machine!.nome.substring(0, 14)}',
                 style: TextStyles.body.copyWith(
                     color: SmartAssistantColors.primary,
                     fontSize: TextStyles.headline2.fontSize),

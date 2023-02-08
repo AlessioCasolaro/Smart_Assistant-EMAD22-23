@@ -8,12 +8,20 @@ import 'package:get/get.dart' as getPackage;
 import 'package:flutter/material.dart';
 
 class ToolListPage extends StatefulWidget {
+  String codiceUtente = "";
+  String codiceIstanzaAttivita = "";
   AttivitaAttivitas? attivita;
   List<AttivitaRicambiTipoRicambio>? ricambi;
   List<AttivitaTipoAttrezzaturaTipoAttrezzatura>? attrezzatura;
 
-  ToolListPage({Key? key, required AttivitaAttivitas selectedAttivita})
+  ToolListPage(
+      {Key? key,
+      required String codUtente,
+      required String codIstanzaAttivita,
+      required AttivitaAttivitas selectedAttivita})
       : super(key: key) {
+    codiceUtente = codUtente;
+    codiceIstanzaAttivita = codIstanzaAttivita;
     attivita = selectedAttivita;
     ricambi = selectedAttivita.attivitaRicambiTipoRicambios;
     attrezzatura = selectedAttivita.attivitaTipoAttrezzaturaTipoAttrezzaturas;
@@ -155,6 +163,9 @@ class _ToolListPageState extends State<ToolListPage> {
                                   MaterialPageRoute(
                                     builder: (context) => QRScanner(
                                         key: null,
+                                        codUtente: widget.codiceUtente,
+                                        codIstanzaAttivita:
+                                            widget.codiceIstanzaAttivita,
                                         selectedAttivita: widget.attivita!),
                                   ),
                                 );

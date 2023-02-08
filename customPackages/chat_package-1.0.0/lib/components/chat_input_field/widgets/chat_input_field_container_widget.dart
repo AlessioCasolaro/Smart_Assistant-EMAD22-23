@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/constants.dart';
 
 class ChatInputFieldContainerWidget extends StatefulWidget {
@@ -73,6 +73,7 @@ class _ChatTextViewWidgetState extends State<ChatInputFieldContainerWidget> {
                         onChanged: widget.onTextFieldValueChanged,
                         decoration: InputDecoration(
                           hintText: widget.sendMessageHintText,
+                          hintStyle: TextStyle(fontSize: 14.sp),
                           border: InputBorder.none,
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,

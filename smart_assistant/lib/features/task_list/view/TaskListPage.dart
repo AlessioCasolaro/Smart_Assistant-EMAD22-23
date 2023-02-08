@@ -50,6 +50,7 @@ Future<http.Response> getData(String codUtente) {
 class DataFromResponse {
   static Future<Response> getDataLocally(BuildContext context) async {
     final data = await getData(codUtente);
+    log("Utenza: " + codUtente);
     log("LOG1 " + data.body.toString());
     final reportData = responseFromJson(data.body);
     return reportData;
@@ -101,6 +102,7 @@ class _TaskListPageState extends State<TaskListPage> {
   @override
   Widget build(BuildContext context) {
     if (count == 0) {
+      //esegui prima getAttivitas() e poi sortAttivitas()
       getAttivitas();
       sortAttivitas();
       count++;
@@ -172,6 +174,7 @@ class _TaskListPageState extends State<TaskListPage> {
             attivitas.isNotEmpty
                 ? TaskList(
                     callback: (index) => setState(() => selectedIndex = index),
+                    date: istanze,
                     attivitas: attivitas)
                 : Center(
                     child: Column(
@@ -215,8 +218,12 @@ class _TaskListPageState extends State<TaskListPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        ToolListPage(selectedAttivita: toPass)),
+                                    builder: (context) => ToolListPage(
+                                        codUtente: codUtente,
+                                        codIstanzaAttivita:
+                                            istanze[selectedIndex]
+                                                .codiceIstanzaAttivita,
+                                        selectedAttivita: toPass)),
                               );
                             }),
                       ),

@@ -21,11 +21,10 @@ abstract class AppRouter {
           settings: settings,
           view: const LoginPage(),
         );
-      /*case dashboardRoute:
+      case taskListRoute:
         return getPageRoute(
-          settings: settings,  //Inserire parametri fittizi (creare Attivita fake)
-          view: Dashboard(),  //oppure togliere
-        );*/
+            settings: settings,
+            view: TaskListPage(utente: settings.arguments as String));
       case qrRoute:
         return getPageRoute(
           settings: settings,

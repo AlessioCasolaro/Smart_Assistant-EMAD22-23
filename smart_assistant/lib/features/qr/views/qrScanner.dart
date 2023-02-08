@@ -10,11 +10,18 @@ import '../../../core/navigator.dart';
 import '../../../shared/widgets/backAlert.dart';
 
 class QRScanner extends StatefulWidget {
+  String codiceUtente = "";
+  String codiceIstanzaAttivita = "";
   AttivitaAttivitas? attivita;
   OggettoOggetto? oggetto;
 
-  QRScanner({Key? key, required AttivitaAttivitas selectedAttivita})
+  QRScanner(
+      {Key? key,
+      required String codUtente,
+      required String codIstanzaAttivita,
+      required AttivitaAttivitas selectedAttivita})
       : super(key: key) {
+    codiceUtente = codUtente;
     attivita = selectedAttivita;
   }
 
@@ -40,12 +47,14 @@ class _QRScannerState extends State<QRScanner> {
 
   @override
   Widget build(BuildContext context) {
+    log("Codice utente QR" + widget.codiceUtente);
     log("QR" +
         widget.attivita!.codiceAttivita +
         widget.attivita!.oggettoOggettos[0].codiceOggetto);
     widget.oggetto = widget.attivita!.oggettoOggettos[0];
     String qrInput = widget.oggetto!.nome;
     return BackAlert(
+      codUtente: widget.codiceUtente,
       child: Scaffold(
         body: Column(
           children: <Widget>[
@@ -79,6 +88,11 @@ class _QRScannerState extends State<QRScanner> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => Dashboard(
+                                codUtente: widget.codiceUtente,
+                                codAttivita: widget.attivita!.codiceAttivita,
+                                codOggetto: widget.oggetto!.codiceOggetto,
+                                codIstanzaAttivita:
+                                    widget.codiceIstanzaAttivita,
                                 startedAttivita:
                                     widget.attivita!.codiceAttivita,
                                 selectedOggetto: widget

@@ -4,6 +4,7 @@ import 'package:chat_package/models/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:chat_package/components/message/video_message/videoPlayer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //TODO add text size
 class VideoMessageWidget extends StatelessWidget {
@@ -87,7 +88,8 @@ class VideoMessageWidget extends StatelessWidget {
                   ),
                   child: Text(
                     message.text,
-                    style: messageContainerTextStyle ?? TextStyle(fontSize: 12),
+                    style:
+                        messageContainerTextStyle ?? TextStyle(fontSize: 14.sp),
                   ),
                 ),
               ),

@@ -7,12 +7,14 @@ import '../view/TaskListPage.dart';
 typedef void StringCallback(int index);
 
 class TaskList extends StatefulWidget {
+  List<IstanzaAttivita> date = [];
   List<AttivitaAttivitas> attivitas = [];
   final StringCallback callback;
 
   TaskList({
     super.key,
     required this.attivitas,
+    required this.date,
     required this.callback,
   }) {}
 
@@ -67,14 +69,32 @@ class _TaskListState extends State<TaskList> {
                       : widget.attivitas[index].priorita == "ALTA"
                           ? const Icon(Icons.circle, color: Colors.red)
                           : const Icon(Icons.circle, color: Colors.black),
-              title: Text(
-                widget.attivitas[index].nome,
-                style: TextStyles.body.copyWith(
-                    fontSize: 18.sp,
-                    color: _selected[index]
-                        ? SmartAssistantColors.white
-                        : SmartAssistantColors.black),
-              ),
+              title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.attivitas[index].nome,
+                      style: TextStyles.body.copyWith(
+                          fontSize: 18.sp,
+                          color: _selected[index]
+                              ? SmartAssistantColors.white
+                              : SmartAssistantColors.black),
+                    ),
+                    Text(
+                      "Data Avvio: " +
+                          widget.date[index].dataAvvio
+                              .toString()
+                              .substring(0, 10) +
+                          "\t\t\tDurata: " +
+                          (widget.attivitas[index].durataPrevista.toString()) +
+                          " giorno/i",
+                      style: TextStyles.body.copyWith(
+                          fontSize: 14.sp,
+                          color: _selected[index]
+                              ? SmartAssistantColors.white
+                              : SmartAssistantColors.primary),
+                    )
+                  ]),
               onTap: () {
                 setState(() {
                   TaskListPage.of(context)?.selectedIndex = index;

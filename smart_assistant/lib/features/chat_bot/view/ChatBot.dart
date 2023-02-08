@@ -368,7 +368,7 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
           resp.messages![i]!.content![0]!.codiceTopic != "") {
         //Se trova un topic
         String topicGenerated =
-            "Scegli uno dei seguenti topic e ti consiglierò un documento:\n\n";
+            "Choose one of the following topics and I will recommend a media:\n\n";
         for (var j = 0; j < resp.messages![i]!.content!.length; j++) {
           //Cicla sui topic
           topicGenerated = topicGenerated +

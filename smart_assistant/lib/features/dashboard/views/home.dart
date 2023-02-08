@@ -17,17 +17,28 @@ import 'package:get/get.dart' as getPackage;
 import 'package:smart_assistant/features/dashboard/classes/Response.dart';
 
 int count = 0;
+String codiceUtente = "";
+String codiceIstanzaAttivita = "";
+String codiceAttivita = ""; //6
+String codiceOggetto = ""; //2
 
 class Dashboard extends StatefulWidget {
-  String? attivita = "6";
-  String? oggetto = "2";
   static List<String> docList = [];
   static List<String> urlList = [];
 
-  Dashboard({Key? key, required startedAttivita, required selectedOggetto})
+  Dashboard(
+      {Key? key,
+      required String codUtente,
+      required String codIstanzaAttivita,
+      required String codAttivita,
+      required String codOggetto,
+      required startedAttivita,
+      required selectedOggetto})
       : super(key: key) {
-    attivita = startedAttivita;
-    oggetto = selectedOggetto;
+    codiceUtente = codUtente;
+    codiceIstanzaAttivita = codIstanzaAttivita;
+    codiceAttivita = startedAttivita;
+    codiceOggetto = selectedOggetto;
   }
 
   @override
@@ -38,7 +49,23 @@ Future loaddot() async {
   await dotenv.load(fileName: ".env");
 }
 
+Future<http.Response> completeTask(
+    String codiceIstanzaAttivita, String codOggetto) {
+  return http.post(
+    Uri.parse(dotenv.env['URL_COMPLETE'].toString()),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'codiceIstanzaAttivita': codiceIstanzaAttivita,
+      'codiceUtente': codOggetto,
+    }),
+  );
+}
+
 Future<http.Response> getData(String codAttivita, String codOggetto) {
+  log("Codice Attivita" + codAttivita);
+  log("Codice Oggetto" + codOggetto);
   return http.post(
     Uri.parse(dotenv.env['URL_DASHBOARD'].toString()),
     headers: <String, String>{
@@ -56,7 +83,7 @@ class DataFromResponse {
       BuildContext context, String codAttivita, String codOggetto) async {
     final data = await getData(codAttivita, codOggetto);
     final reportData = responseFromJsonDashboard(data.body);
-
+    log("UTENTE DAshboard" + codiceUtente);
     log("Log Dashboard" + data.body.toString());
     return reportData;
   }
@@ -67,7 +94,7 @@ class _DashboardState extends State<Dashboard> {
   List<OggettoOggetto> oggetto = [];
   Future<void> getAttivitas() async {
     await DataFromResponse.getDataLocally(
-            context, widget.attivita!, widget.oggetto!)
+            context, codiceAttivita, codiceOggetto)
         .then((value) {
       setState(() {
         attivita = value.data.attivitas;
@@ -123,6 +150,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ])))
           : BackAlert(
+              codUtente: codiceUtente,
               child: Scaffold(
                 body: SingleChildScrollView(
                   child: Padding(
@@ -227,7 +255,14 @@ class _DashboardState extends State<Dashboard> {
                                   height: 150.h,
                                   width: 50.w,
                                   icon: Icons.done,
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    await completeTask(
+                                        codiceIstanzaAttivita, codiceUtente);
+                                    Navigator.pop(context);
+                                    Navigator.popAndPushNamed(
+                                        context, taskListRoute,
+                                        arguments: codiceUtente);
+                                  },
                                 )),
                           ),
                         ]),

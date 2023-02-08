@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:chat_package/utils/transparent_image.dart';
 import 'package:chat_package/models/chat_message.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:chat_package/components/message/document_message/pdfView.dart';
 import 'package:smart_assistant/features/dashboard/widgets/document.dart';
 
@@ -52,14 +52,14 @@ class DocumentMessageWidget extends StatelessWidget {
                       horizontal: 20.0 * 0.75,
                       vertical: 20.0 / 2,
                     ),
-                    width: 300,
+                    width: 320.w,
                     child: Row(children: [
                       Icon(Icons.picture_as_pdf, color: Colors.black),
                       SizedBox(width: 10),
                       Text("Open PDF",
                           style: TextStyle(
                               color: Colors.black,
-                              fontSize: 20,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.w500)),
                     ]),
                   )),
@@ -74,7 +74,8 @@ class DocumentMessageWidget extends StatelessWidget {
                   ),
                   child: Text(
                     message.text,
-                    style: messageContainerTextStyle ?? TextStyle(fontSize: 12),
+                    style:
+                        messageContainerTextStyle ?? TextStyle(fontSize: 14.sp),
                   ),
                 ),
               ),
