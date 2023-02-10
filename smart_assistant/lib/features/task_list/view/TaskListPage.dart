@@ -62,49 +62,37 @@ class _TaskListPageState extends State<TaskListPage> {
   int selectedIndex = 999;
   List<AttivitaAttivitas> attivitas = [];
   void getAttivitas() async {
+    List<AttivitaAttivitas> sortedAttivitas = [];
     await DataFromResponse.getDataLocally(context).then((value) {
       setState(() {
         istanze = value.data.istanzaAttivitas;
         for (int i = 0; i < istanze.length; i++) {
           attivitas.add(istanze[i].attivitaAttivitas);
         }
+        for(int i = 0; i < attivitas.length; i++){
+          if(attivitas[i].priorita == "ALTA"){
+            sortedAttivitas.add(attivitas[i]);
+          }
+        }
+        for(int i = 0; i < attivitas.length; i++){
+          if(attivitas[i].priorita == "NORMALE"){
+            sortedAttivitas.add(attivitas[i]);
+          }
+        }
+        for(int i = 0; i < attivitas.length; i++){
+          if(attivitas[i].priorita == "BASSA"){
+            sortedAttivitas.add(attivitas[i]);
+          }
+        }
+        attivitas = sortedAttivitas;
       });
-    });
-  }
-
-  //ordinamento attivitas per priorità
-  void sortAttivitas() {
-    attivitas.sort((a, b) {
-      if (a.priorita == "ALTA" && b.priorita == "ALTA") {
-        return 0;
-      } else if (a.priorita == "ALTA" && b.priorita == "NORMALE") {
-        return -1;
-      } else if (a.priorita == "ALTA" && b.priorita == "BASSA") {
-        return -1;
-      } else if (a.priorita == "NORMALE" && b.priorita == "ALTA") {
-        return 1;
-      } else if (a.priorita == "NORMALE" && b.priorita == "NORMALE") {
-        return 0;
-      } else if (a.priorita == "NORMALE" && b.priorita == "BASSA") {
-        return -1;
-      } else if (a.priorita == "BASSA" && b.priorita == "ALTA") {
-        return 1;
-      } else if (a.priorita == "BASSA" && b.priorita == "NORMALE") {
-        return 1;
-      } else if (a.priorita == "BASSA" && b.priorita == "BASSA") {
-        return 0;
-      } else {
-        return 0;
-      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     if (count == 0) {
-      //esegui prima getAttivitas() e poi sortAttivitas()
       getAttivitas();
-      sortAttivitas();
       count++;
     }
 
