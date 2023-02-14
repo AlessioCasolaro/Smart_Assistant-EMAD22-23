@@ -452,7 +452,7 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
         text:
             'Hello! I am Jarvis, your personal assistant. How can I help you?'),
   ];
-  final scrollController = ScrollController();
+  final scrollController = ScrollController(keepScrollOffset: true);
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -504,6 +504,12 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
                   setState(() {
                     messages.add(textMessage);
                     _addMessage(textMessage);
+                    //scroll chat to the bottom
+                    scrollController.animateTo(
+                      scrollController.position.maxScrollExtent,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut,
+                    );
                   });
                 },
               ),

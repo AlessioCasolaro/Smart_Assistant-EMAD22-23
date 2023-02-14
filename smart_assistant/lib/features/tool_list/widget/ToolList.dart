@@ -24,6 +24,7 @@ class _ToolListState extends State<ToolList> {
   List<String> tools = [];
 
   void fillList() {
+    tools.clear();
     for (var i = 0; i < widget.attrezzatura.length; i++) {
       tools.add(widget.attrezzatura[i].nome);
     }

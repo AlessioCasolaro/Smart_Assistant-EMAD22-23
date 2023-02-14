@@ -215,13 +215,14 @@ class _DashboardState extends State<Dashboard> {
                                     BorderRadius.all(Radius.circular(10))),
                           ),
                           //
-                          SizedBox(height: 16.h),
+                          SizedBox(height: 10.h),
                           QuickAction(oggetto: oggetto[0]),
 
-                          SizedBox(height: 16.h),
+                          SizedBox(height: 10.h),
                           //Titolo al centro
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 'Documents',
@@ -249,7 +250,7 @@ class _DashboardState extends State<Dashboard> {
                             alignment: Alignment.bottomRight,
                             child: SizedBox(
                                 width: 160.w,
-                                height: 55.h,
+                                height: 50.h,
                                 child: ButtonIconPrimary(
                                   label: 'Complete Task',
                                   height: 150.h,

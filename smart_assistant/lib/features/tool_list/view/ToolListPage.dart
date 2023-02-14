@@ -100,7 +100,7 @@ class _ToolListPageState extends State<ToolListPage> {
                 attrezzatura:
                     widget.attivita!.attivitaTipoAttrezzaturaTipoAttrezzaturas),
             SizedBox(
-              height: 20.h,
+              height: 17.h,
             ),
             SizedBox(
               height: 70.h,
@@ -148,7 +148,7 @@ class _ToolListPageState extends State<ToolListPage> {
                     ),
                     Expanded(
                       child: Align(
-                        alignment: Alignment.bottomRight,
+                        alignment: Alignment.topRight,
                         child: Container(
                           width: 100.w,
                           height: 55.h,

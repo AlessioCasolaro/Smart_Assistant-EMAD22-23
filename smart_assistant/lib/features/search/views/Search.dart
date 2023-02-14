@@ -79,6 +79,8 @@ class _SearchViewState extends State<SearchView> {
   }
 
   void fillDocList() {
+    SearchView.docList.clear;
+    SearchView.urlList.clear;
     for (int i = 0; i < listaDocumenti.length; i++) {
       SearchView.docList.add(listaDocumenti[i].titolo!);
       SearchView.urlList.add(listaDocumenti[i].riferimentoDocumentale!);
@@ -114,7 +116,7 @@ class _SearchViewState extends State<SearchView> {
                 box: const BoxDecoration(color: Color(0xFF1F75FE))),
             const SizedBox(height: 10),
             Container(
-              width: 600.h,
+              width: 550.h,
               child: TextField(
                 style: TextStyle(fontSize: 26.0, height: 1.5),
                 decoration: InputDecoration(
@@ -160,7 +162,7 @@ class _SearchViewState extends State<SearchView> {
                         ),
 
                         DocumentsList(
-                          heightGet: 650.h,
+                          heightGet: 580.h,
                           oggetto: ogg!,
                           document: List.generate(
                             SearchView.docList.length,

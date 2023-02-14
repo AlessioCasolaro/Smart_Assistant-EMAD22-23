@@ -131,7 +131,7 @@ class ButtonIconPrimary extends StatelessWidget {
           size: 36.sp,
           color: SmartAssistantColors.white,
         ),
-        SizedBox(width: 5.w),
+        SizedBox(width: 1.w),
         Text(
           label,
           style: TextStyle(color: SmartAssistantColors.white, fontSize: 22.sp),
