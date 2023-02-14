@@ -504,12 +504,6 @@ class _ChatBotState extends State<ChatBot> with WidgetsBindingObserver {
                   setState(() {
                     messages.add(textMessage);
                     _addMessage(textMessage);
-                    //scroll chat to the bottom
-                    scrollController.animateTo(
-                      scrollController.position.maxScrollExtent,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeOut,
-                    );
                   });
                 },
               ),
