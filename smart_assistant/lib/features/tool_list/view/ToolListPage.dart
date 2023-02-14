@@ -100,10 +100,10 @@ class _ToolListPageState extends State<ToolListPage> {
                 attrezzatura:
                     widget.attivita!.attivitaTipoAttrezzaturaTipoAttrezzaturas),
             SizedBox(
-              height: 17.h,
+              height: 16.h,
             ),
             SizedBox(
-              height: 70.h,
+              height: 60.h,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
