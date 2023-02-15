@@ -84,7 +84,7 @@ class _QRScannerState extends State<QRScanner> {
                         style: TextStyle(
                           fontSize: 28.sp,
                         )),
-                  if (result != null && result!.code == qrInput)
+                  if (result != null && result!.code == widget.oggetto!.nome)
                     SizedBox(
                       width: 100.w,
                       child: ButtonPrimary(
