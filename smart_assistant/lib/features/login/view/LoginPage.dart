@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
             ),
             Header(),
             Container(
-              height: 40.h,
+              height: 100.h,
               decoration: BoxDecoration(
                   color: getPackage.Get.isDarkMode
                       ? Color(0xFF2D2D30)
@@ -37,6 +37,16 @@ class LoginPage extends StatelessWidget {
                     topLeft: Radius.circular(90),
                     topRight: Radius.circular(90),
                   )),
+                  child: Center(
+                        child: Text(
+                          "Sign In",
+                          style: TextStyle(
+                              color: getPackage.Get.isDarkMode
+                                  ? SmartAssistantColors.white
+                                  : SmartAssistantColors.primary,
+                              fontSize: TextStyles.headline2.fontSize),
+                        ),
+                      ),
             ),
             Expanded(
               child: InputWrapper(),

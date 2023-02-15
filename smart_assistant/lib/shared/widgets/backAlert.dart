@@ -35,9 +35,12 @@ class _BackAlertState extends State<BackAlert> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.popAndPushNamed(context, taskListRoute,
-                      arguments: codiceUtente);
+                  Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      TaskListPage(utente: codiceUtente)),
+                            );
                 },
                 child: const Text('Yes'),
               ),

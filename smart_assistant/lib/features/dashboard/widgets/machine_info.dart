@@ -6,10 +6,20 @@ import '../../../core/navigator.dart';
 class MachineInfo extends StatelessWidget {
   OggettoOggetto? machine;
   String type = "";
+  String nomeMacchina = "";
 
   MachineInfo({Key? key, required OggettoOggetto macchina}) : super(key: key) {
     machine = macchina;
     type = machine!.tipoOggettoTipoOggettos.nome;
+    if (machine!.nome.length <= 14) {
+      nomeMacchina = machine!.nome;
+    } else {
+      if(machine!.nome.substring(13, 14) == ' ') {
+        nomeMacchina = machine!.nome.substring(0, 13)  + '...';
+      } else {
+        nomeMacchina = machine!.nome.substring(0, 14)  + '...';
+      }
+    }
   }
 
   @override
@@ -22,7 +32,7 @@ class MachineInfo extends StatelessWidget {
           Row(
             children: [
               Text(
-                '${machine!.nome.substring(0, 14)}',
+                nomeMacchina,
                 style: TextStyles.body.copyWith(
                     color: SmartAssistantColors.primary,
                     fontSize: TextStyles.headline2.fontSize),

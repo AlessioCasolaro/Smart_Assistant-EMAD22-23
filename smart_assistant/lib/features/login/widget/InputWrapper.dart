@@ -36,42 +36,14 @@ class InputState extends State<InputWrapper> {
   @override
   Widget build(BuildContext context) {
     String codiceUtente = "";
-    return Container(
-        decoration: BoxDecoration(
-            color: getPackage.Get.isDarkMode
-                ? Color(0xFF2D2D30)
-                : SmartAssistantColors.white,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(60),
-              topRight: Radius.circular(60),
-            )),
-        child: Form(
+    return Form(
           key: _formKey,
           child: Scaffold(
-            body: Container(
-              decoration: BoxDecoration(
-                  color: getPackage.Get.isDarkMode
-                      ? Color(0xFF2D2D30)
-                      : SmartAssistantColors.white,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    topRight: Radius.circular(600),
-                  )),
-              child: Padding(
+            body: Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      Center(
-                        child: Text(
-                          "Sign In",
-                          style: TextStyle(
-                              color: getPackage.Get.isDarkMode
-                                  ? SmartAssistantColors.white
-                                  : SmartAssistantColors.primary,
-                              fontSize: TextStyles.headline2.fontSize),
-                        ),
-                      ),
                       const SizedBox(
                         height: 40,
                       ),
@@ -120,8 +92,7 @@ class InputState extends State<InputWrapper> {
                 ),
               ),
             ),
-          ),
-        ));
+          );
   }
 }
 

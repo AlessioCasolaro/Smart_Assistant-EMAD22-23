@@ -106,6 +106,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void fillDocList() {
+    Dashboard.docList.clear();
+    Dashboard.urlList.clear();
     for (int i = 0; i < oggetto[0].contenutosOggetto.length; i++) {
       Dashboard.docList.add(oggetto[0].contenutosOggetto[i].titolo);
       Dashboard.urlList
@@ -201,7 +203,7 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 32.h),
+                          SizedBox(height: 10.h),
                           MachineInfo(
                             macchina: oggetto[0],
                           ),
@@ -227,7 +229,7 @@ class _DashboardState extends State<Dashboard> {
                               Text(
                                 'Documents',
                                 style: TextStyles.body.copyWith(
-                                  fontSize: TextStyles.headline2.fontSize,
+                                  fontSize: TextStyles.headline3.fontSize,
                                   color: SmartAssistantColors.primary,
                                 ),
                               )
@@ -245,27 +247,21 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             ),
                           ),
-
+                          SizedBox(height: 10.h),
                           Align(
-                            alignment: Alignment.bottomRight,
-                            child: SizedBox(
-                                width: 160.w,
-                                height: 50.h,
-                                child: ButtonIconPrimary(
-                                  label: 'Complete Task',
-                                  height: 150.h,
-                                  width: 50.w,
-                                  icon: Icons.done,
-                                  onPressed: () async {
-                                    await completeTask(
-                                        codiceIstanzaAttivita, codiceUtente);
-                                    Navigator.pop(context);
-                                    Navigator.popAndPushNamed(
-                                        context, taskListRoute,
-                                        arguments: codiceUtente);
-                                  },
-                                )),
-                          ),
+                              alignment: Alignment.bottomRight,
+                              child: ButtonIconPrimary(
+                                label: 'Complete Task',
+                                height: 60.h,
+                                width: 165.w,
+                                icon: Icons.done,
+                                onPressed: () async {
+                                  await completeTask(
+                                      codiceIstanzaAttivita, codiceUtente).then((value) =>  
+                                      AppNavigator.pushNamedReplacement(taskListRoute,
+                                      arguments: codiceUtente));
+                                },
+                              )),
                         ]),
                   ),
                 ),

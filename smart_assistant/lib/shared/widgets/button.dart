@@ -114,7 +114,7 @@ class ButtonIconPrimary extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(width, height), //Grandezza bottone
+        fixedSize: Size(width, height), //Grandezza bottone
         backgroundColor: SmartAssistantColors.primary, //Colore sfondo bottone
         shape: RoundedRectangleBorder(
           //Forma bottone
@@ -131,7 +131,7 @@ class ButtonIconPrimary extends StatelessWidget {
           size: 36.sp,
           color: SmartAssistantColors.white,
         ),
-        SizedBox(width: 1.w),
+        SizedBox(width: 5.w),
         Text(
           label,
           style: TextStyle(color: SmartAssistantColors.white, fontSize: 22.sp),

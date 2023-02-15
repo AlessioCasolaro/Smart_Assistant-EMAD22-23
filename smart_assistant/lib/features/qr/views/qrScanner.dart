@@ -52,7 +52,16 @@ class _QRScannerState extends State<QRScanner> {
         widget.attivita!.codiceAttivita +
         widget.attivita!.oggettoOggettos[0].codiceOggetto);
     widget.oggetto = widget.attivita!.oggettoOggettos[0];
-    String qrInput = widget.oggetto!.nome;
+    String qrInput = '';
+    if (widget.oggetto!.nome.length <= 21) {
+      qrInput = widget.oggetto!.nome;
+    } else {
+      if(widget.oggetto!.nome.substring(20, 21) == ' ') {
+        qrInput = widget.oggetto!.nome.substring(0, 20)  + '...';
+      } else {
+        qrInput = widget.oggetto!.nome.substring(0, 21)  + '...';
+      }
+    }
     return BackAlert(
       codUtente: widget.codiceUtente,
       child: Scaffold(
