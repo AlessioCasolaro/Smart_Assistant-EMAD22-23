@@ -30,7 +30,7 @@ Smart Assistant utilizza diverse tecnologie per garantire il corretto funzioname
 -   AWS Lex: una tecnologia di elaborazione del linguaggio naturale utilizzata per la realizzazione del Chatbot;
 -   PicoVoice e Deepgram: tecnologie utilizzate per il controllo vocale del Chatbot, implementando una wakeword e un sistema di speech to text.
 
-![Architettura](Diagrammi\Diagramma%20Architettura.jpg "Architettura")
+![Architettura](Diagrammi\Diagramma_Architettura.jpg "Architettura")
 
 ##	Struttura Cartelle
 
