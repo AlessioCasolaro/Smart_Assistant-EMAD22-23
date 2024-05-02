@@ -1,0 +1,43 @@
+<div class="movies-container">
+    <div class="box">
+        <div class="photo"><img src="{{data.imagePath}}"></div>
+        <div class="info">
+            <h1>{{data.title}}</h1>
+            <br><br>
+            {{{data.description}}}
+            <br><br>
+
+
+
+            <p>Rating: {{data.rating}} ⭐ ({{data.votes}})</p>
+        </div>
+
+        
+        <form action="/recensione" method="post">
+
+             <label for="name">Nome:</label><br>
+            <input type="text" id="name" name="name" placeholder="Inserisci il tuo username"><br><br>
+
+            <input type="hidden" id="filmid" name="filmid" value="{{data._id}}">
+            <input type="hidden" id="filmimg" name="filmimg" value="{{data.imagePath}}">
+            <input type="hidden" id="filmtl" name="filmtl" value="{{data.title}}">
+
+            <label for="review">Recensione:</label><br>
+            <textarea id="review" name="review" placeholder="Inserisci la tua recensione"></textarea><br><br>
+       
+
+            <label for="rating">Valutazione:</label>
+            <select id="rating" name="rating">
+                <option value="1">1 ⭐</option>
+                <option value="2">2 ⭐</option>
+                <option value="3">3 ⭐</option>
+                <option value="4">4 ⭐</option>
+                <option value="5">5 ⭐</option>
+            </select><br><br>
+
+            <input type="submit" value="Invia recensione" class="submit-button">
+        </form>
+        
+
+    </div>
+</div>

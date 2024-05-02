@@ -1,0 +1,90 @@
+<nav class="navbar">
+    <div class="left">
+        <a href="/"><img src="/images/netflix-logo.png" alt=""></a>
+    </div>
+    <div class="right">
+        <button><a href="/reviews">Recensioni</a></button>
+        <button><a href="/classifica">Most Rated</a></button>
+
+       
+            <button id="openBotButton" style="color: white;">Aiuto</button>
+
+                   
+            <div id="botModal" class="modal">
+            <div class="modal-content" style="width: 30%; height: 40%;"> 
+                <span class="close">&times;</span>
+               
+                <iframe id="botFrame" src="" style="width: 100%; height: 100%;"></iframe>
+            </div>
+            </div>
+
+
+            <style>
+          
+            .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+            }
+
+            
+            .modal-content {
+            background-color: rgba(212, 122, 122, 0.8);
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            }
+
+            
+            .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            }
+            </style>
+
+            <script>
+            
+            var modal = document.getElementById("botModal");
+            var btn = document.getElementById("openBotButton");
+
+            
+            var span = document.getElementsByClassName("close")[0];
+
+            
+            btn.onclick = function() {
+            modal.style.display = "block";
+            }
+
+            
+            span.onclick = function() {
+            modal.style.display = "none";
+            }
+
+            
+            window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+            }
+
+            
+            document.getElementById("botFrame").src = "https://webchat.botframework.com/embed/QnaCine-bot?s=ZI8AecP9chw.g-L0FhrNHiOYNcpiLt49M4TVRXkWct9_DSgtEOdHGeM";
+            </script>
+    </div>
+</nav>

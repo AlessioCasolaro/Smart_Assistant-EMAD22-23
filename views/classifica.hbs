@@ -1,0 +1,21 @@
+
+ {{#each data}}
+<div class="movies-container2">
+
+    <div class="box">
+        <div class="photo"><img src="{{imagePath}}"></div>
+        <div class="info">
+            <h1>{{title}}</h1>
+            <br><br>
+            {{{description}}}
+            <br><br>
+
+
+            <p>Rating: {{rating}} ⭐ ({{votes}})</p>
+        </div>
+
+
+    </div>
+</div>
+
+ {{/each}}
